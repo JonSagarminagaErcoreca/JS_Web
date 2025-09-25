@@ -1,0 +1,40 @@
+# Node / package managers
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# Build / output
+dist/
+build/
+.out/
+.vite/
+
+# Env / secretos
+.env
+.env.local
+.env.*.local
+
+# Editor / IDE / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# TypeScript
+*.tsbuildinfo
+
+# Tests / coverage / cache
+coverage/
+.cache/
+
+# Archivos grandes de diseño/media (no subir)
+*.psd
+*.ai
+*.mov
+*.mp4
