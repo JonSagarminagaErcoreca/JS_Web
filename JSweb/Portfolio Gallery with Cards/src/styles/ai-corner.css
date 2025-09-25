@@ -1,0 +1,167 @@
+/* =========================================================
+   AI Corner — styles específicos de la página
+   ========================================================= */
+
+/* ---------- Layout base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body.ai-corner main {
+  height: calc(100dvh - 56px);
+  /* top | right | bottom | left */
+  padding: 16px 28px 32px 16px;
+}
+
+/* Respeta safe areas en móviles con notch */
+@supports (padding: max(0px)) {
+  body.ai-corner main {
+    padding-right: max(28px, env(safe-area-inset-right));
+    padding-bottom: max(32px, env(safe-area-inset-bottom));
+    padding-left: max(16px, env(safe-area-inset-left));
+  }
+}
+
+/* ---------- Grid ---------- */
+body.ai-corner .grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+  min-height: 100%;
+  height: 100%;
+}
+
+/* ---------- Cards ---------- */
+body.ai-corner .card {
+  grid-column: span 3;
+  position: relative;
+  overflow: clip;
+  border-radius: 16px;
+  background: #0b0b0c;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: transform 0.35s cubic-bezier(.2,.6,.2,1),
+              box-shadow 0.35s cubic-bezier(.2,.6,.2,1);
+  transform-style: preserve-3d;
+  perspective: 900px;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  cursor: pointer;
+}
+body.ai-corner .card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.25);
+}
+body.ai-corner .card.large { grid-column: span 6; }
+
+body.ai-corner .card-media {
+  position: relative;
+  background: #111;
+  height: 100%;
+}
+body.ai-corner .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.05) contrast(1.05);
+  transform: scale(1.02);
+  transition: transform 0.5s cubic-bezier(.2,.7,.2,1);
+}
+body.ai-corner .card-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 120% at 50% 10%, rgba(255,255,255,0.16), rgba(0,0,0,0.2)),
+    linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55));
+  pointer-events: none;
+}
+body.ai-corner .card:hover .card-media img {
+  transform: scale(1.06);
+}
+
+body.ai-corner .card-body {
+  padding: 14px 16px;
+  color: #fafafa;
+  z-index: 1;
+}
+body.ai-corner .card-title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+body.ai-corner .card-desc {
+  color: #b9bcc4;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* ---------- Modal ---------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(12,12,14,0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 2000;
+}
+.modal-backdrop[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal {
+  width: min(820px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0e0f12;
+  color: #f3f4f6;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+  transform: translateY(16px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(.2,.7,.2,1), opacity 0.35s ease;
+  padding: 24px;
+  position: relative;
+}
+.modal-backdrop[aria-hidden="false"] .modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+.modal h2 { margin-top: 0; }
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px) {
+  body.ai-corner .grid {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  body.ai-corner .card { grid-column: span 3; }
+  body.ai-corner .card.large { grid-column: span 6; }
+}
+
+@media (max-width: 560px) {
+  body.ai-corner main { padding: 12px; }
+  body.ai-corner .grid {
+    gap: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+  body.ai-corner .card { grid-column: span 4; }
+  body.ai-corner .card.large { grid-column: span 4; }
+}

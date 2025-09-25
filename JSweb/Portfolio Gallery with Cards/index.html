@@ -1,0 +1,105 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Portfolio Gallery with Cards</title>
+      <style>
+        .site-nav {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 56px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 24px;
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border-bottom: 1px solid rgba(0,0,0,0.1);
+          z-index: 1000;
+          font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        .nav-inner { width: 100%; max-width: 1200px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+        .brand { font-weight: 700; color: #111; text-decoration: none; letter-spacing: 0.2px; }
+        .nav-links { display: flex; align-items: center; gap: 16px; }
+
+        .site-nav a {
+          color: #111;
+          text-decoration: none;
+          padding: 8px 12px;
+          border-radius: 8px;
+          transition: background-color 0.2s ease, color 0.2s ease;
+          font-weight: 500;
+        }
+
+        .site-nav a:hover {
+          background-color: rgba(0,0,0,0.08);
+        }
+
+        .hamburger { display: none; background: transparent; border: 0; padding: 8px; border-radius: 8px; }
+        .hamburger:focus-visible { outline: 2px solid #111; }
+        .hamburger-box { width: 22px; height: 2px; background:#111; position: relative; display:block; }
+        .hamburger-box::before, .hamburger-box::after { content:""; position:absolute; left:0; width:22px; height:2px; background:#111; transition: transform 0.2s ease; }
+        .hamburger-box::before { top:-7px; }
+        .hamburger-box::after { top:7px; }
+        .hamburger[aria-expanded="true"] .hamburger-box { background: transparent; }
+        .hamburger[aria-expanded="true"] .hamburger-box::before { transform: translateY(7px) rotate(45deg); }
+        .hamburger[aria-expanded="true"] .hamburger-box::after { transform: translateY(-7px) rotate(-45deg); }
+
+        @media (max-width: 768px) {
+          .nav-links { position: fixed; top: 56px; left: 0; right: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; flex-direction: column; align-items: stretch; padding: 12px; gap: 8px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+          .nav-links.open { display: flex; }
+          .site-nav a { padding: 12px 14px; border-radius: 10px; }
+          .hamburger { display: inline-flex; }
+        }
+
+        body { padding-top: 56px; margin: 0; }
+      </style>
+    </head>
+
+    <body>
+      <nav class="site-nav">
+        <div class="nav-inner">
+          <a class="brand" href="../liquido-hover.html">JS</a>
+          <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav"><span class="hamburger-box"></span></button>
+          <div id="primary-nav" class="nav-links" role="navigation">
+            <a href="../liquido-hover.html">Home</a>
+            <a href="./index.html">Work</a>
+            <a href="../about.html">About me</a>
+            <a href="../ai-corner.html">AI Corner</a>
+          </div>
+        </div>
+      </nav>
+      <div id="root"></div>
+      <script>
+        (function(){
+          const toggle = document.querySelector('.hamburger');
+          const links = document.getElementById('primary-nav');
+          if (toggle && links) {
+            toggle.addEventListener('click', () => {
+              const expanded = toggle.getAttribute('aria-expanded') === 'true';
+              toggle.setAttribute('aria-expanded', String(!expanded));
+              links.classList.toggle('open', !expanded);
+            });
+            links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+              toggle.setAttribute('aria-expanded', 'false');
+              links.classList.remove('open');
+            }));
+            window.addEventListener('resize', () => {
+              if (window.innerWidth > 768) {
+                toggle.setAttribute('aria-expanded', 'false');
+                links.classList.remove('open');
+              }
+            });
+          }
+        })();
+      </script>
+      <script type="module" src="/src/main.tsx"></script>
+    </body>
+  </html>
+  
