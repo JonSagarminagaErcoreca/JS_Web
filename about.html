@@ -47,6 +47,56 @@
   </main>
   <section class="afterglow" aria-hidden="true"></section>
   
+  <script>
+    // Efecto de scroll para cambiar imágenes progresivamente
+    const images = [
+      '../assets/JS/JS_Portrait.png',
+      '../assets/JS/JS_1.png', 
+      '../assets/JS/JS_2.png',
+      '../assets/JS/JS_3.png'
+    ];
+    
+    let currentImageIndex = 0;
+    
+    function updateBackgroundImage() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Calcula el progreso del scroll (0 a 1)
+      const scrollProgress = Math.min(scrollY / (documentHeight - windowHeight), 1);
+      
+      // Determina qué imagen mostrar basado en el progreso
+      const newImageIndex = Math.min(Math.floor(scrollProgress * images.length), images.length - 1);
+      
+      // Solo cambia la imagen si es diferente a la actual
+      if (newImageIndex !== currentImageIndex) {
+        currentImageIndex = newImageIndex;
+        document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+      }
+    }
+    
+    // Throttle para optimizar el rendimiento
+    let ticking = false;
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateBackgroundImage);
+        ticking = true;
+      }
+    }
+    
+    function handleScroll() {
+      ticking = false;
+      requestTick();
+    }
+    
+    // Event listener para el scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Inicializar con la primera imagen
+    updateBackgroundImage();
+  </script>
+  
 </body>
 </html>
 

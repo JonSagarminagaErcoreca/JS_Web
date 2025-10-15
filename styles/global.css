@@ -159,7 +159,15 @@ body { color: var(--text); background: var(--bg); }
 body[data-page="work"] main { padding-top: 56px; }
 
 /* About page */
-body[data-page="about"] { padding-top: 56px; background-image: url('../assets/cursors/JS_Portrait.png'); background-size: cover; background-position: center center; background-attachment: fixed; color: #fff; }
+body[data-page="about"] { 
+  padding-top: 56px; 
+  background-image: url('../assets/JS/JS_Portrait.png'); 
+  background-size: cover; 
+  background-position: center center; 
+  background-attachment: fixed; 
+  color: #fff; 
+  transition: background-image 0.5s ease-in-out;
+}
 body[data-page="about"] main { width: 50vw; max-width: 60ch; margin: 0 auto; padding: 24px; color: #fff; min-height: calc(100vh - 56px); display: flex; flex-direction: column; justify-content: center; text-align: left; }
 body[data-page="about"] h1 { margin: 24px 0; letter-spacing: 0.2px; font-size: 3rem; }
 body[data-page="about"] p { font-size: 1.35rem; line-height: 1.85; }
