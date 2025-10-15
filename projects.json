@@ -61,98 +61,212 @@
   },
   {
     "id": "2",
-    "slug": "mobile-app-interface",
-    "title": "Mobile App Interface",
-    "category": "APP DESIGN",
+    "slug": "herramienta-horarios",
+    "title": "Herramienta Horarios",
+    "category": "UX/UI DESIGN",
     "year": "2024",
-    "image": "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=1200&auto=format&fit=crop",
-    "desc": "Sleek mobile app interface focused on engagement and accessibility.",
-    "tags": ["Swift", "Kotlin", "Figma", "Prototyping", "iOS", "Android"],
+    "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Solución personalizada de generación de horarios para más de 1200 centros con miles de empleados y particularidades contractuales únicas.",
+    "tags": ["UX Research", "UI Design", "Project Management", "User Testing", "Analytics", "Design System"],
+    "description": {
+      "overview": "Desarrollo de una herramienta personalizada de generación de horarios que reemplaza soluciones existentes insuficientes, diseñada específicamente para las necesidades de más de 1200 centros con miles de empleados y particularidades contractuales únicas.",
+      "sections": [
+        {
+          "title": "Reto",
+          "content": "El cliente enfrentaba desafíos significativos con su proveedor actual de software en la herramienta de generación de horarios para sus más de 1200 centros y miles de empleados, cada uno con particularidades contractuales únicas. Identificamos una clara oportunidad de mercado, ya que las soluciones existentes no satisfacían completamente las necesidades del cliente. Tras un exhaustivo análisis de viabilidad y apoyados en nuestro profundo conocimiento del negocio, decidimos desarrollar nuestra propia solución personalizada."
+        },
+        {
+          "title": "Desarrollo",
+          "content": "Formamos un equipo multidisciplinar que incluía un project manager, dos desarrolladores backend, un desarrollador frontend, dos especialistas en negocio y un diseñador UX/UI. Iniciamos con un benchmark exhaustivo de herramientas líderes como Kronos, Excel y Odoo, identificando sus fortalezas y debilidades. Este análisis nos permitió establecer los requisitos críticos para nuestro MVP. Desarrollamos un perfil detallado de nuestro usuario objetivo basado en nuestro conocimiento del negocio y las necesidades de los empleados, lo que facilitó la creación de user stories y customer journeys específicas. Las iteraciones iniciales incluyeron sketches y wireframes de baja fidelidad, que probamos con usuarios para afinar funcionalidades dada la alta interacción que requería la herramienta."
+        },
+        {
+          "title": "La solución",
+          "content": "Con los flujos de navegación y las interacciones principales ya definidas y consensuadas, procedimos a diseñar la interfaz de usuario final, aplicando estilos visuales coherentes con otros proyectos del mismo cliente para fortalecer la identidad visual conjunta. Se desarrolló una nueva librería de componentes para acomodar funciones únicas del proyecto. Los tests de usuario guiados nos permitieron recoger feedback valioso, que utilizamos para refinar aún más las interacciones del producto."
+        },
+        {
+          "title": "Impacto",
+          "content": "Implementamos herramientas de análisis como Hotjar y Google Analytics para monitorear el rendimiento del producto y verificar el cumplimiento de los KPIs establecidos. Los datos recogidos demostraron mejoras significativas en la eficiencia de la creación de horarios y una mayor satisfacción del usuario. Continuamos en un proceso de mejora continua, añadiendo funcionalidades de valor añadido basadas en las user stories faseadas y el feedback continuo de los usuarios."
+        }
+      ]
+    },
     "gallery": [
-      "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1586716412790-53109f0d9754?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop"
     ],
     "links": {
-      "case": "project.html?id=mobile-app-interface",
+      "case": "project.html?id=herramienta-horarios",
       "repo": "",
       "live": ""
     }
   },
   {
     "id": "3",
-    "slug": "brand-identity-system",
-    "title": "Brand Identity System",
-    "category": "BRANDING",
-    "year": "2023",
-    "image": "https://images.unsplash.com/photo-1586716412790-53109f0d9754?q=80&w=1200&auto=format&fit=crop",
-    "desc": "Complete brand identity: logo, color, typography, and guidelines.",
-    "tags": ["Brand Design", "Illustrator", "InDesign", "Strategy"],
+    "slug": "sco-retail-pwa",
+    "title": "SCO. Retail P.W.A.",
+    "category": "UX/UI DESIGN",
+    "year": "2024",
+    "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Aplicación web progresiva para sistemas de autopago en retail con más de 400 centros, integrando cajas tradicionales, autopago y compras con dispositivos personales.",
+    "tags": ["PWA", "UX Research", "UI Design", "Retail", "Payment Systems", "User Testing", "Prototyping"],
+    "description": {
+      "overview": "Desarrollo de una aplicación web progresiva (PWA) para modernizar los sistemas de autopago en retail, reemplazando software obsoleto y cubriendo múltiples canales de pago: cajas tradicionales, autopago y compras con dispositivos personales del usuario.",
+      "sections": [
+        {
+          "title": "Reto",
+          "content": "Nuestro cliente, un importante retailer con más de 400 centros y un volumen de ventas elevado, se enfrentaba al problema de tener un software obsoleto para sus máquinas de autopago en supermercados. La tecnología y los sistemas utilizados en su desarrollo no permitían implementar las mejoras necesarias para satisfacer los requisitos del mercado actual. Nos pidieron una prueba de concepto para demostrar que se podía actualizar el software con los requisitos actuales sin impactar el funcionamiento diario de los centros, lo que requería una aplicación robusta, estable y escalable. Los requerimientos eran complejos, ya que el sistema debía cubrir tanto las cajas de pago tradicionales asistidas por personal, las cajas de autopago, como las compras realizadas con el terminal del usuario final con pasarela de pago incluida y finalización en caja de autopago. Además, la recolección de datos de todas las compras era crucial para detectar patrones de compra, estadísticas, uso de la aplicación y personalizar la experiencia del usuario."
+        },
+        {
+          "title": "Desarrollo",
+          "content": "Formamos un equipo compuesto por un project manager, dos desarrolladores back-end, un desarrollador front-end y dos diseñadores. Debido a la complejidad del proyecto, realizamos una fase de investigación extensa para cubrir la mayor parte de los escenarios posibles. Entrevistamos a personal de cajas que serían los usuarios potenciales y también a usuarios finales. Testeamos en directo varios sitios con cajas de autopago, no solo del sector alimentario, sino de varios sectores, creando un benchmark importante. A partir de ahí, desarrollamos user personas, historias de usuario, arquitectura de información y flujos de navegación. Esta fase nos ayudó a identificar que el producto debía escalar de manera paulatina, por lo que nos centramos en la parte de autopago y compra por parte del usuario para mitigar riesgos. Tuvimos que crear una tabla de funcionalidades por peso ya que acumulamos muchas de ellas, y tuvimos que priorizar cuales eran críticas para el desarrollo de la prueba de concepto, en función de la necesidad y de la complejidad de la misma, ya que la prueba de concepto debía acabar siendo totalmente funcional. En la parte de diseño, usamos Confluence y Jira para la parte de documentación y Adobe XD para diseño y prototipado. Partiendo de bocetos básicos, creamos prototipos de baja fidelidad que fueron testeados en todos los flujos. Luego desarrollamos un moodboard para definir el estilo y e íbamos creando una librería de componentes, estableciendo un sistema de diseño que facilitó la creación de pantallas de manera sólida y ágil. La idea era trabajar en modo 'work prototype' para que todo este trabajo cuando finalizase la prueba de concepto, pudiésemos usarla como punto de partida."
+        },
+        {
+          "title": "La solución",
+          "content": "Finalmente, creamos una POC funcional conectada a sus sistemas que cubría las funciones de caja de autopago y compra por parte del cliente con su propio dispositivo, de una forma centralizada. Esta POC fue catalogada como un éxito y avanzó a la fase piloto."
+        },
+        {
+          "title": "Impacto",
+          "content": "La implementación de la POC funcional fue un éxito, lo que permitió al cliente avanzar hacia una fase piloto en algunos centros sin interrupciones en su operación diaria. La solución desarrollada no solo mejoró la experiencia del usuario en las cajas de autopago y compras con dispositivos personales, sino que también proporcionó una base escalable para futuras mejoras y expansiones. Todo ello con una coherencia tanto visual como de usabilidad en todos los entornos, creamos un ecosistema en todos los medios de pago. La recolección de datos en tiempo real permitió obtener insights valiosos sobre los patrones de compra y el uso de la aplicación, facilitando la personalización y optimización continua del sistema. Como resultado, el cliente ha reportado una mayor eficiencia operativa, una reducción en los tiempos de espera en caja y un incremento en la satisfacción del cliente, consolidando la solución como un componente crítico en su estrategia tecnológica a largo plazo."
+        }
+      ]
+    },
     "gallery": [
-      "https://images.unsplash.com/photo-1586716412790-53109f0d9754?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556742111-a301076d9d18?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1556742111-a301076d9d18?q=80&w=1200&auto=format&fit=crop"
     ],
     "links": {
-      "case": "project.html?id=brand-identity-system",
+      "case": "project.html?id=sco-retail-pwa",
       "repo": "",
       "live": ""
     }
   },
   {
     "id": "4",
-    "slug": "creative-studio-website",
-    "title": "Creative Studio Website",
-    "category": "WEB DESIGN",
-    "year": "2023",
-    "image": "https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop",
-    "desc": "Portfolio website for a creative studio with dynamic animations.",
-    "tags": ["Vue.js", "GSAP", "WebGL", "Animation"],
+    "slug": "plataforma-monitorizacion-eps",
+    "title": "Plataforma monitorización EPS",
+    "category": "DIGITAL TWIN",
+    "year": "2024",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Plataforma de monitoreo y trazabilidad completa para más de un billón de cajas reutilizables de Europool Systems, identificando puntos críticos de pérdidas millonarias.",
+    "tags": ["Data Visualization", "React", "GoJS", "Tableau", "Dashboard", "Trazabilidad", "Logistics"],
+    "description": {
+      "overview": "Desarrollo de una plataforma de monitoreo para Europool Systems que permite la trazabilidad completa de más de un billón de cajas reutilizables, identificando puntos críticos de pérdidas y optimizando la cadena logística.",
+      "sections": [
+        {
+          "title": "El reto",
+          "content": "Europool Systems, una empresa líder en envases retornables, maneja más de un billón de cajas reutilizables en toda España y Europa. Debido a la alta rotación y complejidad logística en sus centros de retorno y lavado, la empresa enfrenta pérdidas millonarias por cajas no devueltas, con una responsabilidad financiera a menudo incierta entre la empresa y sus clientes. En colaboración con uno de sus principales clientes, surgió la necesidad de desarrollar una plataforma que permitiera monitorear la trazabilidad completa de las cajas y localizar los puntos críticos de mayores pérdidas."
+        },
+        {
+          "title": "Desarrollo",
+          "content": "El equipo del proyecto estaba compuesto por un desarrollador back-end, un desarrollador front-end, un técnico de procesos de negocio y un diseñador. Uno de los problemas con los que nos encontramos al abordar el proyecto era la cantidad de flujos y complejidad de los mismos, así que comenzamos realizando una limpieza de datos y simplificamos los flujos para que la aumentase la legibilidad y comprensibilidad de los mismos. Parte del research lo dedicamos a estudiar la mejor manera de representar estos flujos y valorando que la relación esfuerzo-resultado estuviese balanceada, ya que encontramos bastantes problemas por parte de desarrollo a la hora de implementar la soluciones presentadas por diseño. Completamos algunas pruebas de concepto y de esfuerzo con algunas de las soluciones que encontramos mediante prototipos de baja fidelidad, y las validamos con algunos usuarios para comprobar su usabilidad. También realizamos pruebas de estilo con las librerías para ver su recorrido. Optamos por la librería de grafos GoJS para representar los flujos de las cajas, creamos un porta web desarrollado en React y Tableau incrustado para los dashboards. Aunque consideramos Kepler.gl por su atractivo visual, no cumplía funcionalmente con nuestros requisitos, lo que nos llevó a profundizar en GoJS, pese a su complejidad y lenguaje propio. Una vez conocidas las limitaciones técnicas y con las pruebas de concepto validadas por usuarios, definimos el mapa de contenidos del sitio y la arquitectura de la información final teniendo en cuenta los niveles de información que requería el cliente. Dividimos la información en niveles de relevancia y de macro a micro, y lo validamos con cliente para ir de 'una foto general' al mínimo detalle en función del requerimiento. Finalmente creamos un prototipo de alta fidelidad que incluía alarmas intuitivas mediante un sistema de colores semafórico para la interface de los nodos, facilitando la identificación de problemas en cada uno de los nodos y pudiendo entrar a detalle en cada uno de ellos, lo que comentábamos de ir de macro a micro. A la hora de aplicar el diseño visual final tuvimos algunos problemas para adaptar la librería a los requerimientos del prototipo de alta fidelidad por lo que tuvimos que reenfocar algunos flujos, que resultó ser un acierto ya que simplificábamos la 'foto' final y de cara a cliente tuvo mejor aceptación al ser todo más claro."
+        },
+        {
+          "title": "La solución",
+          "content": "Desarrollamos un portal intuitivo con un dashboard principal que ofrece una vista general del flujo de las cajas y pudiendo entrar una vista más detallada para investigaciones más profundas. El diseño de alarmas permitía de un vistazo ver en que puntos de la cadena esta habiendo problemas. La interfaz, clara y simplificada, fue bien recibida tanto por los clientes como por nuestro equipo, permitiendo a los usuarios identificar y actuar sobre puntos críticos eficazmente."
+        },
+        {
+          "title": "Impacto",
+          "content": "Ha día de hoy el portal está en pleno uso, actualizado en tiempo real y ha proporcionado por primera vez tanto a Europool Systems como a sus clientes una visibilidad completa sobre dónde se pierde la trazabilidad de las cajas, permitiendo tomar medidas correctivas. Debido al éxito del proyecto, se está considerando su extensión a más clientes en toda Europa y se presentará internamente en la empresa para discutir su expansión."
+        }
+      ]
+    },
     "gallery": [
-      "https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1667237346955-7b6cbb0815e4?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
     ],
     "links": {
-      "case": "project.html?id=creative-studio-website",
+      "case": "project.html?id=plataforma-monitorizacion-eps",
       "repo": "",
       "live": ""
     }
   },
   {
     "id": "5",
-    "slug": "product-design-system",
-    "title": "Product Design System",
+    "slug": "gplus-monitorizacion-proyeccion",
+    "title": "GPlus. Monitorización y Proyección de Actividad",
     "category": "UX/UI DESIGN",
     "year": "2024",
-    "image": "https://images.unsplash.com/photo-1667237346955-7b6cbb0815e4?q=80&w=1200&auto=format&fit=crop",
-    "desc": "Design system with components, patterns and guidelines.",
-    "tags": ["Design Systems", "Figma", "Components", "Accessibility"],
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Aplicación de monitoreo en tiempo real para retailer con más de 1.200 centros y 33,000 trabajadores, proporcionando visibilidad de ventas, proyecciones y KPIs críticos del negocio.",
+    "tags": ["PWA", "Dashboard", "Analytics", "Real-time", "Retail", "KPIs", "Data Visualization"],
+    "description": {
+      "overview": "Desarrollo de una aplicación web progresiva para uno de los principales retailers del sector alimenticio en España, proporcionando visibilidad en tiempo real de ventas, proyecciones a corto y medio plazo, y KPIs críticos del negocio.",
+      "sections": [
+        {
+          "title": "Reto",
+          "content": "Nuestro cliente, uno de los principales retailers del sector alimenticio en España, opera más de 1.200 centros y emplea a más de 33,000 trabajadores. Se enfrentaban al desafío de no tener visibilidad en tiempo real de sus ventas, recibiendo resultados tardíos y en formatos poco manejables. Para ello surgió la necesidad de crear una herramienta, en principio, enfocada a la capa directiva que cubriese esa necesidad. Esta aplicación debía permitir la consulta de ventas en tiempo real, desde una visión macro hasta el detalle por tienda, e incluir proyecciones de ventas a corto plazo y medio plazo, así como datos históricos y otros KPIs críticos como paso de clientes, compra media, impacto de las ofertas y muchos más indicadores clave del negocio."
+        },
+        {
+          "title": "Desarrollo",
+          "content": "Conformamos un equipo de trabajo compuesto por dos desarrolladores back-end, dos front-end, dos especialistas en negocio y dos diseñadores, donde yo desempeñaba un rol liderando la parte de diseño y facilitación de las reuniones y seguimiento. Primero investigamos algunas herramientas de mercado e hicimos algunas entrevistas con perfiles directivos para ir definiendo los datos clave en su día a día y qué buscaban éstos en este tipo de herramientas y por otro lado y no menos importante, que cosas no eran necesarias para su visión de negocio. Uno de los insights más valioso para nosotros fue la necesidad de síntesis y centrar el diseño en datos clave para este tipo de perfil y que el detalle no ensuciase una visión clara del dato decisorio para ellos. Siguiendo una metodología Agile, estructurábamos el trabajo diario en reuniones cortas donde el equipo de negocio definía los datos clave para cada visión, mientras los diseñadores y desarrolladores trabajaban en conjunto para estructurar, jerarquizar y visualizar esta información de la mejor manera posible. Los bocetos evolucionaron a estructuras más definitivas y, tras la creación de un moodboard y su validación, procedimos a desarrollar y refinar prototipos avanzados. Junto con estos le dimos sentido a todas esas vistas y datos creando una navegación que diese al usuario una visión clara de negocio entre pasado presente y futuro, era clave crear ese recorrido y que el usuario supiese siempre en que punto estaba. Como he comentado, nuestro enfoque se centró en tres perspectivas clave: histórica, presente y futura, permitiendo a la dirección visualizar el 'pulso' del negocio de un simple vistazo. Otra gran preocupación por parte de cliente era la seguridad de la herramienta debido a la sensibilidad de los datos manejados, había que dar esa sensación de seguridad y robustez, pero sin perder una experiencia de usuario que complejizase el login a la app. Para ello nos basamos en registros de doble factor de autentificación por contraseña y sms estándar utilizados en muchas de aplicaciones con los que nuestros usuarios estaban ya familiarizados, tipo banca etc. Se optó por desarrollar una progressive web app accesible vía web, permitía un vista más analítica desde desktop (gráficas interactivas y más posibilidades de detalle) y no requería de instalaciones. En diseño utilizamos herramientas como Google Suite, Adobe XD y Figma para el seguimiento, diseño y prototipado."
+        },
+        {
+          "title": "La solución",
+          "content": "El resultado fue una aplicación intuitiva y altamente funcional, que pronto se convirtió en un caso de éxito para nuestra empresa. La app permite visualizar en tiempo real y gestionar proactivamente la actividad del negocio, con funciones revisadas continuamente y ampliadas como gestión de roles y modo oscuro."
+        },
+        {
+          "title": "Impacto",
+          "content": "Hoy en día, la aplicación se ha implementado en casi toda la organización, incluyendo una versión para el departamento logístico y personalización según el rol del usuario. Con más de tres años en funcionamiento y un papel clave durante la pandemia, GPlus ha demostrado ser un instrumento vital en la gestión y proyección del negocio, facilitando decisiones informadas y oportunas a todos los niveles de la empresa."
+        }
+      ]
+    },
     "gallery": [
-      "https://images.unsplash.com/photo-1667237346955-7b6cbb0815e4?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1663153206192-6d0e4c9570dd?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
     ],
     "links": {
-      "case": "project.html?id=product-design-system",
+      "case": "project.html?id=gplus-monitorizacion-proyeccion",
       "repo": "",
       "live": ""
     }
   },
   {
     "id": "6",
-    "slug": "digital-art-collection",
-    "title": "Digital Art Collection",
-    "category": "DIGITAL ART",
-    "year": "2023",
-    "image": "https://images.unsplash.com/photo-1663153206192-6d0e4c9570dd?q=80&w=1200&auto=format&fit=crop",
-    "desc": "Generative art exploring tech and creativity.",
-    "tags": ["Generative", "Processing", "Creative Coding"],
+    "slug": "vpo-ingenieria",
+    "title": "VPO Ingeniería",
+    "category": "BRANDING",
+    "year": "2024",
+    "image": "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Proyecto integral de identidad corporativa para VPO Ingeniería, separando la marca del grupo Versia y creando una identidad propia enfocada en mejora de procesos retail y logística.",
+    "tags": ["Brand Identity", "Logo Design", "Web Design", "Corporate Identity", "Photography", "Content Strategy"],
+    "description": {
+      "overview": "Desarrollo completo de identidad corporativa para VPO Ingeniería, empresa especializada en mejora de procesos retail y logística. Proyecto integral que incluye naming, branding, web corporativa, papelería y estrategia de comunicación.",
+      "sections": [
+        {
+          "title": "Reto",
+          "content": "Nuestra empresa, antes Versia Procesos Operativos, debido a una decisión de estrategia comercial, decidió crear una identidad propia separada de la matriz (Versia). Así surgió VPO Ingeniería, como necesidad de separar nuestro nicho de negocio del entorno, sobre todo TIC, al que se dedica Versia. Necesitábamos llegar a un público en concreto de una manera diferente a la del resto del grupo. Se trataba de un proyecto integral a nivel de identidad. Desde el propio naming hasta la generación del branding correspondiente. Nuestro sector es la mejora de procesos especializados en el mundo retail y logístico y siempre respaldo de una capa analítica de datos. Debíamos darle un enfoque fresco y con mentalidad startup, rompiendo con los modelos tradicionales de consultoría, pero sin perder ese toque sutil y fino. Papelería, plantillas Office, web, RRSS,…. Se desarrolló todo lo que conlleva la imagen de marca. Para ello eran clave dos aspectos. El primero, no ser totalmente ajeno a la matriz y el segundo generar una imagen acorde a nuestro sector con un aspecto muy cuidado. Llevé yo todo el proceso de cambio de marca, propuestas, búsqueda de dominios, etc.."
+        },
+        {
+          "title": "Desarrollo",
+          "content": "El naming venía decidido por la dirección de la empresa, por lo que en ese sentido no tuvimos demasiado margen de actuación, sí que apostamos por el descriptivo ingeniera más que consultoría, que se barajaba en un principio, ya que creíamos que tenía algunas connotaciones actualmente de las que queríamos huir. Para no perder completamente la identidad de la matriz decidimos dos cosas, mantener la tipografía del logo, y adueñarnos del color secundario como nuestro color acento. Añadimos un color complementario más oscuro como color principal para que ese color acento resaltase más y nos daría ese toque sobrio que también buscábamos. Con todo esto construimos el logotipo, que en algunos casos iría acompañado de la web, ya que 'VPO' a secas podría confundirse con otras siglas por lo que ayudaría a distinguirlo y ayudaría a entender en que sector nos encontramos. Creamos una guía de estilo, que aplicamos a distintos soporte que la empresa requería. Creamos plantillas para los documentos de Microsoft Office también y por último nos pusimos con web. La web debía ser un escaparate de nuestra empresa, por lo que tuvimos que montar una sesión fotográfica también para generar contenidos 'reales'. La estructura de la web era más o menos sencilla y debía cubrir los apartados tipos que podemos ver en muchas web del sector. Propusimos cubrir los siguientes apartados: Servicios, Proyectos, Sobre Nosotros y Contacto con vistas a crecer de manera horizontal en algunos de ellos. Una vez realizadas las pertinentes reuniones para consensuar el contenido y estructura final de la web, nos lanzamos con las primeras pruebas de estilo. Se decidió que un vídeo era la mejor manera de mostrar de una manera rápida y visual a lo que nos dedicábamos. Editamos un vídeo para la home para ello con algunos mensajes clave para nosotros. Un vez decidido el estilo final maquetamos todo el site. Creamos también un perfil propio el LinkedIn donde generamos nuestros propios contenidos enfocados a nuestro sector. También hemos llevado a cabo diseños para Ferias con todo lo que esto conlleva de cara a darle visibilidad a nuestra nueva imagen."
+        },
+        {
+          "title": "La solución",
+          "content": "Identidad corporativa completa con logo, guía de estilo, papelería, plantillas Office, web corporativa (vpoingenieria.com), estrategia de LinkedIn y materiales para ferias. La solución final de la web se puede ver en vpoingenieria.com"
+        },
+        {
+          "title": "Las cifras",
+          "content": "Conseguimos tener el espacio que no teníamos en internet con una identidad propia y dirigida al público objetivo que marcamos."
+        }
+      ]
+    },
     "gallery": [
-      "https://images.unsplash.com/photo-1663153206192-6d0e4c9570dd?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1649000808933-1f4aac7cad9a?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop"
     ],
     "links": {
-      "case": "project.html?id=digital-art-collection",
+      "case": "project.html?id=vpo-ingenieria",
       "repo": "",
-      "live": ""
+      "live": "https://vpoingenieria.com"
     }
   }
 ]
