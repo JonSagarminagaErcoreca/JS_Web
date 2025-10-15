@@ -1,0 +1,158 @@
+[
+  {
+    "id": "1",
+    "slug": "msm-digital-twin",
+    "title": "MSM Digital Twin",
+    "category": "DIGITAL TWIN",
+    "year": "2024",
+    "image": "https://images.unsplash.com/photo-1649000808933-1f4aac7cad9a?q=80&w=1200&auto=format&fit=crop",
+    "hero": {
+      "type": "video",
+      "src": "assets/MSM/MSM_LinkedIn_v1_1.mp4",
+      "poster": "https://images.unsplash.com/photo-1649000808933-1f4aac7cad9a?q=80&w=1200&auto=format&fit=crop"
+    },
+    "desc": "Plataforma avanzada de gemelo digital para optimización de procesos de manufactura y monitoreo en tiempo real.",
+    "tags": ["Gemelo Digital", "IoT", "Machine Learning", "Visualización 3D", "Analytics en Tiempo Real"],
+    "description": {
+      "overview": "MSM Digital Twin es una plataforma integral que crea réplicas virtuales de sistemas de manufactura, permitiendo monitoreo en tiempo real, análisis predictivo y optimización de procesos.",
+      "sections": [
+        {
+          "title": "Contexto",
+          "content": "Nuestro cliente necesitaba visibilizar los datos de los flujos operativos, cargas y curvas de expedición y recepción de una nueva plataforma logística que aún no estaba construida. Para ello, propusimos una visualización avanzada que permitiera interpretar la información de manera intuitiva. Esto se debía a que el perfil del usuario final no era muy técnico, y vimos que una representación visual interactiva facilitaría la comprensión de los procesos y, además, ayudaría a prever cómo sería la plataforma a nivel constructivo."
+        },
+        {
+          "title": "Reto",
+          "content": "Para abordar el desafío, decidimos desarrollar un dashboard interactivo completamente nuevo que permitiera visualizar la plataforma de manera clara y precisa. Con el objetivo de ofrecer una solución más completa, apostamos por la creación de un gemelo digital, lo que permitía simular y analizar los flujos logísticos de forma interactiva y en tiempo real. Inicialmente, consideramos utilizar Unreal Engine para la simulación, pero lo descartamos debido a su complejidad y las exigencias técnicas que implicaba. En su lugar, optamos por Three.js para desarrollar la visualización 3D, permitiendo una navegación fluida y una representación detallada de la plataforma."
+        },
+        {
+          "title": "Desarrollo",
+          "content": "El proceso de desarrollo se dividió en varias fases clave: Investigación y Definición del Usuario: Identificamos los diferentes tipos de usuarios finales y sus necesidades. Para ello, creamos user personas que nos ayudaron a definir las funcionalidades clave y el nivel de detalle necesario en la interfaz. Arquitectura de la Información y Flujos de Usuario: Diseñamos la estructura de la aplicación mediante arquitectura de la información, journey maps y mapas de navegación para garantizar una experiencia de usuario intuitiva. Modelado 3D en Blender: Creamos un modelo detallado de la plataforma logística, incluyendo estructuras, zonas de carga y expedición, y elementos clave de la operativa. Animaciones y Simulación: Generamos animaciones para visualizar los flujos de trabajo dentro de la plataforma, permitiendo al cliente entender de manera dinámica cómo se gestionaría la logística en el entorno real. Exportación e Integración: Tras la modelación en Blender, exportamos los modelos y los integramos en un portal web interactivo utilizando Three.js. Desarrollo del Portal en React: Creamos una aplicación web donde los usuarios pueden navegar por la plataforma, consultar datos en tiempo real y analizar flujos de trabajo a través de una interfaz amigable. Implementación de Login y Seguridad: Se desarrolló un sistema de autenticación seguro para garantizar que solo los usuarios autorizados pudieran acceder a la plataforma."
+        },
+        {
+          "title": "La solución",
+          "content": "El resultado final fue un gemelo digital completamente funcional con una visualización 3D interactiva. La plataforma permitió al cliente navegar por el entorno logístico, consultar datos clave y simular distintos escenarios de carga y recepción antes de la construcción física de la infraestructura. La herramienta fue un éxito y proporcionó una base sólida para la toma de decisiones estratégicas."
+        },
+        {
+          "title": "Impacto",
+          "content": "Optimización de Recursos: Al visualizar los flujos antes de la implementación, el cliente pudo detectar posibles cuellos de botella y mejorar la eficiencia operativa. Reducción de Costes: Evitar errores en la fase de construcción gracias a la simulación previa redujo costos innecesarios. Mayor Precisión en la Planificación: La representación 3D permitió analizar distintas configuraciones y tomar decisiones basadas en datos. Herramienta de Presentación: La solución se convirtió en una herramienta clave para presentar la plataforma a inversores y stakeholders de forma atractiva e intuitiva."
+        },
+        {
+          "title": "Aprendizajes y Errores",
+          "content": "Elección de Tecnología: Inicialmente consideramos utilizar Unreal Engine para el desarrollo, pero su complejidad y los tiempos de carga no se ajustaban a la necesidad de agilidad del proyecto. Aprendimos que la selección de herramientas debe balancear fidelidad visual y eficiencia técnica. Iteraciones Más Ágiles: En un principio intentamos definir demasiado el producto antes de testearlo, lo que ralentizó los primeros avances. En futuras implementaciones, buscaremos ciclos de iteración más cortos con validaciones tempranas. Balance entre Visual y Datos: Nos dimos cuenta de que la visualización 3D es poderosa, pero no debe reemplazar dashboards de datos claros. En el futuro, plantearemos una mejor integración entre ambas capas. Escalabilidad: Diseñamos la solución con una arquitectura escalable desde el principio, lo cual nos ahorró problemas al agregar nuevas funcionalidades más adelante. Enfoque en Desktop: Decidimos postergar la adaptación responsive y multidispositivo para una fase futura porque la herramienta estaba diseñada principalmente para un entorno de escritorio. Dado que el propósito principal era la visualización detallada de los datos logísticos en una pantalla amplia, priorizamos la estabilidad y optimización del sistema en ese formato antes de abordar una posible adaptación a dispositivos móviles. En general, la combinación de modelado 3D, simulación y visualización interactiva permitió que el cliente tuviera un control total sobre el diseño y operativa de su futura plataforma logística antes de su construcción, maximizando la eficiencia y minimizando riesgos."
+        }
+      ]
+    },
+    "gallery": [
+      "assets/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.png",
+      "assets/MSM/388eb60d-2f01-4421-8b3b-a2f6daeef5b8_rw_1200.png",
+      "assets/MSM/54de1562-7f6d-4961-9a5d-366d583ced3d_rw_1920.png",
+      "assets/MSM/7c25ac63-3d7c-4f70-a3a7-4d784ae0af6e_rw_1920.png",
+      "assets/MSM/88080070-9761-4eb4-a741-b27df1334f26_rw_1920.png",
+      "assets/MSM/bb1141a5-3f49-4a2a-8182-a842f1978ef9_rw_600.png",
+      "assets/MSM/c1261526-8729-4923-ab34-ac0e80c18c45_rw_1920.png",
+      "assets/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_1920.png",
+      "assets/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_19202.png"
+    ],
+    "links": {
+      "case": "project.html?id=msm-digital-twin",
+      "repo": "",
+      "live": ""
+    }
+  },
+  {
+    "id": "2",
+    "slug": "mobile-app-interface",
+    "title": "Mobile App Interface",
+    "category": "APP DESIGN",
+    "year": "2024",
+    "image": "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Sleek mobile app interface focused on engagement and accessibility.",
+    "tags": ["Swift", "Kotlin", "Figma", "Prototyping", "iOS", "Android"],
+    "gallery": [
+      "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1586716412790-53109f0d9754?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "links": {
+      "case": "project.html?id=mobile-app-interface",
+      "repo": "",
+      "live": ""
+    }
+  },
+  {
+    "id": "3",
+    "slug": "brand-identity-system",
+    "title": "Brand Identity System",
+    "category": "BRANDING",
+    "year": "2023",
+    "image": "https://images.unsplash.com/photo-1586716412790-53109f0d9754?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Complete brand identity: logo, color, typography, and guidelines.",
+    "tags": ["Brand Design", "Illustrator", "InDesign", "Strategy"],
+    "gallery": [
+      "https://images.unsplash.com/photo-1586716412790-53109f0d9754?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "links": {
+      "case": "project.html?id=brand-identity-system",
+      "repo": "",
+      "live": ""
+    }
+  },
+  {
+    "id": "4",
+    "slug": "creative-studio-website",
+    "title": "Creative Studio Website",
+    "category": "WEB DESIGN",
+    "year": "2023",
+    "image": "https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Portfolio website for a creative studio with dynamic animations.",
+    "tags": ["Vue.js", "GSAP", "WebGL", "Animation"],
+    "gallery": [
+      "https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1667237346955-7b6cbb0815e4?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "links": {
+      "case": "project.html?id=creative-studio-website",
+      "repo": "",
+      "live": ""
+    }
+  },
+  {
+    "id": "5",
+    "slug": "product-design-system",
+    "title": "Product Design System",
+    "category": "UX/UI DESIGN",
+    "year": "2024",
+    "image": "https://images.unsplash.com/photo-1667237346955-7b6cbb0815e4?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Design system with components, patterns and guidelines.",
+    "tags": ["Design Systems", "Figma", "Components", "Accessibility"],
+    "gallery": [
+      "https://images.unsplash.com/photo-1667237346955-7b6cbb0815e4?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1663153206192-6d0e4c9570dd?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "links": {
+      "case": "project.html?id=product-design-system",
+      "repo": "",
+      "live": ""
+    }
+  },
+  {
+    "id": "6",
+    "slug": "digital-art-collection",
+    "title": "Digital Art Collection",
+    "category": "DIGITAL ART",
+    "year": "2023",
+    "image": "https://images.unsplash.com/photo-1663153206192-6d0e4c9570dd?q=80&w=1200&auto=format&fit=crop",
+    "desc": "Generative art exploring tech and creativity.",
+    "tags": ["Generative", "Processing", "Creative Coding"],
+    "gallery": [
+      "https://images.unsplash.com/photo-1663153206192-6d0e4c9570dd?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1649000808933-1f4aac7cad9a?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "links": {
+      "case": "project.html?id=digital-art-collection",
+      "repo": "",
+      "live": ""
+    }
+  }
+]

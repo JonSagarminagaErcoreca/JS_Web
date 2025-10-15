@@ -38,8 +38,8 @@
   
 
   <main>
-    <section class="relative h-[calc(100vh-56px)] overflow-hidden">
-      <div id="gallery" class="absolute inset-0 flex items-center select-none">
+    <section class="relative min-h-[calc(100dvh-56px)] overflow-x-hidden overflow-y-visible pt-8 pb-8">
+      <div id="gallery" class="absolute inset-0 flex items-center select-none py-4 overflow-visible">
         <div id="track" class="gallery-track flex gap-8 px-8"></div>
       </div>
     </section>
@@ -64,14 +64,7 @@
   </div>
 
   <script>
-    const works = [
-      { id:'1', title:'Modern Web Platform', category:'WEB DESIGN', year:'2024', image:'https://images.unsplash.com/photo-1649000808933-1f4aac7cad9a?q=80&w=1200&auto=format&fit=crop', desc:'A comprehensive web platform featuring modern design principles.', tags:['React','TypeScript','Tailwind CSS','Figma','UX/UI'] },
-      { id:'2', title:'Mobile App Interface', category:'APP DESIGN', year:'2024', image:'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=1200&auto=format&fit=crop', desc:'Sleek mobile app interface focused on engagement and accessibility.', tags:['Swift','Kotlin','Figma','Prototyping','iOS','Android'] },
-      { id:'3', title:'Brand Identity System', category:'BRANDING', year:'2023', image:'https://images.unsplash.com/photo-1586716412790-53109f0d9754?q=80&w=1200&auto=format&fit=crop', desc:'Complete brand identity: logo, color, typography, and guidelines.', tags:['Brand Design','Illustrator','InDesign','Strategy'] },
-      { id:'4', title:'Creative Studio Website', category:'WEB DESIGN', year:'2023', image:'https://images.unsplash.com/photo-1526242767279-2ad8d8271177?q=80&w=1200&auto=format&fit=crop', desc:'Portfolio website for a creative studio with dynamic animations.', tags:['Vue.js','GSAP','WebGL','Animation'] },
-      { id:'5', title:'Product Design System', category:'UX/UI DESIGN', year:'2024', image:'https://images.unsplash.com/photo-1667237346955-7b6cbb0815e4?q=80&w=1200&auto=format&fit=crop', desc:'Design system with components, patterns and guidelines.', tags:['Design Systems','Figma','Components','Accessibility'] },
-      { id:'6', title:'Digital Art Collection', category:'DIGITAL ART', year:'2023', image:'https://images.unsplash.com/photo-1663153206192-6d0e4c9570dd?q=80&w=1200&auto=format&fit=crop', desc:'Generative art exploring tech and creativity.', tags:['Generative','Processing','Creative Coding'] },
-    ];
+    let works = [];
 
     function gradientFor(id){
       const gradients = [
@@ -85,29 +78,43 @@
       let hash = 0; for (let i=0;i<id.length;i++){ hash = (hash*31 + id.charCodeAt(i)) >>> 0; }
       return gradients[hash % gradients.length];
     }
-    function randomHoverGradient(){
-      const options = [
-        'from-fuchsia-500/25 via-pink-500/20 to-transparent',
-        'from-sky-500/25 via-cyan-500/20 to-transparent',
-        'from-amber-500/25 via-orange-500/20 to-transparent',
-        'from-lime-500/25 via-emerald-500/20 to-transparent',
-        'from-violet-500/25 via-indigo-500/20 to-transparent',
-        'from-teal-500/25 via-emerald-500/20 to-transparent',
-      ];
-      return options[Math.floor(Math.random()*options.length)];
-    }
 
     const track = document.getElementById('track');
-    const tripled = [...works, ...works, ...works];
-    function render(){
+    
+    // Sistema de gradient aleatorio (igual que menu.js)
+    function randomGradient(){ 
+      const h = Math.floor(Math.random()*360); 
+      const h2 = (h+60)%360; 
+      return `linear-gradient(135deg, hsl(${h} 80% 65%), hsl(${h2} 80% 65%))`; 
+    }
+    
+    // Cargar proyectos desde JSON
+    async function loadWorks(){
+      try {
+        const res = await fetch('./projects.json', { cache: 'no-cache' });
+        works = await res.json();
+        const tripled = [...works, ...works, ...works];
+        render(tripled);
+      } catch (error) {
+        console.error('Error loading projects:', error);
+        track.innerHTML = '<p>Error loading projects</p>';
+      }
+    }
+    
+    function render(tripled){
       track.innerHTML = '';
       tripled.forEach(w => {
         const card = document.createElement('div');
-        card.className = 'group relative w-[420px] h-[calc(100vh-56px)] rounded-2xl overflow-hidden shrink-0 bg-white transition-transform duration-300 ease-out hover:scale-[1.02] mb-6 cursor-pointer';
+        card.className = 'work-card group relative w-[420px] h-[calc(100vh-56px-32px)] rounded-2xl overflow-hidden shrink-0 bg-white transition-transform duration-300 ease-out hover:scale-[1.02] hover:shadow-lg mb-6 cursor-pointer';
         card.innerHTML = `
-          <div class="absolute inset-x-0 top-0 h-[60%]">
-            <img src="${w.image}" alt="${w.title}" class="absolute inset-0 w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t ${gradientFor(w.id)} opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
+          <div class="absolute inset-x-0 top-0 h-[60%] overflow-hidden media-clip">
+            ${w.hero?.type === 'video' 
+              ? `<video class="w-full h-full object-cover block" autoplay muted playsinline loop>
+                   <source src="${w.hero.src}" type="video/mp4">
+                 </video>`
+              : `<img src="${w.hero?.src || w.image}" alt="${w.title}" class="w-full h-full object-cover block" />`
+            }
+            <div class="absolute inset-0 bg-gradient-to-t ${gradientFor(w.id)} opacity-30 group-hover:opacity-60 transition-opacity duration-300 pointer-events-none"></div>
           </div>
           <div class="absolute inset-x-0 bottom-0 h-[40%] flex flex-col justify-between p-6">
             <div>
@@ -121,16 +128,25 @@
             <div class="mt-3 flex flex-wrap gap-2 pb-2">
               ${(()=>{ const max=3; const chips=w.tags.slice(0,max).map(t=>`<span class=\"text-xs px-2 py-1 rounded-full bg-gray-100\">${t}</span>`).join(''); const rest=w.tags.length-max; return rest>0? chips+`<span class=\"text-xs px-2 py-1 rounded-full bg-gray-100\">+${rest}</span>`:chips; })()}
             </div>
-          </div>`;
-        // Add a hover-only gradient overlay with random colors
-        const hoverLayer = document.createElement('div');
-        hoverLayer.className = `pointer-events-none absolute inset-0 bg-gradient-to-t ${randomHoverGradient()} opacity-0 group-hover:opacity-80 transition-opacity duration-150`;
-        card.appendChild(hoverLayer);
-        card.addEventListener('click', () => openModal(w));
+          </div>
+          <!-- Overlay de gradient aleatorio en hover -->
+          <div class="absolute inset-0 bg-gradient-to-t opacity-0 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none rounded-inherit hover-gradient"></div>
+          <!-- Link invisible que cubre toda la card -->
+          <a class="work-card__link" href="project.html?id=${w.slug}" aria-label="Ver detalle: ${w.title}"></a>`;
+        
+        // Event listeners para gradient aleatorio en hover
+        const hoverGradient = card.querySelector('.hover-gradient');
+        card.addEventListener('mouseenter', () => {
+          hoverGradient.style.background = randomGradient();
+        });
+        card.addEventListener('mouseleave', () => {
+          hoverGradient.style.background = '';
+        });
+        
         track.appendChild(card);
       });
     }
-    render();
+    loadWorks();
 
     let x = 0; // current translateX
     let animId = 0;
@@ -175,16 +191,49 @@
     gallery.addEventListener('mouseenter', () => { paused = true; });
     gallery.addEventListener('mouseleave', () => { paused = false; });
 
-    // Drag control
-    let dragging = false; let startX = 0; let startTx = 0; let moved = 0;
+    // Drag control (sin romper los <a>)
+    let dragging = false;
+    let startX = 0;
+    let startTx = 0;
+    let moved = 0;
+    let dragStartedOnLink = false;
+
     gallery.addEventListener('pointerdown', (e) => {
-      dragging = true; startX = e.clientX; startTx = targetX; moved = 0; gallery.setPointerCapture(e.pointerId);
+      // Si haces down encima de un link dentro de una card, no activamos drag
+      if (e.target.closest('a')) {
+        dragStartedOnLink = true;
+        dragging = false;
+        return;
+      }
+      dragStartedOnLink = false;
+      dragging = true;
+      startX = e.clientX;
+      startTx = targetX;
+      moved = 0;
+      // IMPORTANTE: no usamos setPointerCapture aquí (anula el click de los enlaces)
+      // gallery.setPointerCapture(e.pointerId); // <-- fuera
     });
+
     gallery.addEventListener('pointermove', (e) => {
-      if (!dragging) return; paused = true; const dx = e.clientX - startX; moved = Math.max(moved, Math.abs(dx)); targetX = startTx + dx; 
+      if (!dragging || dragStartedOnLink) return;
+      paused = true;
+      const dx = e.clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      targetX = startTx + dx;
     });
-    gallery.addEventListener('pointerup', (e) => { dragging = false; paused = false; });
-    gallery.addEventListener('click', (e) => { if (moved > 8) e.preventDefault(); });
+
+    gallery.addEventListener('pointerup', () => {
+      dragging = false;
+      paused = false;
+    });
+
+    // No canceles clicks: deja que los <a> funcionen
+    // (mantenemos este handler por si acaso, pero ya no prevenimos nada)
+    gallery.addEventListener('click', (e) => {
+      // si el usuario arrastró mucho Y el click fue en el fondo del gallery, podrías prevenir
+      // pero como no usamos pointer capture, los <a> ya reciben su click normal
+      // if (moved > 8 && e.target === gallery) e.preventDefault();
+    });
 
     // Mouse wheel horizontal scroll
     gallery.addEventListener('wheel', (e) => {

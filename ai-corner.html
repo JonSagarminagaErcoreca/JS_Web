@@ -14,7 +14,7 @@
   <!-- Estilos específicos de esta página con mayor especificidad -->
   <style>
     /* ===== Página AI ===== */
-    body[data-page="ai"] { padding: 0; margin: 0; background: #0a0a0b; overflow: hidden; width: 100%; height: 100dvh; }
+    body[data-page="ai"] { padding: 0; margin: 0; overflow: hidden; width: 100%; height: 100dvh; background: var(--bg); }
     body[data-page="ai"] main { height: 100dvh; width: 100%; padding: 8px; overflow: hidden; box-sizing: border-box; }
     
     /* Navegación flotante sobre la grid */
@@ -27,12 +27,11 @@
       position: relative;
       overflow: hidden;
       border-radius: 16px;
-      background: #0b0b0c;
-      color: #fafafa;
       cursor: pointer;
       display: block;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      transition: transform 0.35s cubic-bezier(.2,.6,.2,1), box-shadow 0.35s cubic-bezier(.2,.6,.2,1);
+      background: var(--card);
+      color: var(--card-ink);
+      transition: transform 0.35s cubic-bezier(.2,.6,.2,1);
     }
 
     body[data-page="ai"] .card.xl { grid-column: span 8; grid-row: span 4; }
@@ -42,37 +41,32 @@
 
     body[data-page="ai"] .card:hover {
       transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.25);
     }
 
-    body[data-page="ai"] .card-media { position: relative; background: #111; height: 100%; }
+    body[data-page="ai"] .card-media { position: relative; height: 100%; }
     body[data-page="ai"] .card-media img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       filter: saturate(1.05) contrast(1.05);
       transform: scale(1.02);
       transition: transform 0.5s cubic-bezier(.2,.7,.2,1), filter 0.35s ease;
     }
-    body[data-page="ai"] .card:hover .card-media img { transform: scale(1.06); filter: blur(12px) brightness(0.4) saturate(0.5); }
+    body[data-page="ai"] .card:hover .card-media img { transform: scale(1.06); filter: blur(8px) brightness(.92) saturate(.9); }
 
     body[data-page="ai"] .card-gradient {
       position: absolute; inset: 0;
-      background:
-        radial-gradient(120% 120% at 50% 10%, rgba(255,255,255,0.16), rgba(0,0,0,0.2)),
-        linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55));
       pointer-events: none;
     }
     /* Overlay de información (3 filas: título, subtítulo, iconos) */
     body[data-page="ai"] .card-overlay { position:absolute; inset:0; display:grid; grid-template-rows:auto auto auto; align-content:end; justify-items:start; gap:8px; padding:20px; text-align:left; opacity:0; transform: translateY(20px); transition: opacity .25s ease, transform .25s ease; }
     body[data-page="ai"] .card:hover .card-overlay { opacity:1; transform: translateY(0); }
-    body[data-page="ai"] .card-overlay h3 { margin:0; font-size:20px; font-weight:700; letter-spacing:-0.01em; }
-    body[data-page="ai"] .card-overlay p { margin:0; font-size:14px; color:#c2c6cf; }
+    body[data-page="ai"] .card-overlay p { margin:0; font-size:14px; }
     body[data-page="ai"] .card-overlay .icons { display:flex; gap:10px; align-items:center; justify-content:flex-start; margin-top:4px; }
-    body[data-page="ai"] .card-overlay .icons svg { width:18px; height:18px; opacity:.95; filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
+    body[data-page="ai"] .card-overlay .icons svg { width:18px; height:18px; opacity:.9; filter: drop-shadow(0 1px 3px rgba(0,0,0,.12)); }
 
     /* ===== MODAL (namespaced) ===== */
     body[data-page="ai"] .modal-backdrop {
       position: fixed; inset: 0; display: grid; place-items: center;
-      background: rgba(12,12,14,0.35);
+      background: rgba(0,0,0,0.35);
       backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
       opacity: 0; pointer-events: none; transition: opacity 0.25s ease; z-index: 2000;
     }
@@ -83,8 +77,8 @@
       max-height: 90vh;
       border-radius: 18px;
       overflow: auto;
-      background: #0e0f12; color: #f3f4f6;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+      background: var(--card); color: var(--card-ink);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
       transform: translateY(16px) scale(0.98); opacity: 0;
       transition: transform 0.35s cubic-bezier(.2,.7,.2,1), opacity 0.35s ease;
       padding: 24px; position: relative;
@@ -94,7 +88,7 @@
     body[data-page="ai"] .modal img { width: 100%; border-radius: 12px; margin-bottom: 16px; }
     body[data-page="ai"] .modal-close {
       position: absolute; top: 16px; right: 16px;
-      background: transparent; border: none; color: #fff; font-size: 28px; cursor: pointer;
+      background: transparent; border: none; color: var(--card-ink); font-size: 28px; cursor: pointer;
     }
 
     /* ===== Responsive ===== */
@@ -114,20 +108,9 @@
       body[data-page="ai"] .card.small { grid-column: span 4; grid-row: span 1; }
     }
 
-    /* AI page: asegúrate de que la grid ocupa todo el ancho y alto */
-    body[data-page="ai"] {
-      background: #0a0a0b;
-      overflow: hidden;
-      width: 100%;
-      height: 100dvh;
-    }
-
+    /* AI page: configuración de padding para main */
     body[data-page="ai"] main {
-      height: 100dvh;     /* ocupa todo el viewport */
-      width: 100%;
       padding: 16px;      /* si quieres menos "aire", baja este valor, p. ej. 12px */
-      box-sizing: border-box;
-      overflow: hidden;
     }
 
     /* La grid: full-bleed, sin max-width ni márgenes centrados */
@@ -181,7 +164,6 @@
       grid-row: span var(--row-span);
       transition:
         transform .35s cubic-bezier(.2,.6,.2,1),
-        box-shadow .35s cubic-bezier(.2,.6,.2,1),
         filter .25s ease,
         opacity .25s ease;
       position: relative;
@@ -197,7 +179,6 @@
       --row-span: 2;                      /* y 2 filas (toda la altura del grid) */
       z-index: 3;
       transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 22px 60px rgba(0,0,0,.35);
     }
 
     /* El resto se encoge pero quedan visibles y rellenan el grid */
@@ -273,7 +254,6 @@
         --row-span: 4;   /* más alto; tu grid tiene 6 filas */
         z-index: 3;
         transform: translateY(-2px) scale(1.01);
-        box-shadow: 0 22px 60px rgba(0,0,0,.35);
       }
 
       /* Las no-expandidas se encogen pero siguen visibles (mínimo 2×2) */
@@ -400,6 +380,124 @@
       }
 
       /* En móvil seguimos usando tu modal — no expandimos dentro del grid */
+
+      /* --- Overlay SIEMPRE anclado abajo (hover y expandida) --- */
+      body[data-page="ai"] .card-overlay{
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        top: auto;                 /* <- importante: ya no arriba */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0;
+        text-align: left;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity .25s ease, transform .25s ease;
+        z-index: 2;                /* por encima del blur */
+      }
+
+      /* Degradado para legibilidad (debajo del texto, encima del blur) */
+      body[data-page="ai"] .card-overlay::before{
+        content: "";
+        position: absolute;
+        left: -16px;              /* pequeño "bleed" para cubrir borde */
+        right: -16px;
+        bottom: -16px;
+        height: 55%;
+        background: var(--overlay-grad-light);
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Mostrar overlay en hover (todas las cards) */
+      body[data-page="ai"] .card:hover .card-overlay{
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* En expandida: overlay SIEMPRE visible (sin depender del hover) */
+      body[data-page="ai"] .card.is-expanded .card-overlay{
+        opacity: 1;
+        transform: none;
+      }
+
+      /* Sin pastilla - contenido directo */
+      body[data-page="ai"] .card-overlay .overlay-head{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        max-width: min(520px, 80%);
+        padding: 0;
+      }
+
+      body[data-page="ai"] .card-overlay .overlay-head p{
+        margin: 2px 0 6px 0;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      body[data-page="ai"] .card-overlay .overlay-head .icons{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      /* Bloque extra (desc + CTA) SOLO cuando está expandida */
+      body[data-page="ai"] .overlay-extra{
+        display: none;
+        opacity: 0;
+        transition: opacity .25s ease;
+        max-width: min(680px, 86%);
+        align-self: flex-start;
+      }
+      body[data-page="ai"] .card.is-expanded .overlay-extra{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 1;
+        align-items: flex-start;
+      }
+
+      /* Descriptivo + CTA */
+      body[data-page="ai"] .overlay-desc{
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      body[data-page="ai"] .overlay-cta{
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--stroke);
+        background: var(--fill-soft);
+        color: var(--text);
+        font-weight: 700;
+        text-decoration: none;
+        width: fit-content;
+        transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      }
+      body[data-page="ai"] .overlay-cta:hover{
+        transform: translateY(-1px);
+        background: var(--fill-soft);
+        border-color: var(--stroke);
+      }
+      body[data-page="ai"] .overlay-cta svg{ width:16px; height:16px; }
+
+      /* La imagen en expandida, oscura para legibilidad, pero SIN mover overlay */
+      body[data-page="ai"] .card.is-expanded .card-media img{
+        filter: blur(8px) brightness(.98) saturate(.9);
+        transform: none;
+      }
+      body[data-page="ai"] .card.is-expanded:hover .card-media img{
+        filter: blur(8px) brightness(.98) saturate(.9);
+      }
   </style>
 </head>
 
@@ -442,12 +540,29 @@
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
-          <h3>Prompt → Palette</h3>
-          <p>Convierte prompts en paletas cromáticas.</p>
-          <div class="icons" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7z"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12l18-9-9 18-2-7z"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h10v2H7zm0 7h10v2H7zm0 7h10v2H7z"/></svg>
+          <!-- Cabecera fija: title / subtitle / icons -->
+          <div class="overlay-head">
+            <h3>Prompt → Palette</h3>
+            <p>Convierte prompts en paletas cromáticas.</p>
+            <div class="icons" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12l18-9-9 18-2-7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h10v2H7zm0 7h10v2H7zm0 7h10v2H7z"/></svg>
+            </div>
+          </div>
+
+          <!-- Extra SOLO visible en expandida -->
+          <div class="overlay-extra">
+            <p class="overlay-desc">
+              Genera armonías, verifica contraste AA/AAA y exporta variantes para UI. Diseñado para flujos rápidos y consistentes.
+            </p>
+            <a class="overlay-cta" href="./detalle-prompt-palette.html" target="_self" rel="noopener">
+              Ver más detalle
+              <!-- flecha ↗ -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
+              </svg>
+            </a>
           </div>
         </div>
         <div class="card-body">
@@ -473,12 +588,29 @@
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
-          <h3>Vectorize Anything</h3>
-          <p>Embellece bocetos a SVG limpios.</p>
-          <div class="icons" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h14v2H5zm0 8h14v2H5zm0 8h14v2H5z"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/></svg>
+          <!-- Cabecera fija: title / subtitle / icons -->
+          <div class="overlay-head">
+            <h3>Vectorize Anything</h3>
+            <p>Embellece bocetos a SVG limpios.</p>
+            <div class="icons" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h14v2H5zm0 8h14v2H5zm0 8h14v2H5z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/></svg>
+            </div>
+          </div>
+
+          <!-- Extra SOLO visible en expandida -->
+          <div class="overlay-extra">
+            <p class="overlay-desc">
+              De sketch a vector de producción con líneas suaves y menos puntos. Ideal para iconos y logotipos rápidos.
+            </p>
+            <a class="overlay-cta" href="./detalle-vectorize.html" target="_self" rel="noopener">
+              Ver más detalle
+              <!-- flecha ↗ -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
+              </svg>
+            </a>
           </div>
         </div>
         <div class="card-body">
@@ -501,12 +633,29 @@
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
-          <h3>AI Storyboards</h3>
-          <p>Genera secuencias para pitch visual.</p>
-          <div class="icons" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v12H4z"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 7l5 10H7z"/></svg>
+          <!-- Cabecera fija: title / subtitle / icons -->
+          <div class="overlay-head">
+            <h3>AI Storyboards</h3>
+            <p>Genera secuencias para pitch visual.</p>
+            <div class="icons" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v12H4z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 7l5 10H7z"/></svg>
+            </div>
+          </div>
+
+          <!-- Extra SOLO visible en expandida -->
+          <div class="overlay-extra">
+            <p class="overlay-desc">
+              Coherencia estilística entre planos, prompts orientados a narrativa y export para presentación.
+            </p>
+            <a class="overlay-cta" href="./detalle-storyboards.html" target="_self" rel="noopener">
+              Ver más detalle
+              <!-- flecha ↗ -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
+              </svg>
+            </a>
           </div>
         </div>
         <div class="card-body">
@@ -529,12 +678,29 @@
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
-          <h3>Voice → Notes</h3>
-          <p>Transcribe y resume ideas.</p>
-          <div class="icons" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a3 3 0 013 3v6a3 3 0 11-6 0V6a3 3 0 013-3zM5 11h2a5 5 0 0010 0h2a7 7 0 01-14 0zM10 19h4v2h-4z"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5v14M5 12h14"/></svg>
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/></svg>
+          <!-- Cabecera fija: title / subtitle / icons -->
+          <div class="overlay-head">
+            <h3>Voice → Notes</h3>
+            <p>Transcribe y resume ideas.</p>
+            <div class="icons" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a3 3 0 013 3v6a3 3 0 11-6 0V6a3 3 0 013-3zM5 11h2a5 5 0 0010 0h2a7 7 0 01-14 0zM10 19h4v2h-4z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5v14M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/></svg>
+            </div>
+          </div>
+
+          <!-- Extra SOLO visible en expandida -->
+          <div class="overlay-extra">
+            <p class="overlay-desc">
+              ASR + resumidores + etiquetas clave. Export a docs o tickets. Perfecto para ideas en movimiento.
+            </p>
+            <a class="overlay-cta" href="./detalle-voice-notes.html" target="_self" rel="noopener">
+              Ver más detalle
+              <!-- flecha ↗ -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
+              </svg>
+            </a>
           </div>
         </div>
         <div class="card-body">

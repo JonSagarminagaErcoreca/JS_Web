@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Proyecto • Detalle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/global.css">
+  <style>
+    /* Contenedor principal */
+    body[data-page="project"] { background: var(--bg,#fff); color: var(--text,#0e0f12); padding-top: 56px; }
+    main.project { max-width: 1100px; margin: 0 auto; padding: 24px 16px 80px; }
+
+    .proj-hero { position: relative; border-radius: 20px; overflow: hidden; background: #f4f6f8; }
+    .proj-hero img, .proj-hero video { display:block; width:100%; height:auto; object-fit: cover; }
+    .proj-hero video { cursor: pointer; }
+    .proj-meta { display:flex; gap:16px; align-items:center; justify-content: space-between; margin: 18px 0 8px; color: var(--muted,#6b7280); font-size: 14px; }
+    .proj-meta-info { display:flex; gap:16px; align-items:center; }
+    
+    .back-arrow { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 8px; 
+      color: var(--muted,#6b7280); 
+      text-decoration: none; 
+      font-size: 14px; 
+      font-weight: 500;
+      transition: all 0.2s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-right: 16px;
+    }
+    .back-arrow:hover { 
+      color: var(--text,#0e0f12); 
+      background: rgba(0,0,0,0.04);
+      transform: translateX(-2px);
+    }
+    .back-arrow svg { 
+      width: 16px; 
+      height: 16px; 
+      transition: transform 0.2s ease;
+    }
+    .back-arrow:hover svg { 
+      transform: translateX(-2px);
+    }
+    .dot { width:4px; height:4px; border-radius:999px; background: currentColor; opacity:.6; }
+
+    .proj-title { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: -0.01em; margin: 6px 0 10px; }
+    .proj-excerpt { font-size: 16px; color: var(--muted,#6b7280); padding-bottom: 40px; }
+
+    .proj-tools { display:flex; flex-wrap:wrap; gap:8px; margin: 16px 0 24px; }
+    .chip { padding:6px 10px; border-radius: 999px; background: rgba(0,0,0,0.06); color:#555; font-size: 12px; }
+    [data-theme="dark"] .chip { background: rgba(255,255,255,0.08); color:#dfe3ea; }
+
+    .proj-body { display:grid; gap:14px; margin-top: 20px; font-size: 16px; line-height: 1.8; }
+    
+    .proj-description { margin: 32px 0; }
+    .proj-description h3 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; color: var(--text,#0e0f12); }
+    .proj-description p { font-size: 16px; line-height: 1.7; margin-bottom: 16px; color: var(--muted,#6b7280); }
+    .proj-gallery { 
+      display: grid; 
+      gap: 20px; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      margin-top: 32px; 
+    }
+    .proj-gallery img { 
+      width: 100%; 
+      height: auto;
+      min-height: 180px;
+      max-height: 300px;
+      object-fit: cover; 
+      border-radius: 12px; 
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .proj-gallery img:hover { 
+      transform: scale(1.02); 
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+    }
+    .proj-gallery h4 { grid-column: 1 / -1; font-size: 16px; font-weight: 500; margin: 0 0 16px 0; color: var(--muted,#6b7280); text-transform: uppercase; letter-spacing: 0.5px; }
+    .proj-gallery-card { 
+      display: block; 
+      text-decoration: none; 
+      color: inherit; 
+      background: var(--card,#fff); 
+      border-radius: 12px; 
+      overflow: hidden; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+      transition: all 0.2s ease;
+    }
+    .proj-gallery-card:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15); 
+    }
+    .proj-gallery-card img { width: 100%; height: 160px; object-fit: cover; }
+    .proj-gallery-card-content { padding: 16px; }
+    .proj-gallery-card h5 { font-size: 16px; font-weight: 600; margin: 0 0 8px 0; color: var(--text,#0e0f12); }
+    .proj-gallery-card p { font-size: 14px; color: var(--muted,#6b7280); margin: 0; line-height: 1.4; }
+
+    .proj-cta { margin-top: 24px; display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius: 12px; 
+      background: rgba(0,0,0,0.06); color:#111; text-decoration:none; font-weight:700; border:1px solid rgba(0,0,0,0.12); }
+    .proj-cta:hover { transform: translateY(-1px); }
+    [data-theme="dark"] .proj-cta { background: rgba(255,255,255,0.08); color:#f3f4f6; border-color: rgba(255,255,255,0.18); }
+
+    /* Link de toda la card en work.html (no rompe DOM) */
+    .work-card__link { position:absolute; inset:0; z-index: 5; }
+  </style>
+</head>
+<body data-page="project">
+  <!-- NAV igual que en tus páginas -->
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <div class="menu-bar">
+        <a class="menu-logo" href="./index.html">
+          <img src="assets/cursors/JS_GRIS.svg" alt="JS" />
+          <span class="logo-mask" aria-hidden="true"></span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <input type="checkbox" aria-hidden="true" tabindex="-1" />
+          <div class="bars"><span></span><span></span></div>
+        </button>
+      </div>
+      <div class="right-links"></div>
+    </div>
+  </nav>
+
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
+    <div class="menu-panel" id="menuPanel">
+      <nav class="menu-links" aria-label="Primary">
+        <a href="./work.html">Work</a>
+        <a href="./about.html">About</a>
+        <a href="./ai-corner.html">AI Lab</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="project" id="projectRoot" aria-busy="true">
+    <!-- Se rellena por JS -->
+  </main>
+
+  <script src="./scripts/menu.js"></script>
+  <script type="module">
+    // --- utils
+    const qs = (k) => new URLSearchParams(location.search).get(k);
+    const root = document.getElementById('projectRoot');
+
+    async function load() {
+      const id = qs('id');
+      if (!id) return notFound();
+
+      // si pones en /data/projects.json cambia la ruta aquí
+      const res = await fetch('./projects.json', { cache: 'no-store' });
+      if (!res.ok) return notFound();
+      const list = await res.json();
+      const proj = list.find(p => p.slug === id);
+      if (!proj) return notFound();
+
+      document.title = `${proj.title} • Proyecto`;
+      render(proj, list);
+    }
+
+    function notFound() {
+      root.innerHTML = `
+        <h1>Proyecto no encontrado</h1>
+        <p>Vuelve a <a href="work.html">Work</a>.</p>
+      `;
+      root.setAttribute('aria-busy', 'false');
+    }
+
+    function render(p, allProjects) {
+      const hero = p.hero?.type === 'video'
+        ? `<video class="media" autoplay muted playsinline loop>
+             <source src="${p.hero.src}" type="video/mp4">
+           </video>`
+        : `<img class="media" src="${p.image || ''}" alt="${p.title || ''}">`;
+
+      const tools = (p.tags || []).map(t => `<span class="chip">${t}</span>`).join('');
+      const body  = (p.body  || []).map(par => `<p>${par}</p>`).join('');
+      
+      // Create project cards for other projects (excluding current one)
+      const otherProjects = allProjects.filter(project => project.slug !== p.slug).slice(0, 3);
+      const gal = otherProjects.map(project => `
+        <a href="project.html?id=${project.slug}" class="proj-gallery-card">
+          <img src="${project.image}" alt="${project.title}">
+          <div class="proj-gallery-card-content">
+            <h5>${project.title}</h5>
+            <p>${project.desc}</p>
+          </div>
+        </a>
+      `).join('');
+      
+      // Description section
+      const description = p.description ? `
+        <section class="proj-description">
+          <p>${p.description.overview || ''}</p>
+          ${(p.description.sections || []).map(section => `
+            <h3>${section.title}</h3>
+            <p>${section.content}</p>
+          `).join('')}
+        </section>
+      ` : '';
+
+      root.innerHTML = `
+        <article>
+          <header>
+            <div class="proj-meta">
+              <div class="proj-meta-info">
+                <span>${p.year || ''}</span>
+                <span class="dot"></span>
+                <span>${p.category || ''}</span>
+              </div>
+              <a href="work.html" class="back-arrow" aria-label="Volver a Work">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+                Atrás
+              </a>
+            </div>
+            <h1 class="proj-title">${p.title}</h1>
+            <p class="proj-excerpt">${p.desc || ''}</p>
+          </header>
+
+          <section class="proj-hero" aria-label="Hero">
+            ${hero}
+          </section>
+
+          <section class="proj-tools" aria-label="Herramientas">
+            ${tools}
+          </section>
+
+          ${description}
+
+          <section class="proj-body">
+            ${body}
+          </section>
+
+          ${p.gallery?.length > 0 ? `<section class="proj-gallery" aria-label="Galería del proyecto">
+            <h4>Galería del proyecto</h4>
+            ${(p.gallery || []).map(src => `<img src="${src}" alt="Imagen del proyecto">`).join('')}
+          </section>` : ''}
+          
+          ${otherProjects.length > 0 ? `<section class="proj-gallery" aria-label="Otros proyectos">
+            <h4>Ver otros proyectos</h4>
+            ${gal}
+          </section>` : ''}
+
+          ${p.links?.live ? `<a class="proj-cta" href="${p.links.live}" target="_blank" rel="noopener">
+              Ver proyecto
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
+              </svg>
+            </a>` : ''}
+        </article>
+      `;
+      root.setAttribute('aria-busy', 'false');
+      
+      // Add click-to-pause functionality for videos
+      const video = root.querySelector('video');
+      if (video) {
+        video.addEventListener('click', () => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+      }
+      
+      // Add lightbox functionality for gallery images
+      const galleryImages = root.querySelectorAll('.proj-gallery img');
+      galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+          // Create lightbox modal
+          const lightbox = document.createElement('div');
+          lightbox.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            cursor: pointer;
+          `;
+          
+          const lightboxImg = document.createElement('img');
+          lightboxImg.src = img.src;
+          lightboxImg.style.cssText = `
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+          `;
+          
+          lightbox.appendChild(lightboxImg);
+          document.body.appendChild(lightbox);
+          
+          // Close on click
+          lightbox.addEventListener('click', () => {
+            document.body.removeChild(lightbox);
+          });
+          
+          // Close on escape key
+          const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+              document.body.removeChild(lightbox);
+              document.removeEventListener('keydown', handleEscape);
+            }
+          };
+          document.addEventListener('keydown', handleEscape);
+        });
+      });
+    }
+
+    // inicia
+    load().catch(notFound);
+  </script>
+</body>
+</html>

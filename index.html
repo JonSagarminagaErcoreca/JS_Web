@@ -41,6 +41,53 @@
     </svg>
   </a>
 
+  <!-- Botón Colorize fijo -->
+  <button id="colorizeBtn" class="colorize-button">
+    Colorize
+  </button>
+
+  <style>
+    .colorize-button {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10001; /* Por encima del badge de Unicorn */
+      
+      padding: 13px 60px;
+      border: none;
+      border-radius: 12px;
+      
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      
+      color: var(--outline-color, #000000);
+      font-family: 'Montserrat Alternates', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .colorize-button:hover {
+      transform: translateX(-50%) translateY(-2px);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      scale: 1.05;
+    }
+    
+    .colorize-button:active {
+      transform: translateX(-50%) translateY(0px);
+      scale: 0.98;
+    }
+  </style>
+
   <script>
     // Menú overlay compacto
     (function(){
@@ -89,11 +136,43 @@
       lastOutlineColor = outline.full;
       lastBackgroundColor = c1.desaturated;
 
+      const colorScheme = {
+        liquidColor1: c1.full,
+        liquidColor2: c2.full,
+        liquidColor3: c3.full,
+        backgroundColor: c1.desaturated,
+        outlineColor: outline.full
+      };
+
+      // Guardar en localStorage
+      localStorage.setItem('liquidColorScheme', JSON.stringify(colorScheme));
+
+      // Aplicar colores
       document.documentElement.style.setProperty('--liquid-color-1', c1.full);
       document.documentElement.style.setProperty('--liquid-color-2', c2.full);
       document.documentElement.style.setProperty('--liquid-color-3', c3.full);
       document.documentElement.style.setProperty('--background-color', c1.desaturated);
       document.documentElement.style.setProperty('--outline-color', outline.full);
+    }
+
+    function loadSavedColors() {
+      const saved = localStorage.getItem('liquidColorScheme');
+      if (saved) {
+        try {
+          const colorScheme = JSON.parse(saved);
+          
+          lastOutlineColor = colorScheme.outlineColor;
+          lastBackgroundColor = colorScheme.backgroundColor;
+
+          document.documentElement.style.setProperty('--liquid-color-1', colorScheme.liquidColor1);
+          document.documentElement.style.setProperty('--liquid-color-2', colorScheme.liquidColor2);
+          document.documentElement.style.setProperty('--liquid-color-3', colorScheme.liquidColor3);
+          document.documentElement.style.setProperty('--background-color', colorScheme.backgroundColor);
+          document.documentElement.style.setProperty('--outline-color', colorScheme.outlineColor);
+        } catch (e) {
+          console.warn('Error loading saved color scheme:', e);
+        }
+      }
     }
 
     function setRandomCursor() {
@@ -154,6 +233,14 @@
       setColors();
       setRandomCursor();
     });
+
+    // Conectar botón Colorize
+    document.getElementById('colorizeBtn').addEventListener('click', () => {
+      setColors();
+    });
+
+    // Cargar colores guardados al inicializar
+    loadSavedColors();
   </script>
   <script type="text/javascript">
     !function(){
