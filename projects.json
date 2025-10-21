@@ -5,11 +5,11 @@
     "title": "MSM Digital Twin",
     "category": "DIGITAL TWIN",
     "year": "2024",
-    "image": "https://images.unsplash.com/photo-1649000808933-1f4aac7cad9a?q=80&w=1200&auto=format&fit=crop",
+    "image": "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.png",
     "hero": {
       "type": "video",
-      "src": "assets/MSM/MSM_LinkedIn_v1_1.mp4",
-      "poster": "https://images.unsplash.com/photo-1649000808933-1f4aac7cad9a?q=80&w=1200&auto=format&fit=crop"
+      "src": "assets/Projects/MSM/MSM_LinkedIn_v1_1.mp4",
+      "poster": "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.png"
     },
     "desc": "Plataforma avanzada de gemelo digital para optimización de procesos de manufactura y monitoreo en tiempo real.",
     "tags": ["Gemelo Digital", "IoT", "Machine Learning", "Visualización 3D", "Analytics en Tiempo Real"],
@@ -43,15 +43,15 @@
       ]
     },
     "gallery": [
-      "assets/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.png",
-      "assets/MSM/388eb60d-2f01-4421-8b3b-a2f6daeef5b8_rw_1200.png",
-      "assets/MSM/54de1562-7f6d-4961-9a5d-366d583ced3d_rw_1920.png",
-      "assets/MSM/7c25ac63-3d7c-4f70-a3a7-4d784ae0af6e_rw_1920.png",
-      "assets/MSM/88080070-9761-4eb4-a741-b27df1334f26_rw_1920.png",
-      "assets/MSM/bb1141a5-3f49-4a2a-8182-a842f1978ef9_rw_600.png",
-      "assets/MSM/c1261526-8729-4923-ab34-ac0e80c18c45_rw_1920.png",
-      "assets/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_1920.png",
-      "assets/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_19202.png"
+      "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.png",
+      "assets/Projects/MSM/388eb60d-2f01-4421-8b3b-a2f6daeef5b8_rw_1200.png",
+      "assets/Projects/MSM/54de1562-7f6d-4961-9a5d-366d583ced3d_rw_1920.png",
+      "assets/Projects/MSM/7c25ac63-3d7c-4f70-a3a7-4d784ae0af6e_rw_1920.png",
+      "assets/Projects/MSM/88080070-9761-4eb4-a741-b27df1334f26_rw_1920.png",
+      "assets/Projects/MSM/bb1141a5-3f49-4a2a-8182-a842f1978ef9_rw_600.png",
+      "assets/Projects/MSM/c1261526-8729-4923-ab34-ac0e80c18c45_rw_1920.png",
+      "assets/Projects/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_1920.png",
+      "assets/Projects/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_19202.png"
     ],
     "links": {
       "case": "project.html?id=msm-digital-twin",
@@ -65,7 +65,12 @@
     "title": "Herramienta Horarios",
     "category": "UX/UI DESIGN",
     "year": "2024",
-    "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1200&auto=format&fit=crop",
+    "image": "assets/Projects/Horarios/Portada1.jpg",
+    "hero": {
+      "type": "video",
+      "src": "assets/Projects/Horarios/Logo PYC.mp4",
+      "poster": "assets/Projects/Horarios/Portada1.jpg"
+    },
     "desc": "Solución personalizada de generación de horarios para más de 1200 centros con miles de empleados y particularidades contractuales únicas.",
     "tags": ["UX Research", "UI Design", "Project Management", "User Testing", "Analytics", "Design System"],
     "description": {
@@ -90,10 +95,23 @@
       ]
     },
     "gallery": [
-      "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop"
+      "assets/Projects/Horarios/Portada1.jpg",
+      "assets/Projects/Horarios/Portada 2.jpg",
+      "assets/Projects/Horarios/Mockup final home.png",
+      "assets/Projects/Horarios/Mockup final onboardinf.png",
+      "assets/Projects/Horarios/Mockup final Config.png",
+      "assets/Projects/Horarios/Components.png",
+      "assets/Projects/Horarios/Components 2.png",
+      "assets/Projects/Horarios/1.gif",
+      "assets/Projects/Horarios/2.png",
+      "assets/Projects/Horarios/4.png",
+      "assets/Projects/Horarios/5.png",
+      "assets/Projects/Horarios/6.png",
+      "assets/Projects/Horarios/7.png",
+      "assets/Projects/Horarios/8.png",
+      "assets/Projects/Horarios/9.png",
+      "assets/Projects/Horarios/10.png",
+      "assets/Projects/Horarios/33.png"
     ],
     "links": {
       "case": "project.html?id=herramienta-horarios",
@@ -107,7 +125,11 @@
     "title": "SCO. Retail P.W.A.",
     "category": "UX/UI DESIGN",
     "year": "2024",
-    "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop",
+    "image": "assets/Projects/Mercurio/iPhone 6, 7, 8 Plus – 24.png",
+    "hero": {
+      "type": "image",
+      "src": "assets/Projects/Mercurio/iPhone 6, 7, 8 Plus – 24.png"
+    },
     "desc": "Aplicación web progresiva para sistemas de autopago en retail con más de 400 centros, integrando cajas tradicionales, autopago y compras con dispositivos personales.",
     "tags": ["PWA", "UX Research", "UI Design", "Retail", "Payment Systems", "User Testing", "Prototyping"],
     "description": {
@@ -132,10 +154,20 @@
       ]
     },
     "gallery": [
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1556742111-a301076d9d18?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1556742111-a301076d9d18?q=80&w=1200&auto=format&fit=crop"
+      "assets/Projects/Mercurio/iPhone 6, 7, 8 Plus – 24.png",
+      "assets/Projects/Mercurio/iPhone 6, 7, 8 Plus – 28.png",
+      "assets/Projects/Mercurio/iPhone 6, 7, 8 Plus – 31.png",
+      "assets/Projects/Mercurio/Navegación horizontal – 1.png",
+      "assets/Projects/Mercurio/1.1 – 11.png",
+      "assets/Projects/Mercurio/1.1 – 12.png",
+      "assets/Projects/Mercurio/2 – 2.png",
+      "assets/Projects/Mercurio/3 – 10.png",
+      "assets/Projects/Mercurio/3 – 5.png",
+      "assets/Projects/Mercurio/5 – 5.png",
+      "assets/Projects/Mercurio/6 – 2.png",
+      "assets/Projects/Mercurio/8 – 4.png",
+      "assets/Projects/Mercurio/h3.png",
+      "assets/Projects/Mercurio/H7.png"
     ],
     "links": {
       "case": "project.html?id=sco-retail-pwa",
@@ -149,7 +181,12 @@
     "title": "Plataforma monitorización EPS",
     "category": "DIGITAL TWIN",
     "year": "2024",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    "image": "assets/Projects/EPS/pantalla 1.jpg",
+    "hero": {
+      "type": "video",
+      "src": "assets/Projects/EPS/EPS_Hero.mp4",
+      "poster": "assets/Projects/EPS/pantalla 1.jpg"
+    },
     "desc": "Plataforma de monitoreo y trazabilidad completa para más de un billón de cajas reutilizables de Europool Systems, identificando puntos críticos de pérdidas millonarias.",
     "tags": ["Data Visualization", "React", "GoJS", "Tableau", "Dashboard", "Trazabilidad", "Logistics"],
     "description": {
@@ -174,10 +211,13 @@
       ]
     },
     "gallery": [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
+      "assets/Projects/EPS/pantalla 1.jpg",
+      "assets/Projects/EPS/pantalla 2.jpg",
+      "assets/Projects/EPS/pantalla 3.jpg",
+      "assets/Projects/EPS/pantalla 4.jpg",
+      "assets/Projects/EPS/pantalla 5.jpg",
+      "assets/Projects/EPS/Mockup Flujo copia.png",
+      "assets/Projects/EPS/Node components.png"
     ],
     "links": {
       "case": "project.html?id=plataforma-monitorizacion-eps",
@@ -191,7 +231,11 @@
     "title": "GPlus. Monitorización y Proyección de Actividad",
     "category": "UX/UI DESIGN",
     "year": "2024",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    "image": "assets/Projects/GPlus/Tarjeta presentación Gplus.jpg",
+    "hero": {
+      "type": "image",
+      "src": "assets/Projects/GPlus/MobileTabletGplus.png"
+    },
     "desc": "Aplicación de monitoreo en tiempo real para retailer con más de 1.200 centros y 33,000 trabajadores, proporcionando visibilidad de ventas, proyecciones y KPIs críticos del negocio.",
     "tags": ["PWA", "Dashboard", "Analytics", "Real-time", "Retail", "KPIs", "Data Visualization"],
     "description": {
@@ -216,10 +260,20 @@
       ]
     },
     "gallery": [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop"
+      "assets/Projects/GPlus/Tarjeta presentación Gplus.jpg",
+      "assets/Projects/GPlus/GPlus_mockup.png",
+      "assets/Projects/GPlus/MobileGplus.png",
+      "assets/Projects/GPlus/MobileTabletGplus.png",
+      "assets/Projects/GPlus/MobileTabletGplus2.png",
+      "assets/Projects/GPlus/DS Colors.png",
+      "assets/Projects/GPlus/DS I.png",
+      "assets/Projects/GPlus/DSII.png",
+      "assets/Projects/GPlus/DS III.png",
+      "assets/Projects/GPlus/Captura de pantalla 2023-01-24 222953.png",
+      "assets/Projects/GPlus/Captura de pantalla 2023-01-24 223104.png",
+      "assets/Projects/GPlus/Captura de pantalla 2023-01-24 223155.png",
+      "assets/Projects/GPlus/Captura de pantalla 2023-01-24 223232.png",
+      "assets/Projects/GPlus/Captura de pantalla 2023-01-24 223301.png"
     ],
     "links": {
       "case": "project.html?id=gplus-monitorizacion-proyeccion",
@@ -233,7 +287,11 @@
     "title": "VPO Ingeniería",
     "category": "BRANDING",
     "year": "2024",
-    "image": "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop",
+    "image": "assets/Projects/VPO/Computer Screen Mockup copia.jpg",
+    "hero": {
+      "type": "image",
+      "src": "assets/Projects/VPO/Computer Screen Mockup copia.jpg"
+    },
     "desc": "Proyecto integral de identidad corporativa para VPO Ingeniería, separando la marca del grupo Versia y creando una identidad propia enfocada en mejora de procesos retail y logística.",
     "tags": ["Brand Identity", "Logo Design", "Web Design", "Corporate Identity", "Photography", "Content Strategy"],
     "description": {
@@ -258,10 +316,18 @@
       ]
     },
     "gallery": [
-      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?q=80&w=1200&auto=format&fit=crop"
+      "assets/Projects/VPO/Computer Screen Mockup copia.jpg",
+      "assets/Projects/VPO/Flujos de navegación.png",
+      "assets/Projects/VPO/Hi fideluty.png",
+      "assets/Projects/VPO/high fidelity 2.png",
+      "assets/Projects/VPO/Firma mail.png",
+      "assets/Projects/VPO/Oficina Abadiño Dron.png",
+      "assets/Projects/VPO/MicrosoftTeams-image (31).png",
+      "assets/Projects/VPO/MicrosoftTeams-image (33).png",
+      "assets/Projects/VPO/MicrosoftTeams-image (39).png",
+      "assets/Projects/VPO/MicrosoftTeams-image (42).png",
+      "assets/Projects/VPO/MicrosoftTeams-image (43).png",
+      "assets/Projects/VPO/Christmas2122.gif"
     ],
     "links": {
       "case": "project.html?id=vpo-ingenieria",

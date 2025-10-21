@@ -130,23 +130,27 @@
     body[data-page="ai"] .card { min-width: 0; min-height: 0; }
     body[data-page="ai"] .card-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-    /* 1ª fila completa: 8 + 4 */
-    body[data-page="ai"] .grid > .card:nth-child(1) {  /* Prompt → Palette (grande) */
-      grid-column: 1 / span 8;
+    /* 1ª fila: 4 + 4 + 4 */
+    body[data-page="ai"] .grid > .card:nth-child(1) {  /* JS Web */
+      grid-column: 1 / span 4;
       grid-row: 1 / span 3;
     }
-    body[data-page="ai"] .grid > .card:nth-child(2) {  /* Vectorize Anything */
+    body[data-page="ai"] .grid > .card:nth-child(2) {  /* Make.com Automatizaciones */
+      grid-column: 5 / span 4;
+      grid-row: 1 / span 3;
+    }
+    body[data-page="ai"] .grid > .card:nth-child(3) {  /* CNAPP Survival */
       grid-column: 9 / span 4;
       grid-row: 1 / span 3;
     }
 
-    /* 2ª fila completa: 4 + 8 */
-    body[data-page="ai"] .grid > .card:nth-child(3) {  /* AI Storyboards */
-      grid-column: 1 / span 4;
+    /* 2ª fila: 6 + 6 */
+    body[data-page="ai"] .grid > .card:nth-child(4) {  /* Contenidos RRSS */
+      grid-column: 1 / span 6;
       grid-row: 4 / span 3;
     }
-    body[data-page="ai"] .grid > .card:nth-child(4) {  /* Voice → Notes (grande) */
-      grid-column: 5 / span 8;   /* ocupa de la col 5 a la 12 */
+    body[data-page="ai"] .grid > .card:nth-child(5) {  /* Amazon AI */
+      grid-column: 7 / span 6;
       grid-row: 4 / span 3;
     }
 
@@ -300,10 +304,11 @@
          1: 8x3   2: 4x3
          3: 4x3   4: 8x3
       */
-      body[data-page="ai"] .grid > .card:nth-child(1) { grid-column: 1 / span 8; grid-row: 1 / span 3; }
-      body[data-page="ai"] .grid > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 1 / span 3; }
-      body[data-page="ai"] .grid > .card:nth-child(3) { grid-column: 1 / span 4; grid-row: 4 / span 3; }
-      body[data-page="ai"] .grid > .card:nth-child(4) { grid-column: 5 / span 8; grid-row: 4 / span 3; }
+      body[data-page="ai"] .grid > .card:nth-child(1) { grid-column: 1 / span 4; grid-row: 1 / span 3; }
+      body[data-page="ai"] .grid > .card:nth-child(2) { grid-column: 5 / span 4; grid-row: 1 / span 3; }
+      body[data-page="ai"] .grid > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 1 / span 3; }
+      body[data-page="ai"] .grid > .card:nth-child(4) { grid-column: 1 / span 6; grid-row: 4 / span 3; }
+      body[data-page="ai"] .grid > .card:nth-child(5) { grid-column: 7 / span 6; grid-row: 4 / span 3; }
 
       /* Cards encogidas cuando hay expandida */
       body[data-page="ai"] .grid[data-state^="expand-"] > .card {
@@ -321,29 +326,40 @@
       body[data-page="ai"] .card.is-expanded .card-body { padding: 18px; }
 
       /* === Disposiciones por card expandida (12x6) === */
-      /* 1) Expande la #1 (grande a la izquierda, columna de pequeñas a la derecha) */
+      /* 1) Expande la #1 (JS Web) */
       body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(1) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
       body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
       body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
       body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(5) { display: none; }
 
-      /* 2) Expande la #2 (grande a la derecha, columna de pequeñas a la izquierda) */
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(2) { grid-column: 5 / span 8; grid-row: 1 / span 6; }
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(1) { grid-column: 1 / span 4; grid-row: 1 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(3) { grid-column: 1 / span 4; grid-row: 3 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(4) { grid-column: 1 / span 4; grid-row: 5 / span 2; }
+      /* 2) Expande la #2 (Make.com) */
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(2) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(5) { display: none; }
 
-      /* 3) Expande la #3 (grande abajo-izq, pequeñas columna derecha) */
+      /* 3) Expande la #3 (CNAPP) */
       body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(3) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
       body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
       body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
       body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(5) { display: none; }
 
-      /* 4) Expande la #4 (grande abajo-der, pequeñas columna izquierda) */
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(4) { grid-column: 5 / span 8; grid-row: 1 / span 6; }
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(1) { grid-column: 1 / span 4; grid-row: 1 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(2) { grid-column: 1 / span 4; grid-row: 3 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(3) { grid-column: 1 / span 4; grid-row: 5 / span 2; }
+      /* 4) Expande la #4 (Contenidos RRSS) */
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(4) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(5) { display: none; }
+
+      /* 5) Expande la #5 (Amazon AI) */
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(5) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(4) { display: none; }
 
       /* Tablet: mantenemos la idea, pero con 6 columnas */
       @media (max-width: 980px) and (min-width: 560px) {
@@ -533,30 +549,30 @@
   <!-- ===== GRID ===== -->
   <main>
     <section class="grid" aria-label="AI Experiments grid" id="aiGrid">
-      <!-- Card 1 -->
-      <article class="card large" data-id="palette">
+      <!-- Card 1 - JS Web -->
+      <article class="card" data-id="js-web">
         <div class="card-media">
-          <img src="assets/JS_Portrait.png" alt="Abstract gradient generated by AI" />
+          <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web Portfolio" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
           <!-- Cabecera fija: title / subtitle / icons -->
           <div class="overlay-head">
-            <h3>Prompt → Palette</h3>
-            <p>Convierte prompts en paletas cromáticas.</p>
+            <h3>JS Web</h3>
+            <p>Portfolio desarrollado completamente con IA.</p>
             <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12l18-9-9 18-2-7z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4h10v2H7zm0 7h10v2H7zm0 7h10v2H7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             </div>
           </div>
 
           <!-- Extra SOLO visible en expandida -->
           <div class="overlay-extra">
             <p class="overlay-desc">
-              Genera armonías, verifica contraste AA/AAA y exporta variantes para UI. Diseñado para flujos rápidos y consistentes.
+              Portfolio personal desarrollado completamente con IA usando Cursor.ai, modelos Claude, MCP de Figma y herramientas de desarrollo asistido por IA.
             </p>
-            <a class="overlay-cta" href="./detalle-prompt-palette.html" target="_self" rel="noopener">
+            <a class="overlay-cta" href="https://cursor.sh" target="_blank" rel="noopener">
               Ver más detalle
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -566,35 +582,171 @@
           </div>
         </div>
         <div class="card-body">
-          <h3 class="card-title">Prompt → Palette</h3>
-          <p class="card-desc">Convierte prompts en paletas cromáticas.</p>
+          <h3 class="card-title">JS Web</h3>
+          <p class="card-desc">Portfolio desarrollado completamente con IA.</p>
+          <div class="card-extra">
+            <p>Portfolio personal desarrollado completamente con IA usando Cursor.ai, modelos Claude, MCP de Figma y herramientas de desarrollo asistido por IA. Demuestra las capacidades actuales de la IA para el desarrollo web completo, desde el diseño hasta la implementación.</p>
+            <div class="gallery">
+              <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web Home">
+              <img src="assets/Projects/JS/JS_1.png" alt="JS Web About">
+              <img src="assets/Projects/JS/JS_2.png" alt="JS Web Work">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 - Make.com Automatizaciones -->
+      <article class="card large" data-id="make-automation">
+        <div class="card-media">
+          <img src="assets/IACorner/Make/BG_Login.png" alt="Make.com Automatizaciones" />
+          <div class="card-gradient"></div>
+        </div>
+        <div class="card-overlay">
+          <!-- Cabecera fija: title / subtitle / icons -->
+          <div class="overlay-head">
+            <h3>Automatizaciones Make.com</h3>
+            <p>Generación automática de contenidos para Instagram y X.</p>
+            <div class="icons" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Extra SOLO visible en expandida -->
+          <div class="overlay-extra">
+            <p class="overlay-desc">
+              Automatización completa de contenido para redes sociales usando Make.com. Generación automática de posts para Instagram y X con programación inteligente.
+            </p>
+            <a class="overlay-cta" href="https://make.com" target="_blank" rel="noopener">
+              Ver más detalle
+              <!-- flecha ↗ -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Automatizaciones Make.com</h3>
+          <p class="card-desc">Generación automática de contenidos para Instagram y X.</p>
 
           <!-- SOLO visible cuando la card está expandida -->
           <div class="card-extra">
-            <p>Genera armonías, comprueba contraste AA/AAA y exporta variantes para UI. Pensado para flujos rápidos de diseño.</p>
+            <p>Automatización completa de contenido para redes sociales usando Make.com. Incluye generación automática de posts, programación inteligente, integración con APIs de redes sociales y flujos de trabajo personalizados para maximizar el engagement.</p>
             <div class="gallery" aria-label="Galería">
-              <img src="assets/cursors/cursor6.png" alt="Preview 1">
-              <img src="assets/cursors/cursor9.png" alt="Preview 2">
-              <img src="assets/cursors/cursor12.png" alt="Preview 3">
+              <img src="assets/IACorner/Make/BG_Login.png" alt="Make.com Interface">
+              <img src="assets/IACorner/Make/BG_Login.png" alt="Automation Workflow">
+              <img src="assets/IACorner/Make/BG_Login.png" alt="Social Media Integration">
             </div>
           </div>
         </div>
       </article>
 
-      <!-- Card 2 -->
-      <article class="card" data-id="vectorize">
+      <!-- Card 2 - CNAPP Survival App -->
+      <article class="card" data-id="cnapp-survival">
         <div class="card-media">
-          <img src="assets/cursors/cursor6.png" alt="Vector style preview" />
+          <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Survival App" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
           <!-- Cabecera fija: title / subtitle / icons -->
           <div class="overlay-head">
-            <h3>Vectorize Anything</h3>
-            <p>Embellece bocetos a SVG limpios.</p>
+            <h3>CNAPP Survival</h3>
+            <p>App de supervivencia con Lovable.</p>
             <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h14v2H5zm0 8h14v2H5zm0 8h14v2H5z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Extra SOLO visible en expandida -->
+          <div class="overlay-extra">
+            <p class="overlay-desc">
+              Aplicación de supervivencia desarrollada con Lovable, plataforma de desarrollo con IA. Experiencia completa de supervivencia en situaciones extremas.
+            </p>
+            <a class="overlay-cta" href="https://lovable.dev" target="_blank" rel="noopener">
+              Ver más detalle
+              <!-- flecha ↗ -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">CNAPP Survival</h3>
+          <p class="card-desc">App de supervivencia con Lovable.</p>
+          <div class="card-extra">
+            <p>Aplicación de supervivencia desarrollada con Lovable, plataforma de desarrollo con IA. Incluye guías de supervivencia, técnicas de primeros auxilios, navegación, construcción de refugios y preparación para situaciones extremas.</p>
+            <div class="gallery">
+              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP App Icon">
+              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Interface">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 - Contenidos RRSS -->
+      <article class="card large" data-id="rrss-content">
+        <div class="card-media">
+          <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="Contenidos RRSS con ChatGPT" />
+          <div class="card-gradient"></div>
+        </div>
+        <div class="card-overlay">
+          <!-- Cabecera fija: title / subtitle / icons -->
+          <div class="overlay-head">
+            <h3>Contenidos RRSS</h3>
+            <p>ChatGPT entrenado con datos empresariales.</p>
+            <div class="icons" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Extra SOLO visible en expandida -->
+          <div class="overlay-extra">
+            <p class="overlay-desc">
+              ChatGPT personalizado entrenado con datos específicos de la empresa para generar temas, desarrollar contenidos y proponer ideas de ilustración para redes sociales.
+            </p>
+            <a class="overlay-cta" href="https://chat.openai.com" target="_blank" rel="noopener">
+              Ver más detalle
+              <!-- flecha ↗ -->
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Contenidos RRSS</h3>
+          <p class="card-desc">ChatGPT entrenado con datos empresariales.</p>
+          <div class="card-extra">
+            <p>ChatGPT personalizado entrenado con datos específicos de la empresa para generar temas relevantes, desarrollar contenidos adaptados al tono corporativo y proponer ideas creativas para ilustraciones. Incluye estrategias de contenido, calendario editorial y propuestas visuales personalizadas.</p>
+            <div class="gallery">
+              <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="ChatGPT Interface">
+              <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="Content Strategy">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 - Amazon AI Project -->
+      <article class="card medium" data-id="amazon-ai">
+        <div class="card-media">
+          <img src="assets/IACorner/Amazon/370 - copia.png" alt="Amazon AI generated images project" />
+          <div class="card-gradient"></div>
+        </div>
+        <div class="card-overlay">
+          <!-- Cabecera fija: title / subtitle / icons -->
+          <div class="overlay-head">
+            <h3>Amazon AI Series</h3>
+            <p>Consistencia visual con IA temprana.</p>
+            <div class="icons" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/></svg>
             </div>
           </div>
@@ -602,9 +754,9 @@
           <!-- Extra SOLO visible en expandida -->
           <div class="overlay-extra">
             <p class="overlay-desc">
-              De sketch a vector de producción con líneas suaves y menos puntos. Ideal para iconos y logotipos rápidos.
+              Proyecto pionero de generación de imágenes con IA de hace más de un año, cuando lograr consistencia visual era un verdadero desafío técnico.
             </p>
-            <a class="overlay-cta" href="./detalle-vectorize.html" target="_self" rel="noopener">
+            <a class="overlay-cta" href="https://www.amazon.es/dp/B0DHZ8QGH7" target="_blank" rel="noopener">
               Ver más detalle
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -614,103 +766,14 @@
           </div>
         </div>
         <div class="card-body">
-          <h3 class="card-title">Vectorize Anything</h3>
-          <p class="card-desc">Embellece bocetos a SVG limpios.</p>
+          <h3 class="card-title">Amazon AI Series</h3>
+          <p class="card-desc">Consistencia visual con IA temprana.</p>
           <div class="card-extra">
-            <p>De sketch a vector de producción con líneas suaves y menos puntos. Ideal para iconos y logotipos rápidos.</p>
+            <p>Proyecto pionero de generación de imágenes con IA de hace más de un año, cuando lograr consistencia visual era un verdadero desafío técnico. Exploración de las capacidades tempranas de la IA generativa.</p>
             <div class="gallery">
-              <img src="assets/cursors/cursor12.png" alt="Preview">
-              <img src="assets/cursors/cursor9.png" alt="Preview">
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="card" data-id="storyboards">
-        <div class="card-media">
-          <img src="assets/cursors/cursor9.png" alt="Storyboard frames" />
-          <div class="card-gradient"></div>
-        </div>
-        <div class="card-overlay">
-          <!-- Cabecera fija: title / subtitle / icons -->
-          <div class="overlay-head">
-            <h3>AI Storyboards</h3>
-            <p>Genera secuencias para pitch visual.</p>
-            <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v12H4z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 7l5 10H7z"/></svg>
-            </div>
-          </div>
-
-          <!-- Extra SOLO visible en expandida -->
-          <div class="overlay-extra">
-            <p class="overlay-desc">
-              Coherencia estilística entre planos, prompts orientados a narrativa y export para presentación.
-            </p>
-            <a class="overlay-cta" href="./detalle-storyboards.html" target="_self" rel="noopener">
-              Ver más detalle
-              <!-- flecha ↗ -->
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">AI Storyboards</h3>
-          <p class="card-desc">Genera secuencias para pitch visual.</p>
-          <div class="card-extra">
-            <p>Coherencia estilística entre planos, prompts orientados a narrativa y export para presentación.</p>
-            <div class="gallery">
-              <img src="assets/cursors/cursor6.png" alt="Preview">
-              <img src="assets/cursors/cursor12.png" alt="Preview">
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 4 -->
-      <article class="card large" data-id="voice-notes">
-        <div class="card-media">
-          <img src="assets/cursors/cursor12.png" alt="Waveform visualization" />
-          <div class="card-gradient"></div>
-        </div>
-        <div class="card-overlay">
-          <!-- Cabecera fija: title / subtitle / icons -->
-          <div class="overlay-head">
-            <h3>Voice → Notes</h3>
-            <p>Transcribe y resume ideas.</p>
-            <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a3 3 0 013 3v6a3 3 0 11-6 0V6a3 3 0 013-3zM5 11h2a5 5 0 0010 0h2a7 7 0 01-14 0zM10 19h4v2h-4z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5v14M5 12h14"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/></svg>
-            </div>
-          </div>
-
-          <!-- Extra SOLO visible en expandida -->
-          <div class="overlay-extra">
-            <p class="overlay-desc">
-              ASR + resumidores + etiquetas clave. Export a docs o tickets. Perfecto para ideas en movimiento.
-            </p>
-            <a class="overlay-cta" href="./detalle-voice-notes.html" target="_self" rel="noopener">
-              Ver más detalle
-              <!-- flecha ↗ -->
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Voice → Notes</h3>
-          <p class="card-desc">Transcribe y resume ideas.</p>
-          <div class="card-extra">
-            <p>ASR + resumidores + etiquetas clave. Export a docs o tickets. Perfecto para ideas en movimiento.</p>
-            <div class="gallery">
-              <img src="assets/cursors/cursor9.png" alt="Preview">
-              <img src="assets/cursors/cursor6.png" alt="Preview">
+              <img src="assets/IACorner/Amazon/Book - copia.png" alt="Amazon Book AI">
+              <img src="assets/IACorner/Amazon/contra - copia.png" alt="Amazon Contra AI">
+              <img src="assets/IACorner/Amazon/Cuadro - copia.png" alt="Amazon Cuadro AI">
             </div>
           </div>
         </div>
