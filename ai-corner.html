@@ -21,7 +21,24 @@
     body[data-page="ai"] .site-nav { z-index: 10; }
 
     /* ===== GRID (misma estética de antes, ahora namespaced) ===== */
-    body[data-page="ai"] .grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: repeat(6, 1fr); gap: 8px; height: 100%; width: 100%; margin: 0; padding: 0; grid-auto-flow: dense; }
+    body[data-page="ai"] .grid { 
+      display: grid; 
+      grid-template-columns: repeat(12, 1fr); 
+      grid-template-rows: repeat(6, 1fr); 
+      gap: 8px; 
+      height: 100%; 
+      width: 100%; 
+      margin: 0; 
+      padding: 0; 
+      grid-auto-flow: dense;
+      overflow: visible;
+    }
+    
+    /* Asegurar que el grid en estado expandido mantenga todas las cards visibles */
+    body[data-page="ai"] .grid[data-state^="expand-"] {
+      grid-template-rows: repeat(12, 1fr);
+      overflow: visible !important;
+    }
 
     body[data-page="ai"] .card {
       position: relative;
@@ -39,8 +56,11 @@
     body[data-page="ai"] .card.medium { grid-column: span 4; grid-row: span 2; }
     body[data-page="ai"] .card.small { grid-column: span 4; grid-row: span 2; }
 
+    /* Hover sin desplazar hacia arriba para que la fila superior no se corte */
     body[data-page="ai"] .card:hover {
-      transform: translateY(-4px) scale(1.01);
+      transform: translateY(0) scale(1.01);
+      transform-origin: center center;
+      box-shadow: 0 10px 24px rgba(15,23,42,.12);
     }
 
     body[data-page="ai"] .card-media { position: relative; height: 100%; }
@@ -48,8 +68,10 @@
       width: 100%; height: 100%; object-fit: cover; display: block;
       filter: saturate(1.05) contrast(1.05);
       transform: scale(1.02);
+      transform-origin: center center;
       transition: transform 0.5s cubic-bezier(.2,.7,.2,1), filter 0.35s ease;
     }
+    /* En hover solo escalamos imagen/overlay sin mover la card hacia arriba */
     body[data-page="ai"] .card:hover .card-media img { transform: scale(1.06); filter: blur(8px) brightness(.92) saturate(.9); }
 
     body[data-page="ai"] .card-gradient {
@@ -57,7 +79,7 @@
       pointer-events: none;
     }
     /* Overlay de información (3 filas: título, subtítulo, iconos) */
-    body[data-page="ai"] .card-overlay { position:absolute; inset:0; display:grid; grid-template-rows:auto auto auto; align-content:end; justify-items:start; gap:8px; padding:20px; text-align:left; opacity:0; transform: translateY(20px); transition: opacity .25s ease, transform .25s ease; }
+    body[data-page="ai"] .card-overlay { position:absolute; inset:0; display:grid; grid-template-rows:auto auto auto; align-content:end; justify-items:start; gap:8px; padding:20px; text-align:left; opacity:0; transform: translateY(16px); transition: opacity .25s ease, transform .25s ease; }
     body[data-page="ai"] .card:hover .card-overlay { opacity:1; transform: translateY(0); }
     body[data-page="ai"] .card-overlay p { margin:0; font-size:14px; }
     body[data-page="ai"] .card-overlay .icons { display:flex; gap:10px; align-items:center; justify-content:flex-start; margin-top:4px; }
@@ -130,26 +152,24 @@
     body[data-page="ai"] .card { min-width: 0; min-height: 0; }
     body[data-page="ai"] .card-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-    /* 1ª fila: 4 + 4 + 4 */
-    body[data-page="ai"] .grid > .card:nth-child(1) {  /* JS Web */
+    /* Estado base: solo cuando NO hay expansión */
+    body[data-page="ai"] .grid[data-state="base"] > .card:nth-child(1) {  /* JS Web */
       grid-column: 1 / span 4;
       grid-row: 1 / span 3;
     }
-    body[data-page="ai"] .grid > .card:nth-child(2) {  /* Make.com Automatizaciones */
+    body[data-page="ai"] .grid[data-state="base"] > .card:nth-child(2) {  /* Make.com Automatizaciones */
       grid-column: 5 / span 4;
       grid-row: 1 / span 3;
     }
-    body[data-page="ai"] .grid > .card:nth-child(3) {  /* CNAPP Survival */
+    body[data-page="ai"] .grid[data-state="base"] > .card:nth-child(3) {  /* CNAPP Survival */
       grid-column: 9 / span 4;
       grid-row: 1 / span 3;
     }
-
-    /* 2ª fila: 6 + 6 */
-    body[data-page="ai"] .grid > .card:nth-child(4) {  /* Contenidos RRSS */
+    body[data-page="ai"] .grid[data-state="base"] > .card:nth-child(4) {  /* Contenidos RRSS */
       grid-column: 1 / span 6;
       grid-row: 4 / span 3;
     }
-    body[data-page="ai"] .grid > .card:nth-child(5) {  /* Amazon AI */
+    body[data-page="ai"] .grid[data-state="base"] > .card:nth-child(5) {  /* Amazon AI */
       grid-column: 7 / span 6;
       grid-row: 4 / span 3;
     }
@@ -325,74 +345,96 @@
       body[data-page="ai"] .card.is-expanded .card-extra { display: block; opacity: 1; }
       body[data-page="ai"] .card.is-expanded .card-body { padding: 18px; }
 
+      /* === Reglas básicas para expansión === */
+      body[data-page="ai"] .grid[data-state^="expand-"] > .card {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        min-width: 100px !important;
+        min-height: 100px !important;
+      }
+
       /* === Disposiciones por card expandida (12x6) === */
-      /* 1) Expande la #1 (JS Web) */
-      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(1) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
-      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(5) { display: none; }
+      /* 1) Expande la #1 (JS Web) → margen derecho 4 items en filas enteras */
+      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(1) { grid-column: 1 / span 8; grid-row: 1 / span 12; }
+      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 1 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 4 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 7 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(5) { grid-column: 9 / span 4; grid-row: 10 / span 3; }
 
       /* 2) Expande la #2 (Make.com) */
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(2) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(5) { display: none; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(2) { grid-column: 1 / span 8; grid-row: 1 / span 12; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 4 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 7 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(5) { grid-column: 9 / span 4; grid-row: 10 / span 3; }
 
       /* 3) Expande la #3 (CNAPP) */
-      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(3) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
-      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(5) { display: none; }
+      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(3) { grid-column: 1 / span 8; grid-row: 1 / span 12; }
+      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 4 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 7 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(5) { grid-column: 9 / span 4; grid-row: 10 / span 3; }
 
       /* 4) Expande la #4 (Contenidos RRSS) */
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(4) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(5) { display: none; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(4) { grid-column: 1 / span 8; grid-row: 1 / span 12; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 4 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 7 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(5) { grid-column: 9 / span 4; grid-row: 10 / span 3; }
 
       /* 5) Expande la #5 (Amazon AI) */
-      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(5) { grid-column: 1 / span 8; grid-row: 1 / span 6; }
-      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 3 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 5 / span 2; }
-      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(4) { display: none; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(5) { grid-column: 1 / span 8; grid-row: 1 / span 12; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(1) { grid-column: 9 / span 4; grid-row: 1 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(2) { grid-column: 9 / span 4; grid-row: 4 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 7 / span 3; }
+      body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(4) { grid-column: 9 / span 4; grid-row: 10 / span 3; }
 
       /* Tablet: mantenemos la idea, pero con 6 columnas */
       @media (max-width: 980px) and (min-width: 560px) {
         /* base compacta */
-        body[data-page="ai"] .grid { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(8, 1fr); }
+        body[data-page="ai"] .grid { grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(12, 1fr); }
         body[data-page="ai"] .grid > .card:nth-child(1) { grid-column: 1 / span 4; grid-row: 1 / span 3; }
         body[data-page="ai"] .grid > .card:nth-child(2) { grid-column: 5 / span 2; grid-row: 1 / span 3; }
-        body[data-page="ai"] .grid > .card:nth-child(3) { grid-column: 1 / span 2; grid-row: 4 / span 3; }
-        body[data-page="ai"] .grid > .card:nth-child(4) { grid-column: 3 / span 4; grid-row: 4 / span 3; }
+        body[data-page="ai"] .grid > .card:nth-child(3) { grid-column: 1 / span 2; grid-row: 4 / span 2; }
+        body[data-page="ai"] .grid > .card:nth-child(4) { grid-column: 3 / span 2; grid-row: 4 / span 2; }
+        body[data-page="ai"] .grid > .card:nth-child(5) { grid-column: 5 / span 2; grid-row: 4 / span 2; }
 
-        /* expand-1 */
-        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(1) { grid-column: 1 / span 4; grid-row: 1 / span 8; }
-        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(2) { grid-column: 5 / span 2; grid-row: 1 / span 3; }
-        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(3) { grid-column: 5 / span 2; grid-row: 4 / span 2; }
-        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(4) { grid-column: 5 / span 2; grid-row: 6 / span 3; }
+        /* expand-1 (4 items a la derecha en filas enteras) */
+        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(1) { grid-column: 1 / span 4 !important; grid-row: 1 / span 12 !important; }
+        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(2) { grid-column: 5 / span 2 !important; grid-row: 1 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(3) { grid-column: 5 / span 2 !important; grid-row: 4 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(4) { grid-column: 5 / span 2 !important; grid-row: 7 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-1"] > .card:nth-child(5) { grid-column: 5 / span 2 !important; grid-row: 10 / span 3 !important; }
 
         /* expand-2 */
-        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(2) { grid-column: 2 / span 5; grid-row: 1 / span 8; }
-        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(1) { grid-column: 1 / span 1; grid-row: 1 / span 3; }
-        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(3) { grid-column: 1 / span 1; grid-row: 4 / span 2; }
-        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(4) { grid-column: 1 / span 1; grid-row: 6 / span 3; }
+        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(2) { grid-column: 1 / span 4 !important; grid-row: 1 / span 12 !important; }
+        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(1) { grid-column: 5 / span 2 !important; grid-row: 1 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(3) { grid-column: 5 / span 2 !important; grid-row: 4 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(4) { grid-column: 5 / span 2 !important; grid-row: 7 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-2"] > .card:nth-child(5) { grid-column: 5 / span 2 !important; grid-row: 10 / span 3 !important; }
 
         /* expand-3 */
-        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(3) { grid-column: 1 / span 4; grid-row: 1 / span 8; }
-        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(1) { grid-column: 5 / span 2; grid-row: 1 / span 3; }
-        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(2) { grid-column: 5 / span 2; grid-row: 4 / span 2; }
-        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(4) { grid-column: 5 / span 2; grid-row: 6 / span 3; }
+        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(3) { grid-column: 1 / span 4 !important; grid-row: 1 / span 12 !important; }
+        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(1) { grid-column: 5 / span 2 !important; grid-row: 1 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(2) { grid-column: 5 / span 2 !important; grid-row: 4 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(4) { grid-column: 5 / span 2 !important; grid-row: 7 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-3"] > .card:nth-child(5) { grid-column: 5 / span 2 !important; grid-row: 10 / span 3 !important; }
 
         /* expand-4 */
-        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(4) { grid-column: 2 / span 5; grid-row: 1 / span 8; }
-        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(1) { grid-column: 1 / span 1; grid-row: 1 / span 3; }
-        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(2) { grid-column: 1 / span 1; grid-row: 4 / span 2; }
-        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(3) { grid-column: 1 / span 1; grid-row: 6 / span 3; }
+        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(4) { grid-column: 1 / span 4 !important; grid-row: 1 / span 12 !important; }
+        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(1) { grid-column: 5 / span 2 !important; grid-row: 1 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(2) { grid-column: 5 / span 2 !important; grid-row: 4 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(3) { grid-column: 5 / span 2 !important; grid-row: 7 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-4"] > .card:nth-child(5) { grid-column: 5 / span 2 !important; grid-row: 10 / span 3 !important; }
+
+        /* expand-5 */
+        body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(5) { grid-column: 1 / span 4 !important; grid-row: 1 / span 12 !important; }
+        body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(1) { grid-column: 5 / span 2 !important; grid-row: 1 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(2) { grid-column: 5 / span 2 !important; grid-row: 4 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(3) { grid-column: 5 / span 2 !important; grid-row: 7 / span 3 !important; }
+        body[data-page="ai"] .grid[data-state="expand-5"] > .card:nth-child(4) { grid-column: 5 / span 2 !important; grid-row: 10 / span 3 !important; }
       }
 
       /* En móvil seguimos usando tu modal — no expandimos dentro del grid */
@@ -975,7 +1017,7 @@
         grid.querySelectorAll('.card.is-expanded').forEach(c => c.classList.remove('is-expanded'));
       }
 
-      // Qué estado aplicar según card index (1..4)
+      // Qué estado aplicar según card index (1..5)
       function stateForIndex(idx){
         return `expand-${idx}`;
       }
@@ -1013,7 +1055,8 @@
           // volver a base
           setBaseState();
         } else {
-          grid.dataset.state = stateForIndex(index + 1); // index 0..3 => expand-1..4
+          const newState = stateForIndex(index + 1);
+          grid.dataset.state = newState;
           grid.querySelectorAll('.card').forEach(el => el.classList.remove('is-expanded'));
           card.classList.add('is-expanded');
         }
