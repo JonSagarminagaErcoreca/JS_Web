@@ -8,6 +8,36 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/global.css">
+  <script>
+    // Protección de acceso
+    (function() {
+      const AUTH_KEY = 'portfolio_authenticated';
+      const AUTH_TIMESTAMP = 'portfolio_auth_timestamp';
+      const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 horas
+      
+      function isAuthenticated() {
+        const auth = sessionStorage.getItem(AUTH_KEY);
+        const timestamp = sessionStorage.getItem(AUTH_TIMESTAMP);
+        
+        if (!auth || !timestamp) return false;
+        
+        const now = Date.now();
+        const authTime = parseInt(timestamp, 10);
+        
+        if (now - authTime > SESSION_DURATION) {
+          sessionStorage.removeItem(AUTH_KEY);
+          sessionStorage.removeItem(AUTH_TIMESTAMP);
+          return false;
+        }
+        
+        return auth === 'true';
+      }
+      
+      if (!isAuthenticated()) {
+        window.location.href = './password.html';
+      }
+    })();
+  </script>
   <style>
     /* Contenedor principal */
     body[data-page="project"] { background: var(--bg,#fff); color: var(--text,#0e0f12); padding-top: 56px; }

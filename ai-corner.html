@@ -11,6 +11,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/global.css">
 
+  <!-- Protección de acceso -->
+  <script>
+    (function() {
+      const AUTH_KEY = 'portfolio_authenticated';
+      const AUTH_TIMESTAMP = 'portfolio_auth_timestamp';
+      const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 horas
+      
+      function isAuthenticated() {
+        const auth = sessionStorage.getItem(AUTH_KEY);
+        const timestamp = sessionStorage.getItem(AUTH_TIMESTAMP);
+        
+        if (!auth || !timestamp) return false;
+        
+        const now = Date.now();
+        const authTime = parseInt(timestamp, 10);
+        
+        if (now - authTime > SESSION_DURATION) {
+          sessionStorage.removeItem(AUTH_KEY);
+          sessionStorage.removeItem(AUTH_TIMESTAMP);
+          return false;
+        }
+        
+        return auth === 'true';
+      }
+      
+      if (!isAuthenticated()) {
+        window.location.href = './password.html';
+      }
+    })();
+  </script>
+
   <!-- Estilos específicos de esta página con mayor especificidad -->
   <style>
     /* ===== Página AI ===== */
@@ -82,8 +113,13 @@
     body[data-page="ai"] .card-overlay { position:absolute; inset:0; display:grid; grid-template-rows:auto auto auto; align-content:end; justify-items:start; gap:8px; padding:20px; text-align:left; opacity:0; transform: translateY(16px); transition: opacity .25s ease, transform .25s ease; }
     body[data-page="ai"] .card:hover .card-overlay { opacity:1; transform: translateY(0); }
     body[data-page="ai"] .card-overlay p { margin:0; font-size:14px; }
-    body[data-page="ai"] .card-overlay .icons { display:flex; gap:10px; align-items:center; justify-content:flex-start; margin-top:4px; }
-    body[data-page="ai"] .card-overlay .icons svg { width:18px; height:18px; opacity:.9; filter: drop-shadow(0 1px 3px rgba(0,0,0,.12)); }
+    body[data-page="ai"] .card-overlay .icons { display:flex; gap:10px; align-items:center; justify-content:flex-start; margin-top:4px; margin-bottom:12px; }
+    body[data-page="ai"] .card-overlay .icons svg,
+    body[data-page="ai"] .card-overlay .icons img { height:18px; width: auto; opacity:.9; filter: drop-shadow(0 1px 3px rgba(0,0,0,.12)); object-fit: contain; }
+    /* Ajustes ópticos por logo para igualar altura visual sin distorsión */
+    body[data-page="ai"] .card-overlay .icons img[src*="Cursor AI"] { height:17px; }
+    body[data-page="ai"] .card-overlay .icons img[src*="Google_Gemini"] { height:17px; }
+    body[data-page="ai"] .card-overlay .icons img[src*="us_logo_full"] { height:16px; }
 
     /* ===== MODAL (namespaced) ===== */
     body[data-page="ai"] .modal-backdrop {
@@ -510,6 +546,7 @@
         transition: opacity .25s ease;
         max-width: min(680px, 86%);
         align-self: flex-start;
+        margin-top: 14px;
       }
       body[data-page="ai"] .card.is-expanded .overlay-extra{
         display: flex;
@@ -533,20 +570,28 @@
         gap: 8px;
         padding: 10px 14px;
         border-radius: 12px;
-        border: 1px solid var(--stroke);
-        background: var(--fill-soft);
-        color: var(--text);
-        font-weight: 700;
+        border: 1px solid rgba(255,255,255,0.4);
+        background: rgba(255,255,255,0.1);
+        color: #ffffff;
+        font-weight: 400;
         text-decoration: none;
         width: fit-content;
-        transition: transform .18s ease, background .18s ease, border-color .18s ease;
+        transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+        pointer-events: auto; /* permite clic por encima de la capa de expansión */
+        z-index: 3;           /* asegura que quede por encima visualmente */
       }
       body[data-page="ai"] .overlay-cta:hover{
-        transform: translateY(-1px);
-        background: var(--fill-soft);
-        border-color: var(--stroke);
+        transform: translateY(-2px);
+        background: rgba(255,255,255,0.3);
+        border-color: rgba(255,255,255,0.8);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        cursor: pointer;
       }
-      body[data-page="ai"] .overlay-cta svg{ width:16px; height:16px; }
+      body[data-page="ai"] .overlay-cta:active{
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+      body[data-page="ai"] .overlay-cta svg{ width:16px; height:16px; color: #ffffff; fill: #ffffff; }
 
       /* La imagen en expandida, oscura para legibilidad, pero SIN mover overlay */
       body[data-page="ai"] .card.is-expanded .card-media img{
@@ -556,6 +601,114 @@
       body[data-page="ai"] .card.is-expanded:hover .card-media img{
         filter: blur(8px) brightness(.98) saturate(.9);
       }
+      
+      /* ===== AI Corner: overlay y colores solo en hover/expandida ===== */
+
+      /* Apaga cualquier gradiente/overlay existente por defecto */
+      body[data-page="ai"] .card-gradient,
+      body[data-page="ai"] .card-overlay {
+        pointer-events: none; /* el overlay no interfiere con clicks */
+      }
+      /* Asegura que el gradiente preexistente no sea visible por defecto */
+      body[data-page="ai"] .card-gradient { background: none !important; display: none; }
+      /* Desactiva cualquier degradado claro anterior del propio overlay */
+      body[data-page="ai"] .card .card-overlay::before { background: none !important; }
+
+      /* Capa de gradiente propia (negro -> transparente, desde abajo) */
+      body[data-page="ai"] .card .card-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0,0,0,0.80) 0%,
+          rgba(0,0,0,0.50) 28%,
+          rgba(0,0,0,0.00) 62%
+        );
+        opacity: 0;               /* oculto por defecto */
+        transition: opacity .28s ease;
+        pointer-events: none;
+        z-index: 1;               /* por encima de la imagen, debajo del texto */
+      }
+
+      /* El bloque de texto del overlay solo se muestra en hover/expandida */
+      body[data-page="ai"] .card .card-overlay {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity .22s ease, transform .22s ease;
+        z-index: 2;
+      }
+
+      /* Hover o expandida = overlay visible */
+      body[data-page="ai"] .card:hover .card-media::after,
+      body[data-page="ai"] .card.is-expanded .card-media::after {
+        opacity: 1;
+      }
+      body[data-page="ai"] .card:hover .card-overlay,
+      body[data-page="ai"] .card.is-expanded .card-overlay {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Colores de textos al activarse el overlay */
+      body[data-page="ai"] .card:hover .card-overlay h3,
+      body[data-page="ai"] .card.is-expanded .card-overlay h3 {
+        color: #fff !important;
+      }
+      body[data-page="ai"] .card:hover .card-overlay p,
+      body[data-page="ai"] .card.is-expanded .card-overlay p {
+        color: #e6e6e6 !important;
+      }
+      /* para descripciones más largas si existen dentro del overlay */
+      body[data-page="ai"] .card:hover .card-overlay .overlay-desc,
+      body[data-page="ai"] .card.is-expanded .card-overlay .overlay-desc {
+        color: #cfcfcf !important;
+      }
+
+      /* Sombras: apagadas por defecto, solo en hover/expandida */
+      body[data-page="ai"] .card { box-shadow: none !important; }
+      body[data-page="ai"] .card:hover,
+      body[data-page="ai"] .card.is-expanded { box-shadow: 0 18px 44px rgba(0,0,0,.22); }
+
+      /* Mantén la imagen legible con overlay, sin duplicar blur en hover */
+      body[data-page="ai"] .card:hover .card-media img,
+      body[data-page="ai"] .card.is-expanded .card-media img {
+        filter: brightness(0.95) contrast(1.02) !important;
+      }
+
+      /* ===== Menu overlay: ajustes tipográficos y sociales ===== */
+      body[data-page="ai"] .menu-overlay .menu-links a{
+        text-transform: none !important; /* no mayúsculas */
+        font-size: 18px;                 /* un poco más pequeño */
+        letter-spacing: -0.01em;
+      }
+      body[data-page="ai"] .menu-panel .menu-divider{
+        height: 1px;
+        background: var(--stroke);
+        margin: 12px 0;
+      }
+      body[data-page="ai"] .menu-panel .menu-social{
+        display: flex;
+        gap: 12px;
+        padding-top: 4px;
+      }
+      body[data-page="ai"] .menu-panel .menu-social a{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px; height: 36px;
+        border-radius: 10px;
+        border: 1px solid var(--stroke);
+        background: var(--fill-soft);
+        color: var(--text);
+        transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      }
+      body[data-page="ai"] .menu-panel .menu-social a:hover{
+        transform: translateY(-1px);
+        background: var(--fill-soft);
+        border-color: var(--stroke);
+      }
+      body[data-page="ai"] .menu-panel .menu-social svg{ width:18px; height:18px; }
   </style>
 </head>
 
@@ -585,36 +738,60 @@
         <a href="./about.html">About</a>
         <a href="./ai-corner.html">AI Lab</a>
       </nav>
+      <div class="menu-divider" role="separator" aria-hidden="true"></div>
+      <div class="menu-social" aria-label="Social links">
+        <a href="https://www.instagram.com/jon_sagarminaga/" target="_blank" rel="noopener" aria-label="Instagram"
+           title="Instagram">
+          <!-- Instagram icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM17.8 6.2a1 1 0 1 1-1.6 1.2 1 1 0 0 1 1.6-1.2z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jon-sagarminaga-erkoreka/" target="_blank" rel="noopener" aria-label="LinkedIn"
+           title="LinkedIn">
+          <!-- LinkedIn icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-7.3c0-1.74-.03-3.98-2.43-3.98-2.44 0-2.82 1.9-2.82 3.86V23h-4V8z"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 
   <!-- ===== GRID ===== -->
   <main>
     <section class="grid" aria-label="AI Experiments grid" id="aiGrid">
-      <!-- Card 1 - JS Web -->
+      <!-- Card 1 - JS Web — Vibe Coding -->
       <article class="card" data-id="js-web">
         <div class="card-media">
-          <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web Portfolio" />
+          <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web — Vibe Coding Portfolio" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
           <!-- Cabecera fija: title / subtitle / icons -->
           <div class="overlay-head">
-            <h3>JS Web</h3>
-            <p>Portfolio desarrollado completamente con IA.</p>
+            <h3>JS Web — Vibe Coding</h3>
+            <p>Portfolio personal desarrollado íntegramente con inteligencia artificial</p>
             <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
+              <img src="assets/IACorner/Logos/cursor@2x.png" alt="Cursor.ai" />
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
+              <img src="assets/IACorner/Logos/unicorn@2x.png" alt="Unicorn Studio" />
             </div>
           </div>
 
           <!-- Extra SOLO visible en expandida -->
           <div class="overlay-extra">
             <p class="overlay-desc">
-              Portfolio personal desarrollado completamente con IA usando Cursor.ai, modelos Claude, MCP de Figma y herramientas de desarrollo asistido por IA.
+              Portfolio creado como experimento técnico y creativo, combinando diseño, prompting y desarrollo asistido por IA.
             </p>
-            <a class="overlay-cta" href="https://cursor.sh" target="_blank" rel="noopener">
+            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+              <p>"JS Web – Vibe Coding" es un proyecto personal que explora el potencial del desarrollo web potenciado por IA.</p>
+              <p>Todo el proceso —desde la concepción visual hasta la estructura de código— ha sido guiado mediante prompting en ChatGPT, integrando Cursor.ai como entorno de desarrollo y coordinación del flujo de trabajo.</p>
+              <p>Algunas imágenes y recursos visuales se generaron con Nano Banana, y para efectos de presentación interactiva y motion se utilizó Unicorn.studio.</p>
+              <p>El resultado es una web dinámica, moderna y coherente visualmente, donde el diseño, la tecnología y la IA se integran para expresar una nueva forma de crear digitalmente.</p>
+            </div>
+            <a class="overlay-cta" href="./index.html" target="_blank" rel="noopener" style="margin-top: 12px;">
               Ver más detalle
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -624,14 +801,18 @@
           </div>
         </div>
         <div class="card-body">
-          <h3 class="card-title">JS Web</h3>
-          <p class="card-desc">Portfolio desarrollado completamente con IA.</p>
+          <h3 class="card-title">JS Web — Vibe Coding</h3>
+          <p class="card-desc">Portfolio personal desarrollado íntegramente con inteligencia artificial</p>
           <div class="card-extra">
-            <p>Portfolio personal desarrollado completamente con IA usando Cursor.ai, modelos Claude, MCP de Figma y herramientas de desarrollo asistido por IA. Demuestra las capacidades actuales de la IA para el desarrollo web completo, desde el diseño hasta la implementación.</p>
+            <p>"JS Web – Vibe Coding" es un proyecto personal que explora el potencial del desarrollo web potenciado por IA.</p>
+            <p>Todo el proceso —desde la concepción visual hasta la estructura de código— ha sido guiado mediante prompting en ChatGPT, integrando Cursor.ai como entorno de desarrollo y coordinación del flujo de trabajo.</p>
+            <p>Algunas imágenes y recursos visuales se generaron con Nano Banana, y para efectos de presentación interactiva y motion se utilizó Unicorn.studio.</p>
+            <p>El resultado es una web dinámica, moderna y coherente visualmente, donde el diseño, la tecnología y la IA se integran para expresar una nueva forma de crear digitalmente.</p>
+            <p><strong>ChatGPT · Cursor.ai · Nano Banana · Unicorn.studio</strong></p>
             <div class="gallery">
-              <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web Home">
-              <img src="assets/Projects/JS/JS_1.png" alt="JS Web About">
-              <img src="assets/Projects/JS/JS_2.png" alt="JS Web Work">
+              <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web — Vibe Coding Home">
+              <img src="assets/Projects/JS/JS_1.png" alt="JS Web — Vibe Coding About">
+              <img src="assets/Projects/JS/JS_2.png" alt="JS Web — Vibe Coding Work">
             </div>
           </div>
         </div>
@@ -649,9 +830,8 @@
             <h3>Automatizaciones Make.com</h3>
             <p>Generación automática de contenidos para Instagram y X.</p>
             <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <img src="assets/IACorner/Logos/makeblanco@2x.png" alt="Make.com" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
             </div>
           </div>
 
@@ -660,7 +840,7 @@
             <p class="overlay-desc">
               Automatización completa de contenido para redes sociales usando Make.com. Generación automática de posts para Instagram y X con programación inteligente.
             </p>
-            <a class="overlay-cta" href="https://make.com" target="_blank" rel="noopener">
+            <a class="overlay-cta" href="https://x.com/CisneNegroApp" target="_blank" rel="noopener">
               Ver más detalle
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -697,9 +877,8 @@
             <h3>CNAPP Survival</h3>
             <p>App de supervivencia con Lovable.</p>
             <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
+              <img src="assets/IACorner/Logos/lovable@2x.png" alt="Lovable" />
             </div>
           </div>
 
@@ -708,7 +887,7 @@
             <p class="overlay-desc">
               Aplicación de supervivencia desarrollada con Lovable, plataforma de desarrollo con IA. Experiencia completa de supervivencia en situaciones extremas.
             </p>
-            <a class="overlay-cta" href="https://lovable.dev" target="_blank" rel="noopener">
+            <a class="overlay-cta" href="https://black-swan-preparedness-hub.lovable.app/?utm_source=lovable-editor" target="_blank" rel="noopener">
               Ver más detalle
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -742,9 +921,8 @@
             <h3>Contenidos RRSS</h3>
             <p>ChatGPT entrenado con datos empresariales.</p>
             <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
             </div>
           </div>
 
@@ -753,7 +931,7 @@
             <p class="overlay-desc">
               ChatGPT personalizado entrenado con datos específicos de la empresa para generar temas, desarrollar contenidos y proponer ideas de ilustración para redes sociales.
             </p>
-            <a class="overlay-cta" href="https://chat.openai.com" target="_blank" rel="noopener">
+            <a class="overlay-cta" href="https://www.linkedin.com/company/vpo-ingenieria" target="_blank" rel="noopener">
               Ver más detalle
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -787,9 +965,8 @@
             <h3>Amazon AI Series</h3>
             <p>Consistencia visual con IA temprana.</p>
             <div class="icons" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v16H4z"/></svg>
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
             </div>
           </div>
 
@@ -798,7 +975,7 @@
             <p class="overlay-desc">
               Proyecto pionero de generación de imágenes con IA de hace más de un año, cuando lograr consistencia visual era un verdadero desafío técnico.
             </p>
-            <a class="overlay-cta" href="https://www.amazon.es/dp/B0DHZ8QGH7" target="_blank" rel="noopener">
+            <a class="overlay-cta" href="https://www.amazon.es/Mandalas-Wild-Animals-Color-Enjoy/dp/B0DHZ8QGH7/ref=pd_rhf_dp_s_ci_mcx_mr_hp_d_d_sccl_2_2/257-1385953-9691753?pd_rd_w=M9zQc&content-id=amzn1.sym.7cab37f0-9f91-4fec-abf5-398309e3ac94:amzn1.symc.206c6295-3b43-4a2b-9d15-273ba17f7025&pf_rd_p=7cab37f0-9f91-4fec-abf5-398309e3ac94&pf_rd_r=BK8KZ3M9GVPVS18XW6GG&pd_rd_wg=ZWNfF&pd_rd_r=2a98b6d6-50d8-4832-93d7-7fe56d061c55&pd_rd_i=B0DHZ8QGH7&psc=1" target="_blank" rel="noopener">
               Ver más detalle
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1084,11 +1261,18 @@
 
         const fresh = [...grid.querySelectorAll('.card')];
         fresh.forEach((card, idx) => {
+          // Evita que el CTA dispare la expansión/colapso
+          card.querySelectorAll('.overlay-cta').forEach((cta) => {
+            cta.addEventListener('click', (e) => {
+              e.stopPropagation();
+            });
+          });
+
           if (mqMobile.matches) {
             card.addEventListener('click', () => onCardClickMobile(card));
           } else {
             card.addEventListener('click', (e) => {
-              if (e.target.closest('.gallery')) return; // no colapsar por usar la galería
+              if (e.target.closest('.gallery') || e.target.closest('.overlay-cta')) return; // no colapsar por usar galería o CTA
               onCardClickDesktop(card, idx);
             });
           }

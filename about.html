@@ -8,10 +8,54 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/global.css">
+  <script>
+    // Protección de acceso
+    (function() {
+      const AUTH_KEY = 'portfolio_authenticated';
+      const AUTH_TIMESTAMP = 'portfolio_auth_timestamp';
+      const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 horas
+      
+      function isAuthenticated() {
+        const auth = sessionStorage.getItem(AUTH_KEY);
+        const timestamp = sessionStorage.getItem(AUTH_TIMESTAMP);
+        
+        if (!auth || !timestamp) return false;
+        
+        const now = Date.now();
+        const authTime = parseInt(timestamp, 10);
+        
+        if (now - authTime > SESSION_DURATION) {
+          sessionStorage.removeItem(AUTH_KEY);
+          sessionStorage.removeItem(AUTH_TIMESTAMP);
+          return false;
+        }
+        
+        return auth === 'true';
+      }
+      
+      if (!isAuthenticated()) {
+        window.location.href = './password.html';
+      }
+    })();
+  </script>
   <script defer src="./scripts/menu.js"></script>
   <style>
-    /* Ocultar scrollbar siempre */
-    /* estilos inlined serán eliminados tras migración completa */
+    /* Menu overlay: ajustes tipográficos y sociales (alineado con AI Corner) */
+    body[data-page="about"] .menu-overlay .menu-links a{
+      text-transform: none !important;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    body[data-page="about"] .menu-panel .menu-divider{ height:1px; background: var(--stroke); margin: 12px 0; }
+    body[data-page="about"] .menu-panel .menu-social{ display:flex; gap:12px; padding-top:4px; }
+    body[data-page="about"] .menu-panel .menu-social a{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:36px; height:36px; border-radius:10px; border:1px solid var(--stroke);
+      background: var(--fill-soft); color: var(--text);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    body[data-page="about"] .menu-panel .menu-social a:hover{ transform: translateY(-1px); background: var(--fill-soft); border-color: var(--stroke); }
+    body[data-page="about"] .menu-panel .menu-social svg{ width:18px; height:18px; }
   </style>
 </head>
 <body data-page="about">
@@ -35,6 +79,19 @@
         <a href="./about.html">About</a>
         <a href="./ai-corner.html">AI Lab</a>
       </nav>
+      <div class="menu-divider" role="separator" aria-hidden="true"></div>
+      <div class="menu-social" aria-label="Social links">
+        <a href="https://www.instagram.com/jon_sagarminaga/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM17.8 6.2a1 1 0 1 1-1.6 1.2 1 1 0 0 1 1.6-1.2z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jon-sagarminaga-erkoreka/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-7.3c0-1.74-.03-3.98-2.43-3.98-2.44 0-2.82 1.9-2.82 3.86V23h-4V8z"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
   <main>
