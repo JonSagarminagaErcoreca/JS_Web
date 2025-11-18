@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/global.css">
+  <script defer src="./scripts/i18n.js"></script>
   <script>
     // Protección de acceso
     (function() {
@@ -56,6 +57,14 @@
     }
     body[data-page="about"] .menu-panel .menu-social a:hover{ transform: translateY(-1px); background: var(--fill-soft); border-color: var(--stroke); }
     body[data-page="about"] .menu-panel .menu-social svg{ width:18px; height:18px; }
+    body[data-page="about"] .menu-panel .menu-social .menu-lang{
+      margin-left:auto;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:44px; height:36px; border-radius:10px; border:1px solid var(--stroke);
+      background: var(--fill-soft); color: var(--text); font-weight:700; letter-spacing:.02em;
+      cursor:pointer; transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    body[data-page="about"] .menu-panel .menu-social .menu-lang:hover{ transform: translateY(-1px); background: var(--fill-soft); border-color: var(--stroke); }
   </style>
 </head>
 <body data-page="about">
@@ -75,9 +84,9 @@
   <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
     <div class="menu-panel" id="menuPanel">
       <nav class="menu-links" aria-label="Primary">
-        <a href="./work.html">Work</a>
-        <a href="./about.html">About</a>
-        <a href="./ai-corner.html">AI Lab</a>
+        <a href="./work.html" data-i18n="menu.work">Work</a>
+        <a href="./about.html" data-i18n="menu.about">About</a>
+        <a href="./ai-corner.html" data-i18n="menu.ai">AI Lab</a>
       </nav>
       <div class="menu-divider" role="separator" aria-hidden="true"></div>
       <div class="menu-social" aria-label="Social links">
@@ -91,16 +100,17 @@
             <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-7.3c0-1.74-.03-3.98-2.43-3.98-2.44 0-2.82 1.9-2.82 3.86V23h-4V8z"/>
           </svg>
         </a>
+        <button type="button" id="langToggle" class="menu-lang" aria-label="Toggle language" title="Language toggle">EN</button>
       </div>
     </div>
   </div>
   <main>
-    <h1>Para qué diseñamos</h1>
-    <p>Me enganché a esta profesión cuando descubrí que un detalle de interacción, una micro-animación o un flujo bien pensado puede ser la diferencia entre frustración y una experiencia fluida.</p>
-    <p>Vengo del diseño gráfico, una disciplina que todavía disfruto y en la que sigo colaborando en algunos proyectos. Ahí entendí algo clave: diseñar va mucho más allá de la estética. Se trata de comunicar, de resolver problemas y de dar sentido a cada decisión visual. Esa base me enseñó a cuidar los detalles, pero sobre todo a asumir que un buen diseño no solo se ve bien: funciona, conecta y facilita. Esa forma de pensar es la que sigo aplicando hoy en producto digital y en cada proyecto que desarrollo.</p>
-    <p>Estamos en un momento brutal, donde se está redibujando la manera de diseñar y de usar productos digitales. Me motiva pensar en cómo combinar lo mejor de la creatividad con las nuevas tecnologías. Para mí, el reto es claro: hacer que la tecnología siga estando al servicio de las personas.</p>
-    <p>He liderado equipos y proyectos de diseño UX/UI, producto y branding durante años, siempre con metodologías ágiles y un enfoque práctico: testear rápido, aprender y mejorar. Me muevo con naturalidad entre lo visual, lo estratégico y lo técnico (Figma, Webflow, Adobe Suite, 3D, animación…), porque creo que el buen diseño pasa por entender todos los ángulos.</p>
-    <p>Y bueno, más allá de las etiquetas, lo que me mueve es seguir aprendiendo, experimentar con lo que viene y diseñar experiencias que realmente sumen. Si quieres ver el recorrido más formal, te paso mi CV encantado. 😉</p>
+    <h1 data-i18n="about.h1">Para qué diseñamos</h1>
+    <p data-i18n="about.p1">Me enganché a esta profesión cuando descubrí que un detalle de interacción, una micro-animación o un flujo bien pensado puede ser la diferencia entre frustración y una experiencia fluida.</p>
+    <p data-i18n="about.p2">Vengo del diseño gráfico, una disciplina que todavía disfruto y en la que sigo colaborando en algunos proyectos. Ahí entendí algo clave: diseñar va mucho más allá de la estética. Se trata de comunicar, de resolver problemas y de dar sentido a cada decisión visual. Esa base me enseñó a cuidar los detalles, pero sobre todo a asumir que un buen diseño no solo se ve bien: funciona, conecta y facilita. Esa forma de pensar es la que sigo aplicando hoy en producto digital y en cada proyecto que desarrollo.</p>
+    <p data-i18n="about.p3">Estamos en un momento brutal, donde se está redibujando la manera de diseñar y de usar productos digitales. Me motiva pensar en cómo combinar lo mejor de la creatividad con las nuevas tecnologías. Para mí, el reto es claro: hacer que la tecnología siga estando al servicio de las personas.</p>
+    <p data-i18n="about.p4">He liderado equipos y proyectos de diseño UX/UI, producto y branding durante años, siempre con metodologías ágiles y un enfoque práctico: testear rápido, aprender y mejorar. Me muevo con naturalidad entre lo visual, lo estratégico y lo técnico (Figma, Webflow, Adobe Suite, 3D, animación…), porque creo que el buen diseño pasa por entender todos los ángulos.</p>
+    <p data-i18n="about.p5">Y bueno, más allá de las etiquetas, lo que me mueve es seguir aprendiendo, experimentar con lo que viene y diseñar experiencias que realmente sumen. Si quieres ver el recorrido más formal, te paso mi CV encantado. 😉</p>
   </main>
   <section class="afterglow" aria-hidden="true"></section>
   

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/global.css">
+  <script defer src="./scripts/i18n.js"></script>
 
   <!-- Protección de acceso -->
   <script>
@@ -709,6 +710,26 @@
         border-color: var(--stroke);
       }
       body[data-page="ai"] .menu-panel .menu-social svg{ width:18px; height:18px; }
+      body[data-page="ai"] .menu-panel .menu-social .menu-lang{
+        margin-left: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px; height: 36px;
+        border-radius: 10px;
+        border: 1px solid var(--stroke);
+        background: var(--fill-soft);
+        color: var(--text);
+        font-weight: 700;
+        letter-spacing: .02em;
+        cursor: pointer;
+        transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      }
+      body[data-page="ai"] .menu-panel .menu-social .menu-lang:hover{
+        transform: translateY(-1px);
+        background: var(--fill-soft);
+        border-color: var(--stroke);
+      }
   </style>
 </head>
 
@@ -734,9 +755,9 @@
   <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
     <div class="menu-panel" id="menuPanel">
       <nav class="menu-links" aria-label="Primary">
-        <a href="./work.html">Work</a>
-        <a href="./about.html">About</a>
-        <a href="./ai-corner.html">AI Lab</a>
+        <a href="./work.html" data-i18n="menu.work">Work</a>
+        <a href="./about.html" data-i18n="menu.about">About</a>
+        <a href="./ai-corner.html" data-i18n="menu.ai">AI Lab</a>
       </nav>
       <div class="menu-divider" role="separator" aria-hidden="true"></div>
       <div class="menu-social" aria-label="Social links">
@@ -754,6 +775,7 @@
             <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-7.3c0-1.74-.03-3.98-2.43-3.98-2.44 0-2.82 1.9-2.82 3.86V23h-4V8z"/>
           </svg>
         </a>
+        <button type="button" id="langToggle" class="menu-lang" aria-label="Toggle language" title="Language toggle">EN</button>
       </div>
     </div>
   </div>
@@ -770,8 +792,8 @@
         <div class="card-overlay">
           <!-- Cabecera fija: title / subtitle / icons -->
           <div class="overlay-head">
-            <h3>JS Web — Vibe Coding</h3>
-            <p>Portfolio personal desarrollado íntegramente con inteligencia artificial</p>
+            <h3 data-i18n="card.jsweb.title">JS Web — Vibe Coding</h3>
+            <p data-i18n="card.jsweb.subtitle">Portfolio personal desarrollado íntegramente con inteligencia artificial</p>
             <div class="icons" aria-hidden="true">
               <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
               <img src="assets/IACorner/Logos/cursor@2x.png" alt="Cursor.ai" />
@@ -782,17 +804,17 @@
 
           <!-- Extra SOLO visible en expandida -->
           <div class="overlay-extra">
-            <p class="overlay-desc">
+            <p class="overlay-desc" data-i18n="card.jsweb.overlayShort">
               Portfolio creado como experimento técnico y creativo, combinando diseño, prompting y desarrollo asistido por IA.
             </p>
             <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
-              <p>"JS Web – Vibe Coding" es un proyecto personal que explora el potencial del desarrollo web potenciado por IA.</p>
-              <p>Todo el proceso —desde la concepción visual hasta la estructura de código— ha sido guiado mediante prompting en ChatGPT, integrando Cursor.ai como entorno de desarrollo y coordinación del flujo de trabajo.</p>
-              <p>Algunas imágenes y recursos visuales se generaron con Nano Banana, y para efectos de presentación interactiva y motion se utilizó Unicorn.studio.</p>
-              <p>El resultado es una web dinámica, moderna y coherente visualmente, donde el diseño, la tecnología y la IA se integran para expresar una nueva forma de crear digitalmente.</p>
+              <p data-i18n="card.jsweb.long1">"JS Web – Vibe Coding" es un proyecto personal que explora el potencial del desarrollo web potenciado por IA.</p>
+              <p data-i18n="card.jsweb.long2">Todo el proceso —desde la concepción visual hasta la estructura de código— ha sido guiado mediante prompting en ChatGPT, integrando Cursor.ai como entorno de desarrollo y coordinación del flujo de trabajo.</p>
+              <p data-i18n="card.jsweb.long3">Algunas imágenes y recursos visuales se generaron con Nano Banana, y para efectos de presentación interactiva y motion se utilizó Unicorn.studio.</p>
+              <p data-i18n="card.jsweb.long4">El resultado es una web dinámica, moderna y coherente visualmente, donde el diseño, la tecnología y la IA se integran para expresar una nueva forma de crear digitalmente.</p>
             </div>
             <a class="overlay-cta" href="./index.html" target="_blank" rel="noopener" style="margin-top: 12px;">
-              Ver más detalle
+              <span class="cta-label" data-i18n="cta.more">Ver más detalle</span>
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
@@ -801,8 +823,8 @@
           </div>
         </div>
         <div class="card-body">
-          <h3 class="card-title">JS Web — Vibe Coding</h3>
-          <p class="card-desc">Portfolio personal desarrollado íntegramente con inteligencia artificial</p>
+          <h3 class="card-title" data-i18n="card.jsweb.title">JS Web — Vibe Coding</h3>
+          <p class="card-desc" data-i18n="card.jsweb.subtitle">Portfolio personal desarrollado íntegramente con inteligencia artificial</p>
           <div class="card-extra">
             <p>"JS Web – Vibe Coding" es un proyecto personal que explora el potencial del desarrollo web potenciado por IA.</p>
             <p>Todo el proceso —desde la concepción visual hasta la estructura de código— ha sido guiado mediante prompting en ChatGPT, integrando Cursor.ai como entorno de desarrollo y coordinación del flujo de trabajo.</p>
@@ -827,8 +849,8 @@
         <div class="card-overlay">
           <!-- Cabecera fija: title / subtitle / icons -->
           <div class="overlay-head">
-            <h3>Automatizaciones Make.com</h3>
-            <p>Generación automática de contenidos para Instagram y X.</p>
+            <h3 data-i18n="card.make.title">Automatizaciones Make.com</h3>
+            <p data-i18n="card.make.subtitle">Generación automática de contenidos para Instagram y X.</p>
             <div class="icons" aria-hidden="true">
               <img src="assets/IACorner/Logos/makeblanco@2x.png" alt="Make.com" />
               <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
@@ -837,11 +859,11 @@
 
           <!-- Extra SOLO visible en expandida -->
           <div class="overlay-extra">
-            <p class="overlay-desc">
+            <p class="overlay-desc" data-i18n="card.make.overlayShort">
               Automatización completa de contenido para redes sociales usando Make.com. Generación automática de posts para Instagram y X con programación inteligente.
             </p>
             <a class="overlay-cta" href="https://x.com/CisneNegroApp" target="_blank" rel="noopener">
-              Ver más detalle
+              <span class="cta-label" data-i18n="cta.more">Ver más detalle</span>
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
@@ -850,8 +872,8 @@
           </div>
         </div>
         <div class="card-body">
-          <h3 class="card-title">Automatizaciones Make.com</h3>
-          <p class="card-desc">Generación automática de contenidos para Instagram y X.</p>
+          <h3 class="card-title" data-i18n="card.make.title">Automatizaciones Make.com</h3>
+          <p class="card-desc" data-i18n="card.make.subtitle">Generación automática de contenidos para Instagram y X.</p>
 
           <!-- SOLO visible cuando la card está expandida -->
           <div class="card-extra">
@@ -874,8 +896,8 @@
         <div class="card-overlay">
           <!-- Cabecera fija: title / subtitle / icons -->
           <div class="overlay-head">
-            <h3>CNAPP Survival</h3>
-            <p>App de supervivencia con Lovable.</p>
+            <h3 data-i18n="card.cnapp.title">CNAPP Survival</h3>
+            <p data-i18n="card.cnapp.subtitle">App de supervivencia con Lovable.</p>
             <div class="icons" aria-hidden="true">
               <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
               <img src="assets/IACorner/Logos/lovable@2x.png" alt="Lovable" />
@@ -884,11 +906,11 @@
 
           <!-- Extra SOLO visible en expandida -->
           <div class="overlay-extra">
-            <p class="overlay-desc">
+            <p class="overlay-desc" data-i18n="card.cnapp.overlayShort">
               Aplicación de supervivencia desarrollada con Lovable, plataforma de desarrollo con IA. Experiencia completa de supervivencia en situaciones extremas.
             </p>
             <a class="overlay-cta" href="https://black-swan-preparedness-hub.lovable.app/?utm_source=lovable-editor" target="_blank" rel="noopener">
-              Ver más detalle
+              <span class="cta-label" data-i18n="cta.more">Ver más detalle</span>
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
@@ -897,8 +919,8 @@
           </div>
         </div>
         <div class="card-body">
-          <h3 class="card-title">CNAPP Survival</h3>
-          <p class="card-desc">App de supervivencia con Lovable.</p>
+          <h3 class="card-title" data-i18n="card.cnapp.title">CNAPP Survival</h3>
+          <p class="card-desc" data-i18n="card.cnapp.subtitle">App de supervivencia con Lovable.</p>
           <div class="card-extra">
             <p>Aplicación de supervivencia desarrollada con Lovable, plataforma de desarrollo con IA. Incluye guías de supervivencia, técnicas de primeros auxilios, navegación, construcción de refugios y preparación para situaciones extremas.</p>
             <div class="gallery">
@@ -918,8 +940,8 @@
         <div class="card-overlay">
           <!-- Cabecera fija: title / subtitle / icons -->
           <div class="overlay-head">
-            <h3>Contenidos RRSS</h3>
-            <p>ChatGPT entrenado con datos empresariales.</p>
+            <h3 data-i18n="card.rrss.title">Contenidos RRSS</h3>
+            <p data-i18n="card.rrss.subtitle">ChatGPT entrenado con datos empresariales.</p>
             <div class="icons" aria-hidden="true">
               <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
               <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
@@ -928,11 +950,11 @@
 
           <!-- Extra SOLO visible en expandida -->
           <div class="overlay-extra">
-            <p class="overlay-desc">
+            <p class="overlay-desc" data-i18n="card.rrss.overlayShort">
               ChatGPT personalizado entrenado con datos específicos de la empresa para generar temas, desarrollar contenidos y proponer ideas de ilustración para redes sociales.
             </p>
             <a class="overlay-cta" href="https://www.linkedin.com/company/vpo-ingenieria" target="_blank" rel="noopener">
-              Ver más detalle
+              <span class="cta-label" data-i18n="cta.more">Ver más detalle</span>
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
@@ -941,8 +963,8 @@
           </div>
         </div>
         <div class="card-body">
-          <h3 class="card-title">Contenidos RRSS</h3>
-          <p class="card-desc">ChatGPT entrenado con datos empresariales.</p>
+          <h3 class="card-title" data-i18n="card.rrss.title">Contenidos RRSS</h3>
+          <p class="card-desc" data-i18n="card.rrss.subtitle">ChatGPT entrenado con datos empresariales.</p>
           <div class="card-extra">
             <p>ChatGPT personalizado entrenado con datos específicos de la empresa para generar temas relevantes, desarrollar contenidos adaptados al tono corporativo y proponer ideas creativas para ilustraciones. Incluye estrategias de contenido, calendario editorial y propuestas visuales personalizadas.</p>
             <div class="gallery">
@@ -962,8 +984,8 @@
         <div class="card-overlay">
           <!-- Cabecera fija: title / subtitle / icons -->
           <div class="overlay-head">
-            <h3>Amazon AI Series</h3>
-            <p>Consistencia visual con IA temprana.</p>
+            <h3 data-i18n="card.amazon.title">Amazon AI Series</h3>
+            <p data-i18n="card.amazon.subtitle">Consistencia visual con IA temprana.</p>
             <div class="icons" aria-hidden="true">
               <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
               <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
@@ -972,11 +994,11 @@
 
           <!-- Extra SOLO visible en expandida -->
           <div class="overlay-extra">
-            <p class="overlay-desc">
+            <p class="overlay-desc" data-i18n="card.amazon.overlayShort">
               Proyecto pionero de generación de imágenes con IA de hace más de un año, cuando lograr consistencia visual era un verdadero desafío técnico.
             </p>
             <a class="overlay-cta" href="https://www.amazon.es/Mandalas-Wild-Animals-Color-Enjoy/dp/B0DHZ8QGH7/ref=pd_rhf_dp_s_ci_mcx_mr_hp_d_d_sccl_2_2/257-1385953-9691753?pd_rd_w=M9zQc&content-id=amzn1.sym.7cab37f0-9f91-4fec-abf5-398309e3ac94:amzn1.symc.206c6295-3b43-4a2b-9d15-273ba17f7025&pf_rd_p=7cab37f0-9f91-4fec-abf5-398309e3ac94&pf_rd_r=BK8KZ3M9GVPVS18XW6GG&pd_rd_wg=ZWNfF&pd_rd_r=2a98b6d6-50d8-4832-93d7-7fe56d061c55&pd_rd_i=B0DHZ8QGH7&psc=1" target="_blank" rel="noopener">
-              Ver más detalle
+              <span class="cta-label" data-i18n="cta.more">Ver más detalle</span>
               <!-- flecha ↗ -->
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
@@ -985,8 +1007,8 @@
           </div>
         </div>
         <div class="card-body">
-          <h3 class="card-title">Amazon AI Series</h3>
-          <p class="card-desc">Consistencia visual con IA temprana.</p>
+          <h3 class="card-title" data-i18n="card.amazon.title">Amazon AI Series</h3>
+          <p class="card-desc" data-i18n="card.amazon.subtitle">Consistencia visual con IA temprana.</p>
           <div class="card-extra">
             <p>Proyecto pionero de generación de imágenes con IA de hace más de un año, cuando lograr consistencia visual era un verdadero desafío técnico. Exploración de las capacidades tempranas de la IA generativa.</p>
             <div class="gallery">

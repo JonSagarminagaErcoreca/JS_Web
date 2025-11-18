@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/global.css">
+  <script defer src="./scripts/i18n.js"></script>
   <script>
     // Protección de acceso
     (function() {
@@ -137,6 +138,31 @@
 
     /* Link de toda la card en work.html (no rompe DOM) */
     .work-card__link { position:absolute; inset:0; z-index: 5; }
+
+    /* Menu overlay: ajustes tipográficos y sociales (alineado con otras páginas) */
+    body[data-page="project"] .menu-overlay .menu-links a{
+      text-transform: none !important;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    body[data-page="project"] .menu-panel .menu-divider{ height:1px; background: var(--stroke); margin: 12px 0; }
+    body[data-page="project"] .menu-panel .menu-social{ display:flex; gap:12px; padding-top:4px; }
+    body[data-page="project"] .menu-panel .menu-social a{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:36px; height:36px; border-radius:10px; border:1px solid var(--stroke);
+      background: var(--fill-soft); color: var(--text);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    body[data-page="project"] .menu-panel .menu-social a:hover{ transform: translateY(-1px); background: var(--fill-soft); border-color: var(--stroke); }
+    body[data-page="project"] .menu-panel .menu-social svg{ width:18px; height:18px; }
+    body[data-page="project"] .menu-panel .menu-social .menu-lang{
+      margin-left:auto;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:44px; height:36px; border-radius:10px; border:1px solid var(--stroke);
+      background: var(--fill-soft); color: var(--text); font-weight:700; letter-spacing:.02em;
+      cursor:pointer; transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    body[data-page="project"] .menu-panel .menu-social .menu-lang:hover{ transform: translateY(-1px); background: var(--fill-soft); border-color: var(--stroke); }
   </style>
 </head>
 <body data-page="project">
@@ -160,10 +186,24 @@
   <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
     <div class="menu-panel" id="menuPanel">
       <nav class="menu-links" aria-label="Primary">
-        <a href="./work.html">Work</a>
-        <a href="./about.html">About</a>
-        <a href="./ai-corner.html">AI Lab</a>
+        <a href="./work.html" data-i18n="menu.work">Work</a>
+        <a href="./about.html" data-i18n="menu.about">About</a>
+        <a href="./ai-corner.html" data-i18n="menu.ai">AI Lab</a>
       </nav>
+      <div class="menu-divider" role="separator" aria-hidden="true"></div>
+      <div class="menu-social" aria-label="Social links">
+        <a href="https://www.instagram.com/jon_sagarminaga/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM17.8 6.2a1 1 0 1 1-1.6 1.2 1 1 0 0 1 1.6-1.2z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jon-sagarminaga-erkoreka/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-7.3c0-1.74-.03-3.98-2.43-3.98-2.44 0-2.82 1.9-2.82 3.86V23h-4V8z"/>
+          </svg>
+        </a>
+        <button type="button" id="langToggle" class="menu-lang" aria-label="Toggle language" title="Language toggle">EN</button>
+      </div>
     </div>
   </div>
 
@@ -192,43 +232,81 @@
       render(proj, list);
     }
 
+    // Helper to get translation
+    function t(key) {
+      const lang = localStorage.getItem('site_lang') || 'es';
+      const translations = {
+        es: {
+          'project.back': 'Atrás',
+          'project.gallery': 'Galería del proyecto',
+          'project.other': 'Ver otros proyectos',
+          'project.view': 'Ver proyecto',
+          'project.notFound': 'Proyecto no encontrado',
+          'project.notFoundBack': 'Vuelve a',
+        },
+        en: {
+          'project.back': 'Back',
+          'project.gallery': 'Project Gallery',
+          'project.other': 'View other projects',
+          'project.view': 'View project',
+          'project.notFound': 'Project not found',
+          'project.notFoundBack': 'Go back to',
+        },
+      };
+      return (translations[lang] && translations[lang][key]) || key;
+    }
+
     function notFound() {
       root.innerHTML = `
-        <h1>Proyecto no encontrado</h1>
-        <p>Vuelve a <a href="work.html">Work</a>.</p>
+        <h1>${t('project.notFound')}</h1>
+        <p>${t('project.notFoundBack')} <a href="work.html" data-i18n="menu.work">Work</a>.</p>
       `;
       root.setAttribute('aria-busy', 'false');
+      // Apply translations after DOM update
+      setTimeout(() => {
+        if (window.applyTranslations) window.applyTranslations();
+      }, 100);
     }
 
     function render(p, allProjects) {
+      // Get translated fields using i18n helper
+      const getF = window.i18nGetField || ((obj, field) => obj[field]);
+      const title = getF(p, 'title');
+      const desc = getF(p, 'desc');
+      const category = getF(p, 'category');
+      
       const hero = p.hero?.type === 'video'
         ? `<video class="media" autoplay muted playsinline loop>
              <source src="${p.hero.src}" type="video/mp4">
            </video>`
-        : `<img class="media" src="${p.image || ''}" alt="${p.title || ''}">`;
+        : `<img class="media" src="${p.image || ''}" alt="${title}">`;
 
       const tools = (p.tags || []).map(t => `<span class="chip">${t}</span>`).join('');
       const body  = (p.body  || []).map(par => `<p>${par}</p>`).join('');
       
       // Create project cards for other projects (excluding current one)
       const otherProjects = allProjects.filter(project => project.slug !== p.slug).slice(0, 3);
-      const gal = otherProjects.map(project => `
-        <a href="project.html?id=${project.slug}" class="proj-gallery-card">
-          <img src="${project.image}" alt="${project.title}">
-          <div class="proj-gallery-card-content">
-            <h5>${project.title}</h5>
-            <p>${project.desc}</p>
-          </div>
-        </a>
-      `).join('');
+      const gal = otherProjects.map(project => {
+        const pTitle = getF(project, 'title');
+        const pDesc = getF(project, 'desc');
+        return `
+          <a href="project.html?id=${project.slug}" class="proj-gallery-card">
+            <img src="${project.image}" alt="${pTitle}">
+            <div class="proj-gallery-card-content">
+              <h5>${pTitle}</h5>
+              <p>${pDesc}</p>
+            </div>
+          </a>
+        `;
+      }).join('');
       
-      // Description section
+      // Description section with translation support
       const description = p.description ? `
         <section class="proj-description">
-          <p>${p.description.overview || ''}</p>
+          <p>${getF(p.description, 'overview')}</p>
           ${(p.description.sections || []).map(section => `
-            <h3>${section.title}</h3>
-            <p>${section.content}</p>
+            <h3>${getF(section, 'title')}</h3>
+            <p>${getF(section, 'content')}</p>
           `).join('')}
         </section>
       ` : '';
@@ -240,17 +318,17 @@
               <div class="proj-meta-info">
                 <span>${p.year || ''}</span>
                 <span class="dot"></span>
-                <span>${p.category || ''}</span>
+                <span>${category}</span>
               </div>
               <a href="work.html" class="back-arrow" aria-label="Volver a Work">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
                 </svg>
-                Atrás
+                <span data-i18n="project.back">Atrás</span>
               </a>
             </div>
-            <h1 class="proj-title">${p.title}</h1>
-            <p class="proj-excerpt">${p.desc || ''}</p>
+            <h1 class="proj-title">${title}</h1>
+            <p class="proj-excerpt">${desc}</p>
           </header>
 
           <section class="proj-hero" aria-label="Hero">
@@ -268,17 +346,17 @@
           </section>
 
           ${p.gallery?.length > 0 ? `<section class="proj-gallery" aria-label="Galería del proyecto">
-            <h4>Galería del proyecto</h4>
+            <h4 data-i18n="project.gallery">Galería del proyecto</h4>
             ${(p.gallery || []).map(src => `<img src="${src}" alt="Imagen del proyecto">`).join('')}
           </section>` : ''}
           
           ${otherProjects.length > 0 ? `<section class="proj-gallery" aria-label="Otros proyectos">
-            <h4>Ver otros proyectos</h4>
+            <h4 data-i18n="project.other">Ver otros proyectos</h4>
             ${gal}
           </section>` : ''}
 
           ${p.links?.live ? `<a class="proj-cta" href="${p.links.live}" target="_blank" rel="noopener">
-              Ver proyecto
+              <span data-i18n="project.view">Ver proyecto</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M14 5h5v5h-2V8.41l-8.29 8.3-1.42-1.42 8.3-8.29H14V5z"/>
               </svg>
@@ -286,6 +364,11 @@
         </article>
       `;
       root.setAttribute('aria-busy', 'false');
+      
+      // Apply translations after DOM update
+      setTimeout(() => {
+        if (window.applyTranslations) window.applyTranslations();
+      }, 100);
       
       // Add click-to-pause functionality for videos
       const video = root.querySelector('video');
