@@ -45,33 +45,6 @@
 
   <!-- Estilos específicos de esta página con mayor especificidad -->
   <style>
-    /* ===== OPTIMIZACIONES DE RENDIMIENTO ===== */
-    body[data-page="ai"] .grid {
-      contain: layout paint style;
-      content-visibility: auto;
-    }
-
-    body[data-page="ai"] .card {
-      contain: layout paint style;
-    }
-
-    body[data-page="ai"] .card:not(:hover):not(.is-expanded) {
-      will-change: auto;
-    }
-
-    body[data-page="ai"] .card-media {
-      contain: layout paint;
-    }
-
-    /* Optimizar filtros - solo aplicar will-change en hover */
-    body[data-page="ai"] .card-media img {
-      will-change: auto;
-    }
-
-    body[data-page="ai"] .card:hover .card-media img {
-      will-change: filter, transform;
-    }
-
     /* ===== Página AI ===== */
     body[data-page="ai"] { padding: 0; margin: 0; overflow: hidden; width: 100%; height: 100dvh; background: var(--bg); }
     body[data-page="ai"] main { height: 100dvh; width: 100%; padding: 8px; overflow: hidden; box-sizing: border-box; }
@@ -108,7 +81,6 @@
       background: var(--card);
       color: var(--card-ink);
       transition: transform 0.35s cubic-bezier(.2,.6,.2,1);
-      contain: layout paint style;
     }
 
     body[data-page="ai"] .card.xl { grid-column: span 8; grid-row: span 4; }
@@ -132,7 +104,7 @@
       transition: transform 0.5s cubic-bezier(.2,.7,.2,1), filter 0.35s ease;
     }
     /* En hover solo escalamos imagen/overlay sin mover la card hacia arriba */
-    body[data-page="ai"] .card:hover .card-media img { transform: scale(1.06); filter: blur(6px) brightness(.92) saturate(.9); will-change: filter, transform; }
+    body[data-page="ai"] .card:hover .card-media img { transform: scale(1.06); filter: blur(8px) brightness(.92) saturate(.9); }
 
     body[data-page="ai"] .card-gradient {
       position: absolute; inset: 0;
@@ -193,29 +165,6 @@
       body[data-page="ai"] .card.large { grid-column: span 4; grid-row: span 4; }
       body[data-page="ai"] .card.medium { grid-column: span 4; grid-row: span 2; }
       body[data-page="ai"] .card.small { grid-column: span 4; grid-row: span 1; }
-      
-      /* ===== EXPANSIÓN EN MÓVIL ===== */
-      body[data-page="ai"] .grid.has-expanded {
-        display: block !important;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-        gap: 16px;
-      }
-
-      body[data-page="ai"] .grid.has-expanded > .card {
-        display: none !important;
-        grid-column: auto !important;
-        grid-row: auto !important;
-      }
-
-      body[data-page="ai"] .grid.has-expanded > .card.is-expanded {
-        display: block !important;
-        width: 100% !important;
-        min-height: calc(100vh - 120px);
-        grid-column: 1 / -1 !important;
-        grid-row: auto !important;
-      }
     }
 
     /* AI page: configuración de padding para main */
@@ -837,7 +786,7 @@
       <!-- Card 1 - JS Web — Vibe Coding -->
       <article class="card" data-id="js-web">
         <div class="card-media">
-          <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web — Vibe Coding Portfolio" loading="lazy" />
+          <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web — Vibe Coding Portfolio" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -846,10 +795,10 @@
             <h3 data-i18n="card.jsweb.title">JS Web — Vibe Coding</h3>
             <p data-i18n="card.jsweb.subtitle">Portfolio personal desarrollado íntegramente con inteligencia artificial</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
-              <img src="assets/IACorner/Logos/cursor@2x.png" alt="Cursor.ai" loading="lazy" />
-              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" loading="lazy" />
-              <img src="assets/IACorner/Logos/unicorn@2x.png" alt="Unicorn Studio" loading="lazy" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
+              <img src="assets/IACorner/Logos/cursor@2x.png" alt="Cursor.ai" />
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
+              <img src="assets/IACorner/Logos/unicorn@2x.png" alt="Unicorn Studio" />
             </div>
           </div>
 
@@ -883,9 +832,9 @@
             <p>El resultado es una web dinámica, moderna y coherente visualmente, donde el diseño, la tecnología y la IA se integran para expresar una nueva forma de crear digitalmente.</p>
             <p><strong>ChatGPT · Cursor.ai · Nano Banana · Unicorn.studio</strong></p>
             <div class="gallery">
-              <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web — Vibe Coding Home" loading="lazy">
-              <img src="assets/Projects/JS/JS_1.png" alt="JS Web — Vibe Coding About" loading="lazy">
-              <img src="assets/Projects/JS/JS_2.png" alt="JS Web — Vibe Coding Work" loading="lazy">
+              <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web — Vibe Coding Home">
+              <img src="assets/Projects/JS/JS_1.png" alt="JS Web — Vibe Coding About">
+              <img src="assets/Projects/JS/JS_2.png" alt="JS Web — Vibe Coding Work">
             </div>
           </div>
         </div>
@@ -894,7 +843,7 @@
       <!-- Card 2 - Make.com Automatizaciones -->
       <article class="card large" data-id="make-automation">
         <div class="card-media">
-          <img src="assets/IACorner/Make/BG_Login.png" alt="Make.com Automatizaciones" loading="lazy" />
+          <img src="assets/IACorner/Make/BG_Login.png" alt="Make.com Automatizaciones" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -903,8 +852,8 @@
             <h3 data-i18n="card.make.title">Automatizaciones Make.com</h3>
             <p data-i18n="card.make.subtitle">Generación automática de contenidos para Instagram y X.</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/makeblanco@2x.png" alt="Make.com" loading="lazy" />
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
+              <img src="assets/IACorner/Logos/makeblanco@2x.png" alt="Make.com" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
             </div>
           </div>
 
@@ -930,9 +879,9 @@
           <div class="card-extra">
             <p>Automatización completa de contenido para redes sociales usando Make.com. Incluye generación automática de posts, programación inteligente, integración con APIs de redes sociales y flujos de trabajo personalizados para maximizar el engagement.</p>
             <div class="gallery" aria-label="Galería">
-              <img src="assets/IACorner/Make/BG_Login.png" alt="Make.com Interface" loading="lazy">
-              <img src="assets/IACorner/Make/BG_Login.png" alt="Automation Workflow" loading="lazy">
-              <img src="assets/IACorner/Make/BG_Login.png" alt="Social Media Integration" loading="lazy">
+              <img src="assets/IACorner/Make/BG_Login.png" alt="Make.com Interface">
+              <img src="assets/IACorner/Make/BG_Login.png" alt="Automation Workflow">
+              <img src="assets/IACorner/Make/BG_Login.png" alt="Social Media Integration">
             </div>
           </div>
         </div>
@@ -941,7 +890,7 @@
       <!-- Card 2 - CNAPP Survival App -->
       <article class="card" data-id="cnapp-survival">
         <div class="card-media">
-          <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Survival App" loading="lazy" />
+          <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Survival App" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -950,8 +899,8 @@
             <h3 data-i18n="card.cnapp.title">CNAPP Survival</h3>
             <p data-i18n="card.cnapp.subtitle">App de supervivencia con Lovable.</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
-              <img src="assets/IACorner/Logos/lovable@2x.png" alt="Lovable" loading="lazy" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
+              <img src="assets/IACorner/Logos/lovable@2x.png" alt="Lovable" />
             </div>
           </div>
 
@@ -975,8 +924,8 @@
           <div class="card-extra">
             <p>Aplicación de supervivencia desarrollada con Lovable, plataforma de desarrollo con IA. Incluye guías de supervivencia, técnicas de primeros auxilios, navegación, construcción de refugios y preparación para situaciones extremas.</p>
             <div class="gallery">
-              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP App Icon" loading="lazy">
-              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Interface" loading="lazy">
+              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP App Icon">
+              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Interface">
             </div>
           </div>
         </div>
@@ -985,7 +934,7 @@
       <!-- Card 3 - Contenidos RRSS -->
       <article class="card large" data-id="rrss-content">
         <div class="card-media">
-          <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="Contenidos RRSS con ChatGPT" loading="lazy" />
+          <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="Contenidos RRSS con ChatGPT" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -994,8 +943,8 @@
             <h3 data-i18n="card.rrss.title">Contenidos RRSS</h3>
             <p data-i18n="card.rrss.subtitle">ChatGPT entrenado con datos empresariales.</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" loading="lazy" />
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
             </div>
           </div>
 
@@ -1019,8 +968,8 @@
           <div class="card-extra">
             <p>ChatGPT personalizado entrenado con datos específicos de la empresa para generar temas relevantes, desarrollar contenidos adaptados al tono corporativo y proponer ideas creativas para ilustraciones. Incluye estrategias de contenido, calendario editorial y propuestas visuales personalizadas.</p>
             <div class="gallery">
-              <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="ChatGPT Interface" loading="lazy">
-              <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="Content Strategy" loading="lazy">
+              <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="ChatGPT Interface">
+              <img src="assets/Projects/VPO/Computer Screen Mockup copia.jpg" alt="Content Strategy">
             </div>
           </div>
         </div>
@@ -1029,7 +978,7 @@
       <!-- Card 5 - Amazon AI Project -->
       <article class="card medium" data-id="amazon-ai">
         <div class="card-media">
-          <img src="assets/IACorner/Amazon/370 - copia.png" alt="Amazon AI generated images project" loading="lazy" />
+          <img src="assets/IACorner/Amazon/370 - copia.png" alt="Amazon AI generated images project" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -1038,8 +987,8 @@
             <h3 data-i18n="card.amazon.title">Amazon AI Series</h3>
             <p data-i18n="card.amazon.subtitle">Consistencia visual con IA temprana.</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
-              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" loading="lazy" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
             </div>
           </div>
 
@@ -1063,9 +1012,9 @@
           <div class="card-extra">
             <p>Proyecto pionero de generación de imágenes con IA de hace más de un año, cuando lograr consistencia visual era un verdadero desafío técnico. Exploración de las capacidades tempranas de la IA generativa.</p>
             <div class="gallery">
-              <img src="assets/IACorner/Amazon/Book - copia.png" alt="Amazon Book AI" loading="lazy">
-              <img src="assets/IACorner/Amazon/contra - copia.png" alt="Amazon Contra AI" loading="lazy">
-              <img src="assets/IACorner/Amazon/Cuadro - copia.png" alt="Amazon Cuadro AI" loading="lazy">
+              <img src="assets/IACorner/Amazon/Book - copia.png" alt="Amazon Book AI">
+              <img src="assets/IACorner/Amazon/contra - copia.png" alt="Amazon Contra AI">
+              <img src="assets/IACorner/Amazon/Cuadro - copia.png" alt="Amazon Cuadro AI">
             </div>
           </div>
         </div>
@@ -1254,19 +1203,16 @@
     })();
     */
 
-    /* ===== NUEVO SISTEMA DE EXPANSIÓN CON FLIP OPTIMIZADO ===== */
+    /* ===== NUEVO SISTEMA DE EXPANSIÓN CON FLIP ===== */
     (function(){
       const grid   = document.getElementById('aiGrid');
       if (!grid) return;
 
       const mqMobile = window.matchMedia('(max-width: 560px)');
-      let abortController = null;
-      let isAnimating = false;
 
       // Estado base
       function setBaseState(){
         grid.dataset.state = 'base';
-        grid.classList.remove('has-expanded');
         grid.querySelectorAll('.card.is-expanded').forEach(c => c.classList.remove('is-expanded'));
       }
 
@@ -1275,118 +1221,83 @@
         return `expand-${idx}`;
       }
 
-      // FLIP optimizado: solo anima elementos visibles y usa RAF
+      // FLIP: anima todas las cards de su rect old -> rect new
       function animateFlip(beforeRects, duration = 400){
-        if (isAnimating) return;
-        isAnimating = true;
-        
-        const cards = Array.from(grid.querySelectorAll('.card'));
-        const visibleCards = cards.filter(el => {
-          const rect = el.getBoundingClientRect();
-          return rect.width > 0 && rect.height > 0;
-        });
+        const cards = [...grid.querySelectorAll('.card')];
+        cards.forEach((el, i) => {
+          const before = beforeRects.get(el);
+          if (!before) return;
+          const after = el.getBoundingClientRect();
 
-        // Usar requestAnimationFrame para mejor rendimiento
-        requestAnimationFrame(() => {
-          visibleCards.forEach((el) => {
-            const before = beforeRects.get(el);
-            if (!before) return;
-            
-            // Usar RAF para calcular after rect
-            requestAnimationFrame(() => {
-              const after = el.getBoundingClientRect();
-              const dx = before.left - after.left;
-              const dy = before.top  - after.top;
-              const sx = before.width  / after.width;
-              const sy = before.height / after.height;
+          const dx = before.left - after.left;
+          const dy = before.top  - after.top;
+          const sx = before.width  / after.width;
+          const sy = before.height / after.height;
 
-              const animation = el.animate(
-                [
-                  { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
-                  { transform: 'translate(0,0) scale(1,1)' }
-                ],
-                { 
-                  duration, 
-                  easing: 'cubic-bezier(.2,.7,.2,1)', 
-                  fill: 'both' 
-                }
-              );
-              
-              animation.onfinish = () => {
-                // Verificar si todas las animaciones terminaron
-                const allFinished = Array.from(document.getAnimations()).every(anim => 
-                  anim.playState === 'finished' || anim.playState === 'idle'
-                );
-                if (allFinished) {
-                  isAnimating = false;
-                }
-              };
-            });
-          });
-          
-          // Si no hay cards visibles, resetear flag después de un delay
-          if (visibleCards.length === 0) {
-            setTimeout(() => { isAnimating = false; }, duration);
-          }
+          el.animate(
+            [
+              { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
+              { transform: 'translate(0,0) scale(1,1)' }
+            ],
+            { duration, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'both' }
+          );
         });
       }
 
-      // Manejar click en desktop/tablet/mobile (ahora funciona en todos)
-      function onCardClick(card, index){
-        if (isAnimating) return; // Prevenir clicks durante animación
-        
+      // Manejar click en desktop/tablet
+      function onCardClickDesktop(card, index){
         const wasExpanded = card.classList.contains('is-expanded');
         const beforeRects = new Map();
-        
-        // Solo calcular rects de cards visibles
-        grid.querySelectorAll('.card').forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.width > 0 && rect.height > 0) {
-            beforeRects.set(el, rect);
-          }
-        });
+        grid.querySelectorAll('.card').forEach(el => beforeRects.set(el, el.getBoundingClientRect()));
 
         if (wasExpanded) {
+          // volver a base
           setBaseState();
         } else {
           const newState = stateForIndex(index + 1);
           grid.dataset.state = newState;
           grid.querySelectorAll('.card').forEach(el => el.classList.remove('is-expanded'));
           card.classList.add('is-expanded');
-          grid.classList.add('has-expanded');
         }
 
         // Forzar reflow y animar
-        requestAnimationFrame(() => {
-          grid.getBoundingClientRect();
-          animateFlip(beforeRects, 420);
-        });
+        grid.getBoundingClientRect();
+        animateFlip(beforeRects, 420);
       }
 
-      // Atar listeners con AbortController (mejor que clonar)
-      function bind(){
-        // Limpiar listeners anteriores
-        if (abortController) {
-          abortController.abort();
-        }
-        abortController = new AbortController();
-        const signal = abortController.signal;
+      // Modal móvil (reusa lo que ya tienes: disparo un custom event)
+      function onCardClickMobile(card){
+        const ev = new CustomEvent('open-ai-modal', { bubbles:true, detail:{card} });
+        card.dispatchEvent(ev);
+      }
 
-        const cards = Array.from(grid.querySelectorAll('.card'));
-        
-        cards.forEach((card, idx) => {
+      // Atar listeners
+      function bind(){
+        const cards = [...grid.querySelectorAll('.card')];
+
+        // Limpia listeners clonando
+        cards.forEach(card => {
+          const clone = card.cloneNode(true);
+          card.parentNode.replaceChild(clone, card);
+        });
+
+        const fresh = [...grid.querySelectorAll('.card')];
+        fresh.forEach((card, idx) => {
           // Evita que el CTA dispare la expansión/colapso
           card.querySelectorAll('.overlay-cta').forEach((cta) => {
             cta.addEventListener('click', (e) => {
               e.stopPropagation();
-            }, { signal });
+            });
           });
 
-          // Ahora funciona en mobile también
-          card.addEventListener('click', (e) => {
-            if (e.target.closest('.gallery') || e.target.closest('.overlay-cta')) return;
-            onCardClick(card, idx);
-          }, { signal });
+          if (mqMobile.matches) {
+            card.addEventListener('click', () => onCardClickMobile(card));
+          } else {
+            card.addEventListener('click', (e) => {
+              if (e.target.closest('.gallery') || e.target.closest('.overlay-cta')) return; // no colapsar por usar galería o CTA
+              onCardClickDesktop(card, idx);
+            });
+          }
         });
       }
 
@@ -1401,12 +1312,8 @@
       });
 
       // Si redimensionan mucho, vuelve a base para evitar estados raros
-      let resizeTimeout;
       window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          if (mqMobile.matches) setBaseState();
-        }, 150);
+        if (mqMobile.matches) setBaseState();
       });
     })();
   </script>
