@@ -274,40 +274,52 @@
     gallery.addEventListener('mouseenter', () => { paused = true; });
     gallery.addEventListener('mouseleave', () => { paused = false; });
 
-    // Drag control (sin romper los <a>)
-    let dragging = false;
-    let startX = 0;
-    let startTx = 0;
+    // Drag control compatible con mouse y táctil (pointer events)
     let moved = 0;
-    let dragStartedOnLink = false;
+    let pointerActive = false;
+    let pointerId = null;
+    let lastPointerX = 0;
+    const pointerSensitivity = window.matchMedia('(pointer: coarse)').matches ? 1.5 : 1;
+    gallery.style.touchAction = 'pan-y';
+
+    const endPointerDrag = (e) => {
+      if (!pointerActive) return;
+      pointerActive = false;
+      pointerId = null;
+      paused = false;
+      if (e && e.pointerId !== undefined && gallery.hasPointerCapture?.(e.pointerId)) {
+        gallery.releasePointerCapture(e.pointerId);
+      }
+    };
 
     gallery.addEventListener('pointerdown', (e) => {
-      // Si haces down encima de un link dentro de una card, no activamos drag
-      if (e.target.closest('a')) {
-        dragStartedOnLink = true;
-        dragging = false;
-        return;
-      }
-      dragStartedOnLink = false;
-      dragging = true;
-      startX = e.clientX;
-      startTx = targetX;
+      if (e.target.closest('a')) return;
+      pointerActive = true;
+      pointerId = e.pointerId;
+      lastPointerX = e.clientX;
       moved = 0;
-      // IMPORTANTE: no usamos setPointerCapture aquí (anula el click de los enlaces)
-      // gallery.setPointerCapture(e.pointerId); // <-- fuera
-    });
+      paused = true;
+      if (gallery.setPointerCapture) {
+        gallery.setPointerCapture(e.pointerId);
+      }
+    }, { passive: false });
 
     gallery.addEventListener('pointermove', (e) => {
-      if (!dragging || dragStartedOnLink) return;
-      paused = true;
-      const dx = e.clientX - startX;
+      if (!pointerActive || (pointerId !== null && e.pointerId !== pointerId)) return;
+      const dx = e.clientX - lastPointerX;
+      if (dx === 0) return;
+      targetX += dx * pointerSensitivity;
       moved = Math.max(moved, Math.abs(dx));
-      targetX = startTx + dx;
+      lastPointerX = e.clientX;
+      e.preventDefault();
+    }, { passive: false });
+
+    gallery.addEventListener('pointerup', (e) => {
+      endPointerDrag(e);
     });
 
-    gallery.addEventListener('pointerup', () => {
-      dragging = false;
-      paused = false;
+    gallery.addEventListener('pointercancel', (e) => {
+      endPointerDrag(e);
     });
 
     // No canceles clicks: deja que los <a> funcionen
