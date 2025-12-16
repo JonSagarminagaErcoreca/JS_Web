@@ -165,6 +165,44 @@
       body[data-page="ai"] .card.large { grid-column: span 4; grid-row: span 4; }
       body[data-page="ai"] .card.medium { grid-column: span 4; grid-row: span 2; }
       body[data-page="ai"] .card.small { grid-column: span 4; grid-row: span 1; }
+
+  /* Mobile: card expandida ocupa toda la pantalla */
+  body[data-page="ai"] .grid.mobile-expanded {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+
+  body[data-page="ai"] .grid.mobile-expanded > .card {
+    display: none;
+  }
+
+  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 100vh;
+    padding: 8px;
+  }
+
+  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded .card-overlay {
+    position: static;
+    opacity: 1;
+    transform: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded .card-overlay::before {
+    display: none;
+  }
+
+  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded .card-body,
+  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded .card-extra {
+    display: block;
+  }
     }
 
     /* AI page: configuración de padding para main */
@@ -786,7 +824,7 @@
       <!-- Card 1 - JS Web — Vibe Coding -->
       <article class="card" data-id="js-web">
         <div class="card-media">
-          <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web — Vibe Coding Portfolio" />
+          <img src="assets/Projects/JS/JS_Portrait.webp" alt="JS Web — Vibe Coding Portfolio" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -832,9 +870,9 @@
             <p>El resultado es una web dinámica, moderna y coherente visualmente, donde el diseño, la tecnología y la IA se integran para expresar una nueva forma de crear digitalmente.</p>
             <p><strong>ChatGPT · Cursor.ai · Nano Banana · Unicorn.studio</strong></p>
             <div class="gallery">
-              <img src="assets/Projects/JS/JS_Portrait.png" alt="JS Web — Vibe Coding Home">
-              <img src="assets/Projects/JS/JS_1.png" alt="JS Web — Vibe Coding About">
-              <img src="assets/Projects/JS/JS_2.png" alt="JS Web — Vibe Coding Work">
+              <img src="assets/Projects/JS/JS_Portrait.webp" alt="JS Web — Vibe Coding Home">
+              <img src="assets/Projects/JS/JS_1.webp" alt="JS Web — Vibe Coding About">
+              <img src="assets/Projects/JS/JS_2.webp" alt="JS Web — Vibe Coding Work">
             </div>
           </div>
         </div>
@@ -843,7 +881,7 @@
       <!-- Card 2 - Make.com Automatizaciones -->
       <article class="card large" data-id="make-automation">
         <div class="card-media">
-          <img src="assets/IACorner/Make/BG_Login.png" alt="Make.com Automatizaciones" />
+          <img src="assets/IACorner/Make/BG_Login.webp" alt="Make.com Automatizaciones" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -879,9 +917,9 @@
           <div class="card-extra">
             <p>Automatización completa de contenido para redes sociales usando Make.com. Incluye generación automática de posts, programación inteligente, integración con APIs de redes sociales y flujos de trabajo personalizados para maximizar el engagement.</p>
             <div class="gallery" aria-label="Galería">
-              <img src="assets/IACorner/Make/BG_Login.png" alt="Make.com Interface">
-              <img src="assets/IACorner/Make/BG_Login.png" alt="Automation Workflow">
-              <img src="assets/IACorner/Make/BG_Login.png" alt="Social Media Integration">
+              <img src="assets/IACorner/Make/BG_Login.webp" alt="Make.com Interface">
+              <img src="assets/IACorner/Make/BG_Login.webp" alt="Automation Workflow">
+              <img src="assets/IACorner/Make/BG_Login.webp" alt="Social Media Integration">
             </div>
           </div>
         </div>
@@ -978,7 +1016,7 @@
       <!-- Card 5 - Amazon AI Project -->
       <article class="card medium" data-id="amazon-ai">
         <div class="card-media">
-          <img src="assets/IACorner/Amazon/370 - copia.png" alt="Amazon AI generated images project" />
+          <img src="assets/IACorner/Amazon/370 - copia.webp" alt="Amazon AI generated images project" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -1012,9 +1050,9 @@
           <div class="card-extra">
             <p>Proyecto pionero de generación de imágenes con IA de hace más de un año, cuando lograr consistencia visual era un verdadero desafío técnico. Exploración de las capacidades tempranas de la IA generativa.</p>
             <div class="gallery">
-              <img src="assets/IACorner/Amazon/Book - copia.png" alt="Amazon Book AI">
-              <img src="assets/IACorner/Amazon/contra - copia.png" alt="Amazon Contra AI">
-              <img src="assets/IACorner/Amazon/Cuadro - copia.png" alt="Amazon Cuadro AI">
+              <img src="assets/IACorner/Amazon/Book - copia.webp" alt="Amazon Book AI">
+              <img src="assets/IACorner/Amazon/contra - copia.webp" alt="Amazon Contra AI">
+              <img src="assets/IACorner/Amazon/Cuadro - copia.webp" alt="Amazon Cuadro AI">
             </div>
           </div>
         </div>
@@ -1141,6 +1179,7 @@
 
       // ------- selector de modo por width -------
       const mqMobile = window.matchMedia('(max-width: 560px)');
+      let mobileExpandedCard = null;
 
       function attachHandlers() {
         // Limpia listeners antiguos si recargas esta función
@@ -1213,6 +1252,11 @@
       // Estado base
       function setBaseState(){
         grid.dataset.state = 'base';
+        grid.classList.remove('mobile-expanded');
+        if (mobileExpandedCard) {
+          mobileExpandedCard.classList.remove('mobile-expanded');
+          mobileExpandedCard = null;
+        }
         grid.querySelectorAll('.card.is-expanded').forEach(c => c.classList.remove('is-expanded'));
       }
 
@@ -1265,10 +1309,21 @@
         animateFlip(beforeRects, 420);
       }
 
-      // Modal móvil (reusa lo que ya tienes: disparo un custom event)
+      // Mobile: expandir card ocupando todo el ancho
       function onCardClickMobile(card){
-        const ev = new CustomEvent('open-ai-modal', { bubbles:true, detail:{card} });
-        card.dispatchEvent(ev);
+        if (mobileExpandedCard === card) {
+          grid.classList.remove('mobile-expanded');
+          card.classList.remove('mobile-expanded');
+          mobileExpandedCard = null;
+        } else {
+          if (mobileExpandedCard) {
+            mobileExpandedCard.classList.remove('mobile-expanded');
+          }
+          mobileExpandedCard = card;
+          grid.classList.add('mobile-expanded');
+          card.classList.add('mobile-expanded');
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
 
       // Atar listeners
@@ -1290,14 +1345,15 @@
             });
           });
 
-          if (mqMobile.matches) {
-            card.addEventListener('click', () => onCardClickMobile(card));
-          } else {
-            card.addEventListener('click', (e) => {
-              if (e.target.closest('.gallery') || e.target.closest('.overlay-cta')) return; // no colapsar por usar galería o CTA
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('.gallery') || e.target.closest('.overlay-cta')) return;
+            if (mqMobile.matches) {
+              grid.dataset.state = 'base';
+              onCardClickMobile(card);
+            } else {
               onCardClickDesktop(card, idx);
-            });
-          }
+            }
+          });
         });
       }
 
@@ -1313,7 +1369,7 @@
 
       // Si redimensionan mucho, vuelve a base para evitar estados raros
       window.addEventListener('resize', () => {
-        if (mqMobile.matches) setBaseState();
+        setBaseState();
       });
     })();
   </script>

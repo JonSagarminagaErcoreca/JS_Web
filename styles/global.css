@@ -161,7 +161,7 @@ body[data-page="work"] main { padding-top: 56px; }
 /* About page */
 body[data-page="about"] { 
   padding-top: 56px; 
-  background-image: url('../assets/Projects/JS/JS_Portrait.png'); 
+  background-image: url('../assets/Projects/JS/JS_Portrait.webp'); 
   background-size: cover; 
   background-position: center center; 
   background-attachment: fixed; 

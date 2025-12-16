@@ -7,11 +7,11 @@
     "category": "DIGITAL TWIN",
     "category_en": "DIGITAL TWIN",
     "year": "2024",
-    "image": "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.png",
+    "image": "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.webp",
     "hero": {
       "type": "video",
       "src": "assets/Projects/MSM/MSM_LinkedIn_v1_1.mp4",
-      "poster": "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.png"
+      "poster": "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.webp"
     },
     "desc": "Plataforma avanzada de gemelo digital para optimización de procesos de manufactura y monitoreo en tiempo real.",
     "desc_en": "Advanced digital twin platform for manufacturing process optimization and real-time monitoring.",
@@ -59,15 +59,15 @@
       ]
     },
     "gallery": [
-      "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.png",
+      "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.webp",
       "assets/Projects/MSM/388eb60d-2f01-4421-8b3b-a2f6daeef5b8_rw_1200.png",
-      "assets/Projects/MSM/54de1562-7f6d-4961-9a5d-366d583ced3d_rw_1920.png",
-      "assets/Projects/MSM/7c25ac63-3d7c-4f70-a3a7-4d784ae0af6e_rw_1920.png",
+      "assets/Projects/MSM/54de1562-7f6d-4961-9a5d-366d583ced3d_rw_1920.webp",
+      "assets/Projects/MSM/7c25ac63-3d7c-4f70-a3a7-4d784ae0af6e_rw_1920.webp",
       "assets/Projects/MSM/88080070-9761-4eb4-a741-b27df1334f26_rw_1920.png",
       "assets/Projects/MSM/bb1141a5-3f49-4a2a-8182-a842f1978ef9_rw_600.png",
       "assets/Projects/MSM/c1261526-8729-4923-ab34-ac0e80c18c45_rw_1920.png",
-      "assets/Projects/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_1920.png",
-      "assets/Projects/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_19202.png"
+      "assets/Projects/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_1920.webp",
+      "assets/Projects/MSM/f3b149c5-35b4-418c-bbf1-20989d26b867_rw_19202.webp"
     ],
     "links": {
       "case": "project.html?id=msm-digital-twin",
@@ -268,7 +268,7 @@
       "assets/Projects/EPS/pantalla 3.jpg",
       "assets/Projects/EPS/pantalla 4.jpg",
       "assets/Projects/EPS/pantalla 5.jpg",
-      "assets/Projects/EPS/Mockup Flujo copia.png",
+      "assets/Projects/EPS/Mockup Flujo copia.webp",
       "assets/Projects/EPS/Node components.png"
     ],
     "links": {
