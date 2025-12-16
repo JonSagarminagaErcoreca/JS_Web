@@ -168,11 +168,67 @@ body[data-page="about"] {
   color: #fff; 
   transition: background-image 0.5s ease-in-out;
 }
-body[data-page="about"] main { width: 50vw; max-width: 60ch; margin: 0 auto; padding: 24px; color: #fff; min-height: calc(100vh - 56px); display: flex; flex-direction: column; justify-content: center; text-align: left; }
-body[data-page="about"] h1 { margin: 24px 0; letter-spacing: 0.2px; font-size: 3rem; color: #fff; }
-body[data-page="about"] p { font-size: 1.35rem; line-height: 1.85; }
+body[data-page="about"] main { 
+  width: 60vw; 
+  max-width: 75ch; 
+  margin: 0 auto; 
+  padding: 40px 48px; 
+  color: #fff; 
+  min-height: calc(100vh - 56px); 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  text-align: left;
+  position: relative;
+  background: rgba(0, 0, 0, 0.7); /* Capa negra 70% opacidad */
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+body[data-page="about"] h1 { 
+  margin: 0 0 24px 0; 
+  letter-spacing: 0.2px; 
+  font-size: 3rem; 
+  color: #fff; 
+}
+
+body[data-page="about"] p { 
+  font-size: 1.1rem; /* Reducido de 1.35rem */
+  line-height: 1.75; 
+  margin-bottom: 16px;
+}
+
 body[data-page="about"] .afterglow { height: 120vh; }
-@media (max-width: 768px) { body[data-page="about"] main { width: 100vw; padding: 20px; } body[data-page="about"] .afterglow { height: 80vh; } }
+
+/* Móvil: fondo negro sin imágenes */
+@media (max-width: 768px) { 
+  body[data-page="about"] { 
+    background-image: none !important; 
+    background-color: #000000;
+  }
+  
+  body[data-page="about"] main { 
+    width: 100vw; 
+    padding: 32px 24px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  body[data-page="about"] h1 {
+    font-size: 2.5rem;
+  }
+  
+  body[data-page="about"] p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+  body[data-page="about"] .afterglow { 
+    height: 80vh; 
+  } 
+}
 
 /* AI Corner page */
 body[data-page="ai"] { padding-top: 56px; background: var(--bg); }

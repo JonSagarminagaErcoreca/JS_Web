@@ -50,7 +50,7 @@
       'about.p2': 'Vengo del diseño gráfico, una disciplina que todavía disfruto y en la que sigo colaborando en algunos proyectos. Ahí entendí algo clave: diseñar va mucho más allá de la estética. Se trata de comunicar, de resolver problemas y de dar sentido a cada decisión visual. Esa base me enseñó a cuidar los detalles, pero sobre todo a asumir que un buen diseño no solo se ve bien: funciona, conecta y facilita. Esa forma de pensar es la que sigo aplicando hoy en producto digital y en cada proyecto que desarrollo.',
       'about.p3': 'Estamos en un momento brutal, donde se está redibujando la manera de diseñar y de usar productos digitales. Me motiva pensar en cómo combinar lo mejor de la creatividad con las nuevas tecnologías. Para mí, el reto es claro: hacer que la tecnología siga estando al servicio de las personas.',
       'about.p4': 'He liderado equipos y proyectos de diseño UX/UI, producto y branding durante años, siempre con metodologías ágiles y un enfoque práctico: testear rápido, aprender y mejorar. Me muevo con naturalidad entre lo visual, lo estratégico y lo técnico (Figma, Webflow, Adobe Suite, 3D, animación…), porque creo que el buen diseño pasa por entender todos los ángulos.',
-      'about.p5': 'Y bueno, más allá de las etiquetas, lo que me mueve es seguir aprendiendo, experimentar con lo que viene y diseñar experiencias que realmente sumen. Si quieres ver el recorrido más formal, te paso mi CV encantado. 😉',
+      'about.p5': 'Y bueno, más allá de las etiquetas, lo que me mueve es seguir aprendiendo, experimentar con lo que viene y diseñar experiencias que realmente sumen.',
       // Project page
       'project.back': 'Atrás',
       'project.gallery': 'Galería del proyecto',
@@ -101,7 +101,7 @@
       'about.p2': 'I come from graphic design, a discipline I still enjoy and collaborate on. There I learned something key: design goes far beyond aesthetics. It is about communicating, solving problems and giving meaning to each visual decision. That foundation taught me to care for details, but above all to assume that good design is not only good-looking: it works, connects and enables. That way of thinking is what I apply today in digital product and every project I develop.',
       'about.p3': 'We are in an exciting moment, where the way we design and use digital products is being redrawn. I am motivated by combining the best of creativity with new technologies. For me, the challenge is clear: making technology remain at the service of people.',
       'about.p4': 'I have led UX/UI, product and branding teams and projects for years, always with agile methodologies and a practical approach: test fast, learn and improve. I move comfortably between visual, strategic and technical work (Figma, Webflow, Adobe Suite, 3D, animation…), because good design comes from understanding every angle.',
-      'about.p5': 'Beyond labels, what drives me is to keep learning, experiment with what is coming, and design experiences that truly add value. If you want the more formal overview, I will gladly share my CV. 😉',
+      'about.p5': 'Beyond labels, what drives me is to keep learning, experiment with what is coming, and design experiences that truly add value.',
       // Project page
       'project.back': 'Back',
       'project.gallery': 'Project Gallery',

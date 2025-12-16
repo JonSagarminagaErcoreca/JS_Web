@@ -110,12 +110,12 @@
     <p data-i18n="about.p2">Vengo del diseño gráfico, una disciplina que todavía disfruto y en la que sigo colaborando en algunos proyectos. Ahí entendí algo clave: diseñar va mucho más allá de la estética. Se trata de comunicar, de resolver problemas y de dar sentido a cada decisión visual. Esa base me enseñó a cuidar los detalles, pero sobre todo a asumir que un buen diseño no solo se ve bien: funciona, conecta y facilita. Esa forma de pensar es la que sigo aplicando hoy en producto digital y en cada proyecto que desarrollo.</p>
     <p data-i18n="about.p3">Estamos en un momento brutal, donde se está redibujando la manera de diseñar y de usar productos digitales. Me motiva pensar en cómo combinar lo mejor de la creatividad con las nuevas tecnologías. Para mí, el reto es claro: hacer que la tecnología siga estando al servicio de las personas.</p>
     <p data-i18n="about.p4">He liderado equipos y proyectos de diseño UX/UI, producto y branding durante años, siempre con metodologías ágiles y un enfoque práctico: testear rápido, aprender y mejorar. Me muevo con naturalidad entre lo visual, lo estratégico y lo técnico (Figma, Webflow, Adobe Suite, 3D, animación…), porque creo que el buen diseño pasa por entender todos los ángulos.</p>
-    <p data-i18n="about.p5">Y bueno, más allá de las etiquetas, lo que me mueve es seguir aprendiendo, experimentar con lo que viene y diseñar experiencias que realmente sumen. Si quieres ver el recorrido más formal, te paso mi CV encantado. 😉</p>
+    <p data-i18n="about.p5">Y bueno, más allá de las etiquetas, lo que me mueve es seguir aprendiendo, experimentar con lo que viene y diseñar experiencias que realmente sumen.</p>
   </main>
   <section class="afterglow" aria-hidden="true"></section>
   
   <script>
-    // Efecto de scroll para cambiar imágenes progresivamente
+    // Efecto de scroll para cambiar imágenes progresivamente (solo desktop)
     const images = [
       '../assets/Projects/JS/JS_Portrait.webp',
       '../assets/Projects/JS/JS_1.webp', 
@@ -125,43 +125,48 @@
     
     let currentImageIndex = 0;
     
-    function updateBackgroundImage() {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      
-      // Calcula el progreso del scroll (0 a 1)
-      const scrollProgress = Math.min(scrollY / (documentHeight - windowHeight), 1);
-      
-      // Determina qué imagen mostrar basado en el progreso
-      const newImageIndex = Math.min(Math.floor(scrollProgress * images.length), images.length - 1);
-      
-      // Solo cambia la imagen si es diferente a la actual
-      if (newImageIndex !== currentImageIndex) {
-        currentImageIndex = newImageIndex;
-        document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+    // Solo ejecutar en desktop (>768px)
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    
+    if (!isMobile) {
+      function updateBackgroundImage() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        // Calcula el progreso del scroll (0 a 1)
+        const scrollProgress = Math.min(scrollY / (documentHeight - windowHeight), 1);
+        
+        // Determina qué imagen mostrar basado en el progreso
+        const newImageIndex = Math.min(Math.floor(scrollProgress * images.length), images.length - 1);
+        
+        // Solo cambia la imagen si es diferente a la actual
+        if (newImageIndex !== currentImageIndex) {
+          currentImageIndex = newImageIndex;
+          document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+        }
       }
-    }
-    
-    // Throttle para optimizar el rendimiento
-    let ticking = false;
-    function requestTick() {
-      if (!ticking) {
-        requestAnimationFrame(updateBackgroundImage);
-        ticking = true;
+      
+      // Throttle para optimizar el rendimiento
+      let ticking = false;
+      function requestTick() {
+        if (!ticking) {
+          requestAnimationFrame(updateBackgroundImage);
+          ticking = true;
+        }
       }
+      
+      function handleScroll() {
+        ticking = false;
+        requestTick();
+      }
+      
+      // Event listener para el scroll
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      
+      // Inicializar con la primera imagen
+      updateBackgroundImage();
     }
-    
-    function handleScroll() {
-      ticking = false;
-      requestTick();
-    }
-    
-    // Event listener para el scroll
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Inicializar con la primera imagen
-    updateBackgroundImage();
   </script>
   
 </body>
