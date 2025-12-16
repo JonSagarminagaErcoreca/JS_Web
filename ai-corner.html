@@ -171,50 +171,156 @@
       body[data-page="ai"] .card.small { grid-column: span 3; grid-row: span 1; }
     }
     @media (max-width: 560px) {
-      body[data-page="ai"] main { padding: 6px; }
-      body[data-page="ai"] .grid { gap: 6px; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(12, 1fr); }
+      body[data-page="ai"] main { 
+        padding: 6px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      body[data-page="ai"] .grid { 
+        gap: 6px; 
+        grid-template-columns: repeat(4, 1fr); 
+        grid-template-rows: repeat(12, 1fr); 
+      }
+      
       body[data-page="ai"] .card.xl { grid-column: span 4; grid-row: span 5; }
       body[data-page="ai"] .card.large { grid-column: span 4; grid-row: span 4; }
       body[data-page="ai"] .card.medium { grid-column: span 4; grid-row: span 2; }
       body[data-page="ai"] .card.small { grid-column: span 4; grid-row: span 1; }
 
-  /* Mobile: card expandida ocupa toda la pantalla */
-  body[data-page="ai"] .grid.mobile-expanded {
-    display: block;
-    height: auto;
-    overflow: visible;
-  }
+      /* Mobile: card expandida */
+      body[data-page="ai"] .grid.mobile-expanded {
+        display: block;
+        height: auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
 
-  body[data-page="ai"] .grid.mobile-expanded > .card {
-    display: none;
-  }
+      body[data-page="ai"] .grid.mobile-expanded > .card:not(.mobile-expanded) {
+        display: none;
+      }
 
-  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-height: 100vh;
-    padding: 8px;
-  }
+      body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded {
+        display: block;
+        min-height: 100vh;
+        height: auto;
+        padding: 0;
+        border-radius: 0;
+        overflow: visible;
+        position: relative;
+      }
+      
+      /* Card-media en móvil: altura controlada */
+      body[data-page="ai"] .card.mobile-expanded .card-media {
+        position: relative;
+        height: 50vh;
+        min-height: 340px;
+        max-height: 450px;
+        width: 100%;
+        margin-bottom: 0;
+      }
+      
+      body[data-page="ai"] .card.mobile-expanded .card-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.85);
+      }
 
-  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded .card-overlay {
-    position: static;
-    opacity: 1;
-    transform: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+      /* Overlay SOBRE la IMAGEN PRINCIPAL (posicionado desde arriba de la card) */
+      body[data-page="ai"] .card.mobile-expanded .card-overlay {
+        position: absolute !important;
+        left: 0;
+        right: 0;
+        top: 0; /* Empieza desde arriba */
+        height: 50vh; /* Misma altura que card-media */
+        min-height: 340px;
+        max-height: 450px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 24px 20px;
+        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.2) 85%, transparent 100%);
+        opacity: 1 !important;
+        transform: none !important;
+        z-index: 15;
+        pointer-events: none;
+      }
+      
+      body[data-page="ai"] .card.mobile-expanded .card-overlay * {
+        pointer-events: auto;
+      }
 
-  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded .card-overlay::before {
-    display: none;
-  }
+      body[data-page="ai"] .card.mobile-expanded .card-overlay::before {
+        display: none;
+      }
 
-  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded .card-body,
-  body[data-page="ai"] .grid.mobile-expanded > .card.mobile-expanded .card-extra {
-    display: block;
-  }
+      /* Textos blancos sobre gradiente oscuro */
+      body[data-page="ai"] .card.mobile-expanded .card-overlay h3 {
+        color: #ffffff !important;
+        margin: 0 0 8px 0;
+        font-size: 20px;
+      }
+
+      body[data-page="ai"] .card.mobile-expanded .card-overlay p {
+        color: rgba(255,255,255,0.92) !important;
+        margin: 0 0 8px 0;
+        font-size: 14px;
+      }
+      
+      body[data-page="ai"] .card.mobile-expanded .overlay-head .icons img {
+        filter: brightness(0) invert(1);
+      }
+
+      /* Ocultar overlay-extra del overlay (está duplicado) */
+      body[data-page="ai"] .card.mobile-expanded .card-overlay .overlay-extra {
+        display: none !important;
+      }
+
+      /* card-body DESPUÉS de la imagen con fondo blanco */
+      body[data-page="ai"] .card.mobile-expanded .card-body {
+        display: block !important;
+        padding: 24px 20px;
+        background: white;
+        position: relative;
+        z-index: 1;
+      }
+      
+      body[data-page="ai"] .card.mobile-expanded .card-body .card-title,
+      body[data-page="ai"] .card.mobile-expanded .card-body .card-desc {
+        display: none; /* Ya están en el overlay sobre la imagen */
+      }
+
+      /* card-extra visible con contenido descriptivo */
+      body[data-page="ai"] .card.mobile-expanded .card-extra {
+        display: block !important;
+      }
+
+      body[data-page="ai"] .card.mobile-expanded .card-extra p {
+        color: #475569 !important;
+        margin: 0 0 16px 0;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+      
+      /* Galería de imágenes visible con scroll horizontal */
+      body[data-page="ai"] .card.mobile-expanded .card-extra .gallery {
+        display: flex !important;
+        gap: 12px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 20px;
+        scroll-snap-type: x mandatory;
+      }
+      
+      body[data-page="ai"] .card.mobile-expanded .card-extra .gallery img {
+        height: 160px;
+        min-width: 240px;
+        object-fit: cover;
+        border-radius: 12px;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
     }
 
     /* AI page: configuración de padding para main */

@@ -110,7 +110,7 @@
 
   <main>
     <section class="relative min-h-[calc(100dvh-56px)] overflow-x-hidden overflow-y-visible pt-8 pb-8">
-      <div id="gallery" class="absolute inset-0 flex items-center select-none py-4 overflow-visible">
+      <div id="gallery" class="absolute inset-0 flex items-center select-none py-4 overflow-visible" style="touch-action: none; -webkit-user-select: none; user-select: none; cursor: grab;">
         <div id="track" class="gallery-track flex gap-8 px-8"></div>
       </div>
     </section>
@@ -274,15 +274,62 @@
     gallery.addEventListener('mouseenter', () => { paused = true; });
     gallery.addEventListener('mouseleave', () => { paused = false; });
 
-    // Drag control (sin romper los <a>)
+    // Drag control con eventos táctiles nativos
     let dragging = false;
     let startX = 0;
     let startTx = 0;
     let moved = 0;
     let dragStartedOnLink = false;
 
-    gallery.addEventListener('pointerdown', (e) => {
-      // Si haces down encima de un link dentro de una card, no activamos drag
+    // Touch events para móvil
+    gallery.addEventListener('touchstart', (e) => {
+      dragStartedOnLink = false;
+      dragging = true;
+      startX = e.touches[0].clientX;
+      startTx = targetX;
+      moved = 0;
+      paused = true;
+      
+      // Deshabilitar pointer-events de los links mientras se arrastra
+      const cards = gallery.querySelectorAll('.work-card');
+      cards.forEach(card => {
+        const link = card.querySelector('.work-card__link');
+        if (link) link.style.pointerEvents = 'none';
+      });
+    }, { passive: true });
+
+    gallery.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      const dx = e.touches[0].clientX - startX;
+      moved = Math.max(moved, Math.abs(dx));
+      targetX = startTx + dx;
+    }, { passive: true });
+
+    gallery.addEventListener('touchend', (e) => {
+      dragging = false;
+      paused = false;
+      
+      // Re-habilitar pointer-events de los links
+      const cards = gallery.querySelectorAll('.work-card');
+      cards.forEach(card => {
+        const link = card.querySelector('.work-card__link');
+        if (link) link.style.pointerEvents = 'auto';
+      });
+      
+      // Si el movimiento fue mínimo (<10px), permitir que funcione como click
+      if (moved < 10) {
+        const target = e.target.closest('.work-card');
+        if (target) {
+          const link = target.querySelector('.work-card__link');
+          if (link) {
+            setTimeout(() => link.click(), 50);
+          }
+        }
+      }
+    });
+
+    // Mouse events para desktop
+    gallery.addEventListener('mousedown', (e) => {
       if (e.target.closest('a')) {
         dragStartedOnLink = true;
         dragging = false;
@@ -293,21 +340,29 @@
       startX = e.clientX;
       startTx = targetX;
       moved = 0;
-      // IMPORTANTE: no usamos setPointerCapture aquí (anula el click de los enlaces)
-      // gallery.setPointerCapture(e.pointerId); // <-- fuera
+      paused = true;
+      gallery.style.cursor = 'grabbing';
     });
 
-    gallery.addEventListener('pointermove', (e) => {
+    gallery.addEventListener('mousemove', (e) => {
       if (!dragging || dragStartedOnLink) return;
-      paused = true;
       const dx = e.clientX - startX;
       moved = Math.max(moved, Math.abs(dx));
       targetX = startTx + dx;
     });
 
-    gallery.addEventListener('pointerup', () => {
+    gallery.addEventListener('mouseup', () => {
       dragging = false;
       paused = false;
+      gallery.style.cursor = 'grab';
+    });
+
+    gallery.addEventListener('mouseleave', () => {
+      if (dragging) {
+        dragging = false;
+        paused = false;
+        gallery.style.cursor = 'grab';
+      }
     });
 
     // No canceles clicks: deja que los <a> funcionen
