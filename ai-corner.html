@@ -1074,14 +1074,23 @@
           panel.style.left = '';
           panel.style.transform = '';
         };
-        toggle.addEventListener('click', (e) => {
+        // Función para manejar el toggle
+        const handleToggle = (e) => {
           e.preventDefault();
+          e.stopPropagation();
           const checkbox = toggle.querySelector('input');
           const open = checkbox ? !checkbox.checked : !overlay.classList.contains('open');
           setOpen(open);
           toggle.classList.toggle('open', open);
           if (checkbox) checkbox.checked = open;
           if (open) positionPanel();
+        };
+        
+        // Eventos para desktop y móvil
+        toggle.addEventListener('click', handleToggle);
+        toggle.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          handleToggle(e);
         });
         const closeAndReset = () => {
           setOpen(false);
