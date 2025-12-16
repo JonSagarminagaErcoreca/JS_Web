@@ -88,31 +88,43 @@
     body[data-page="ai"] .card.medium { grid-column: span 4; grid-row: span 2; }
     body[data-page="ai"] .card.small { grid-column: span 4; grid-row: span 2; }
 
-    /* Hover sin desplazar hacia arriba para que la fila superior no se corte */
-    body[data-page="ai"] .card:hover {
-      transform: translateY(0) scale(1.01);
-      transform-origin: center center;
-      box-shadow: 0 10px 24px rgba(15,23,42,.12);
-    }
+      /* Hover sin desplazar hacia arriba para que la fila superior no se corte */
+      body[data-page="ai"] .card:hover {
+        transform: scale(1.01);
+      }
 
     body[data-page="ai"] .card-media { position: relative; height: 100%; }
-    body[data-page="ai"] .card-media img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      filter: saturate(1.05) contrast(1.05);
-      transform: scale(1.02);
-      transform-origin: center center;
-      transition: transform 0.5s cubic-bezier(.2,.7,.2,1), filter 0.35s ease;
-    }
-    /* En hover solo escalamos imagen/overlay sin mover la card hacia arriba */
-    body[data-page="ai"] .card:hover .card-media img { transform: scale(1.06); filter: blur(8px) brightness(.92) saturate(.9); }
+      body[data-page="ai"] .card-media img {
+        width: 100%; height: 100%; object-fit: cover; display: block;
+        transition: transform 0.3s ease, filter 0.2s ease;
+      }
+      /* En hover solo escalamos imagen/overlay sin mover la card hacia arriba */
+      body[data-page="ai"] .card:hover .card-media img { 
+        transform: scale(1.04); 
+        filter: blur(6px) brightness(.94);
+      }
 
     body[data-page="ai"] .card-gradient {
       position: absolute; inset: 0;
       pointer-events: none;
     }
-    /* Overlay de información (3 filas: título, subtítulo, iconos) */
-    body[data-page="ai"] .card-overlay { position:absolute; inset:0; display:grid; grid-template-rows:auto auto auto; align-content:end; justify-items:start; gap:8px; padding:20px; text-align:left; opacity:0; transform: translateY(16px); transition: opacity .25s ease, transform .25s ease; }
-    body[data-page="ai"] .card:hover .card-overlay { opacity:1; transform: translateY(0); }
+      /* Overlay de información (3 filas: título, subtítulo, iconos) */
+      body[data-page="ai"] .card-overlay { 
+        position:absolute; 
+        inset:0; 
+        display:grid; 
+        grid-template-rows:auto auto auto; 
+        align-content:end; 
+        justify-items:start; 
+        gap:8px; 
+        padding:20px; 
+        text-align:left; 
+        opacity:0; 
+        transition: opacity .2s ease;
+      }
+      body[data-page="ai"] .card:hover .card-overlay { 
+        opacity:1;
+      }
     body[data-page="ai"] .card-overlay p { margin:0; font-size:14px; }
     body[data-page="ai"] .card-overlay .icons { display:flex; gap:10px; align-items:center; justify-content:flex-start; margin-top:4px; margin-bottom:12px; }
     body[data-page="ai"] .card-overlay .icons svg,
@@ -249,185 +261,46 @@
       grid-row: 4 / span 3;
     }
 
-    /* ===== Expandable Grid (add-on) ===== */
-    body[data-page="ai"] .grid {
-      grid-auto-flow: dense;              /* empaqueta huecos automáticamente */
-      transition: grid-gap .25s ease;
-    }
-
-    body[data-page="ai"] .card {
-      /* spans controlados por variables, con transición suave */
-      --col-span: 3;                      /* base: como ya tenías */
-      --row-span: 1;
-      grid-column: span var(--col-span);
-      grid-row: span var(--row-span);
-      transition:
-        transform .35s cubic-bezier(.2,.6,.2,1),
-        filter .25s ease,
-        opacity .25s ease;
-      position: relative;
-      isolation: isolate;
-    }
-
-    /* tus "large" siguen funcionando igual */
-    body[data-page="ai"] .card.large { --col-span: 6; --row-span: 1; }
-
-    /* Estado expandido de UNA card */
-    body[data-page="ai"] .card.is-expanded {
-      --col-span: 8;                      /* ocupa 8/12 columnas */
-      --row-span: 2;                      /* y 2 filas (toda la altura del grid) */
-      z-index: 3;
-      transform: translateY(-2px) scale(1.01);
-    }
-
-    /* El resto se encoge pero quedan visibles y rellenan el grid */
-    body[data-page="ai"] .grid.has-expanded .card:not(.is-expanded) {
-      --col-span: 2;                      /* mínimo 2 columnas */
-      --row-span: 1;                      /* 1 fila (mínimo de alto) */
-      opacity: .95;
-      filter: saturate(.9) contrast(.95) brightness(.96);
-      transform: scale(.985);
-    }
-
-    /* Contenidos extra: solo visibles al expandir */
-    body[data-page="ai"] .card-extra {
-      display: none;
-      opacity: 0;
-      transition: opacity .25s ease;
-    }
-    body[data-page="ai"] .card.is-expanded .card-extra {
-      display: block;
-      opacity: 1;
-    }
-
-    body[data-page="ai"] .card.is-expanded .card-body {
-      /* un poco más de aire al texto al expandir */
-      padding: 18px 18px 20px;
-    }
-
-    /* Mini-galería dentro de la expandida */
-    body[data-page="ai"] .gallery {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 6px;
-      margin-top: 10px;
-    }
-    body[data-page="ai"] .gallery img {
-      height: 120px;
-      min-width: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      scroll-snap-align: start;
-    }
-
-      /* Responsivo: en pantallas estrechas la expandida ocupa todo */
-      @media (max-width: 980px) {
-        body[data-page="ai"] .card.is-expanded { --col-span: 12; --row-span: 2; }
-        body[data-page="ai"] .grid.has-expanded .card:not(.is-expanded) { --col-span: 6; }
+      /* Mini-galería dentro de la expandida */
+      body[data-page="ai"] .gallery {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 6px;
+        margin-top: 10px;
       }
-      @media (max-width: 560px) {
-        body[data-page="ai"] .card.is-expanded { --col-span: 4; --row-span: 2; }
-        body[data-page="ai"] .grid.has-expanded .card:not(.is-expanded) { --col-span: 4; }
-      }
-
-      /* ===== EXPAND FIX: anular posiciones fijas cuando haya una expandida ===== */
-
-      /* Valores por defecto de las variables (sirven solo en modo expandido) */
-      body[data-page="ai"] .card {
-        --col-span: 4;   /* base en expand mode */
-        --row-span: 2;
-      }
-
-      /* Cuando hay una expandida, TODOS los items dejan de usar las posiciones fijas
-         y pasan a usar únicamente los span por variables */
-      body[data-page="ai"] .grid.has-expanded > .card {
-        grid-column: span var(--col-span) !important;
-        grid-row: span var(--row-span) !important;
-      }
-
-      /* La expandida crece */
-      body[data-page="ai"] .grid.has-expanded > .card.is-expanded {
-        --col-span: 8;   /* ocupa ~2/3 del ancho (12 columnas totales) */
-        --row-span: 4;   /* más alto; tu grid tiene 6 filas */
-        z-index: 3;
-        transform: translateY(-2px) scale(1.01);
-      }
-
-      /* Las no-expandidas se encogen pero siguen visibles (mínimo 2×2) */
-      body[data-page="ai"] .grid.has-expanded > .card:not(.is-expanded) {
-        --col-span: 2;
-        --row-span: 2;
-        opacity: .96;
-        filter: saturate(.9) contrast(.95) brightness(.96);
-        transform: scale(.985);
-      }
-
-      /* No difuminar la imagen de la expandida */
-      body[data-page="ai"] .card.is-expanded .card-media img {
-        filter: none !important;
-        transform: scale(1.02);
-      }
-
-      /* Mostrar contenido extra solo en expandida (ya lo tenías, lo refuerzo) */
-      body[data-page="ai"] .card-extra { display: none; opacity: 0; transition: opacity .25s ease; }
-      body[data-page="ai"] .card.is-expanded .card-extra { display: block; opacity: 1; }
-
-      /* Responsivo opcional del expand:
-         - En tablet que la expandida ocupe todo el ancho.
-         - En móvil no usamos expand (tu JS ya lo evita), pero lo dejo por si fuerza. */
-      @media (max-width: 980px) {
-        body[data-page="ai"] .grid.has-expanded > .card.is-expanded { --col-span: 12; --row-span: 4; }
-        body[data-page="ai"] .grid.has-expanded > .card:not(.is-expanded) { --col-span: 6; --row-span: 2; }
-      }
-      @media (max-width: 560px) {
-        body[data-page="ai"] .grid.has-expanded > .card.is-expanded { --col-span: 4; --row-span: 3; }
-        body[data-page="ai"] .grid.has-expanded > .card:not(.is-expanded) { --col-span: 4; --row-span: 2; }
+      body[data-page="ai"] .gallery img {
+        height: 120px;
+        min-width: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        scroll-snap-align: start;
       }
 
       /* === GRID EXPANDIBLE – LAYOUTS POR ESTADO === */
-
-      /* El grid base ya lo tienes. Añadimos estados del grid
-         con data-state en el contenedor .grid */
       body[data-page="ai"] .grid {
         position: relative;
-        contain: layout paint style; /* rendimiento */
       }
 
-      /* --- Base (ya lo tienes) ---
-         1: 8x3   2: 4x3
-         3: 4x3   4: 8x3
-      */
-      body[data-page="ai"] .grid > .card:nth-child(1) { grid-column: 1 / span 4; grid-row: 1 / span 3; }
-      body[data-page="ai"] .grid > .card:nth-child(2) { grid-column: 5 / span 4; grid-row: 1 / span 3; }
-      body[data-page="ai"] .grid > .card:nth-child(3) { grid-column: 9 / span 4; grid-row: 1 / span 3; }
-      body[data-page="ai"] .grid > .card:nth-child(4) { grid-column: 1 / span 6; grid-row: 4 / span 3; }
-      body[data-page="ai"] .grid > .card:nth-child(5) { grid-column: 7 / span 6; grid-row: 4 / span 3; }
-
-      /* Cards encogidas cuando hay expandida */
+      /* Cards con transiciones optimizadas */
       body[data-page="ai"] .grid[data-state^="expand-"] > .card {
-        transition: transform .35s cubic-bezier(.2,.7,.2,1), filter .25s ease, opacity .25s ease;
-        will-change: transform, filter;
+        transition: transform .25s ease, opacity .2s ease;
       }
       body[data-page="ai"] .grid[data-state^="expand-"] > .card:not(.is-expanded) {
-        transform: scale(.96);
-        filter: brightness(.95) contrast(.95) saturate(.95);
+        transform: scale(.97);
+        opacity: .92;
       }
 
       /* Contenido extra: visible solo en expandida */
-      body[data-page="ai"] .card .card-extra { display: none; opacity: 0; transition: opacity .25s ease; }
-      body[data-page="ai"] .card.is-expanded .card-extra { display: block; opacity: 1; }
-      body[data-page="ai"] .card.is-expanded .card-body { padding: 18px; }
-
-      /* === Reglas básicas para expansión === */
-      body[data-page="ai"] .grid[data-state^="expand-"] > .card {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: relative !important;
-        min-width: 100px !important;
-        min-height: 100px !important;
+      body[data-page="ai"] .card .card-extra { 
+        display: none;
+      }
+      body[data-page="ai"] .card.is-expanded .card-extra { 
+        display: block;
+      }
+      body[data-page="ai"] .card.is-expanded .card-body { 
+        padding: 18px;
       }
 
       /* === Disposiciones por card expandida (12x6) === */
@@ -824,7 +697,7 @@
       <!-- Card 1 - JS Web — Vibe Coding -->
       <article class="card" data-id="js-web">
         <div class="card-media">
-          <img src="assets/Projects/JS/JS_Portrait.webp" alt="JS Web — Vibe Coding Portfolio" />
+          <img src="assets/Projects/JS/JS_Portrait.webp" alt="JS Web — Vibe Coding Portfolio" loading="lazy" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -833,10 +706,10 @@
             <h3 data-i18n="card.jsweb.title">JS Web — Vibe Coding</h3>
             <p data-i18n="card.jsweb.subtitle">Portfolio personal desarrollado íntegramente con inteligencia artificial</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
-              <img src="assets/IACorner/Logos/cursor@2x.png" alt="Cursor.ai" />
-              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
-              <img src="assets/IACorner/Logos/unicorn@2x.png" alt="Unicorn Studio" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
+              <img src="assets/IACorner/Logos/cursor@2x.png" alt="Cursor.ai" loading="lazy" />
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" loading="lazy" />
+              <img src="assets/IACorner/Logos/unicorn@2x.png" alt="Unicorn Studio" loading="lazy" />
             </div>
           </div>
 
@@ -870,9 +743,9 @@
             <p>El resultado es una web dinámica, moderna y coherente visualmente, donde el diseño, la tecnología y la IA se integran para expresar una nueva forma de crear digitalmente.</p>
             <p><strong>ChatGPT · Cursor.ai · Nano Banana · Unicorn.studio</strong></p>
             <div class="gallery">
-              <img src="assets/Projects/JS/JS_Portrait.webp" alt="JS Web — Vibe Coding Home">
-              <img src="assets/Projects/JS/JS_1.webp" alt="JS Web — Vibe Coding About">
-              <img src="assets/Projects/JS/JS_2.webp" alt="JS Web — Vibe Coding Work">
+              <img src="assets/Projects/JS/JS_Portrait.webp" alt="JS Web — Vibe Coding Home" loading="lazy">
+              <img src="assets/Projects/JS/JS_1.webp" alt="JS Web — Vibe Coding About" loading="lazy">
+              <img src="assets/Projects/JS/JS_2.webp" alt="JS Web — Vibe Coding Work" loading="lazy">
             </div>
           </div>
         </div>
@@ -881,7 +754,7 @@
       <!-- Card 2 - Make.com Automatizaciones -->
       <article class="card large" data-id="make-automation">
         <div class="card-media">
-          <img src="assets/IACorner/Make/BG_Login.webp" alt="Make.com Automatizaciones" />
+          <img src="assets/IACorner/Make/BG_Login.webp" alt="Make.com Automatizaciones" loading="lazy" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -890,8 +763,8 @@
             <h3 data-i18n="card.make.title">Automatizaciones Make.com</h3>
             <p data-i18n="card.make.subtitle">Generación automática de contenidos para Instagram y X.</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/makeblanco@2x.png" alt="Make.com" />
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
+              <img src="assets/IACorner/Logos/makeblanco@2x.png" alt="Make.com" loading="lazy" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
             </div>
           </div>
 
@@ -917,9 +790,9 @@
           <div class="card-extra">
             <p>Automatización completa de contenido para redes sociales usando Make.com. Incluye generación automática de posts, programación inteligente, integración con APIs de redes sociales y flujos de trabajo personalizados para maximizar el engagement.</p>
             <div class="gallery" aria-label="Galería">
-              <img src="assets/IACorner/Make/BG_Login.webp" alt="Make.com Interface">
-              <img src="assets/IACorner/Make/BG_Login.webp" alt="Automation Workflow">
-              <img src="assets/IACorner/Make/BG_Login.webp" alt="Social Media Integration">
+              <img src="assets/IACorner/Make/BG_Login.webp" alt="Make.com Interface" loading="lazy">
+              <img src="assets/IACorner/Make/BG_Login.webp" alt="Automation Workflow" loading="lazy">
+              <img src="assets/IACorner/Make/BG_Login.webp" alt="Social Media Integration" loading="lazy">
             </div>
           </div>
         </div>
@@ -928,7 +801,7 @@
       <!-- Card 2 - CNAPP Survival App -->
       <article class="card" data-id="cnapp-survival">
         <div class="card-media">
-          <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Survival App" />
+          <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Survival App" loading="lazy" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -937,8 +810,8 @@
             <h3 data-i18n="card.cnapp.title">CNAPP Survival</h3>
             <p data-i18n="card.cnapp.subtitle">App de supervivencia con Lovable.</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
-              <img src="assets/IACorner/Logos/lovable@2x.png" alt="Lovable" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
+              <img src="assets/IACorner/Logos/lovable@2x.png" alt="Lovable" loading="lazy" />
             </div>
           </div>
 
@@ -962,8 +835,8 @@
           <div class="card-extra">
             <p>Aplicación de supervivencia desarrollada con Lovable, plataforma de desarrollo con IA. Incluye guías de supervivencia, técnicas de primeros auxilios, navegación, construcción de refugios y preparación para situaciones extremas.</p>
             <div class="gallery">
-              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP App Icon">
-              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Interface">
+              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP App Icon" loading="lazy">
+              <img src="assets/IACorner/CNAPP/Icon3.png" alt="CNAPP Interface" loading="lazy">
             </div>
           </div>
         </div>
@@ -981,8 +854,8 @@
             <h3 data-i18n="card.rrss.title">Contenidos RRSS</h3>
             <p data-i18n="card.rrss.subtitle">ChatGPT entrenado con datos empresariales.</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" loading="lazy" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
             </div>
           </div>
 
@@ -1016,7 +889,7 @@
       <!-- Card 5 - Amazon AI Project -->
       <article class="card medium" data-id="amazon-ai">
         <div class="card-media">
-          <img src="assets/IACorner/Amazon/370-copia.webp" alt="Amazon AI generated images project" />
+          <img src="assets/IACorner/Amazon/370-copia.webp" alt="Amazon AI generated images project" loading="lazy" />
           <div class="card-gradient"></div>
         </div>
         <div class="card-overlay">
@@ -1025,8 +898,8 @@
             <h3 data-i18n="card.amazon.title">Amazon AI Series</h3>
             <p data-i18n="card.amazon.subtitle">Consistencia visual con IA temprana.</p>
             <div class="icons" aria-hidden="true">
-              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" />
-              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" />
+              <img src="assets/IACorner/Logos/chatgptblanco@2x.png" alt="ChatGPT" loading="lazy" />
+              <img src="assets/IACorner/Logos/Gemini@2x.png" alt="Google Gemini" loading="lazy" />
             </div>
           </div>
 
@@ -1050,9 +923,9 @@
           <div class="card-extra">
             <p>Proyecto pionero de generación de imágenes con IA de hace más de un año, cuando lograr consistencia visual era un verdadero desafío técnico. Exploración de las capacidades tempranas de la IA generativa.</p>
             <div class="gallery">
-              <img src="assets/IACorner/Amazon/Book-copia.webp" alt="Amazon Book AI">
-              <img src="assets/IACorner/Amazon/contra-copia.webp" alt="Amazon Contra AI">
-              <img src="assets/IACorner/Amazon/Cuadro-copia.webp" alt="Amazon Cuadro AI">
+              <img src="assets/IACorner/Amazon/Book-copia.webp" alt="Amazon Book AI" loading="lazy">
+              <img src="assets/IACorner/Amazon/contra-copia.webp" alt="Amazon Contra AI" loading="lazy">
+              <img src="assets/IACorner/Amazon/Cuadro-copia.webp" alt="Amazon Cuadro AI" loading="lazy">
             </div>
           </div>
         </div>
@@ -1242,12 +1115,13 @@
     })();
     */
 
-    /* ===== NUEVO SISTEMA DE EXPANSIÓN CON FLIP ===== */
+    /* ===== SISTEMA DE EXPANSIÓN OPTIMIZADO ===== */
     (function(){
-      const grid   = document.getElementById('aiGrid');
+      const grid = document.getElementById('aiGrid');
       if (!grid) return;
 
       const mqMobile = window.matchMedia('(max-width: 560px)');
+      let mobileExpandedCard = null;
 
       // Estado base
       function setBaseState(){
@@ -1260,53 +1134,17 @@
         grid.querySelectorAll('.card.is-expanded').forEach(c => c.classList.remove('is-expanded'));
       }
 
-      // Qué estado aplicar según card index (1..5)
-      function stateForIndex(idx){
-        return `expand-${idx}`;
-      }
-
-      // FLIP: anima todas las cards de su rect old -> rect new
-      function animateFlip(beforeRects, duration = 400){
-        const cards = [...grid.querySelectorAll('.card')];
-        cards.forEach((el, i) => {
-          const before = beforeRects.get(el);
-          if (!before) return;
-          const after = el.getBoundingClientRect();
-
-          const dx = before.left - after.left;
-          const dy = before.top  - after.top;
-          const sx = before.width  / after.width;
-          const sy = before.height / after.height;
-
-          el.animate(
-            [
-              { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
-              { transform: 'translate(0,0) scale(1,1)' }
-            ],
-            { duration, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'both' }
-          );
-        });
-      }
-
       // Manejar click en desktop/tablet
       function onCardClickDesktop(card, index){
         const wasExpanded = card.classList.contains('is-expanded');
-        const beforeRects = new Map();
-        grid.querySelectorAll('.card').forEach(el => beforeRects.set(el, el.getBoundingClientRect()));
-
+        
         if (wasExpanded) {
-          // volver a base
           setBaseState();
         } else {
-          const newState = stateForIndex(index + 1);
-          grid.dataset.state = newState;
+          grid.dataset.state = `expand-${index + 1}`;
           grid.querySelectorAll('.card').forEach(el => el.classList.remove('is-expanded'));
           card.classList.add('is-expanded');
         }
-
-        // Forzar reflow y animar
-        grid.getBoundingClientRect();
-        animateFlip(beforeRects, 420);
       }
 
       // Mobile: expandir card ocupando todo el ancho
@@ -1326,51 +1164,32 @@
         }
       }
 
-      // Atar listeners
-      function bind(){
-        const cards = [...grid.querySelectorAll('.card')];
-
-        // Limpia listeners clonando
-        cards.forEach(card => {
-          const clone = card.cloneNode(true);
-          card.parentNode.replaceChild(clone, card);
-        });
-
-        const fresh = [...grid.querySelectorAll('.card')];
-        fresh.forEach((card, idx) => {
-          // Evita que el CTA dispare la expansión/colapso
-          card.querySelectorAll('.overlay-cta').forEach((cta) => {
-            cta.addEventListener('click', (e) => {
-              e.stopPropagation();
-            });
-          });
-
-          card.addEventListener('click', (e) => {
-            if (e.target.closest('.gallery') || e.target.closest('.overlay-cta')) return;
-            if (mqMobile.matches) {
-              grid.dataset.state = 'base';
-              onCardClickMobile(card);
-            } else {
-              onCardClickDesktop(card, idx);
-            }
+      // Atar listeners (optimizado sin clonar nodos)
+      const cards = [...grid.querySelectorAll('.card')];
+      cards.forEach((card, idx) => {
+        // Evita que el CTA dispare la expansión/colapso
+        card.querySelectorAll('.overlay-cta').forEach((cta) => {
+          cta.addEventListener('click', (e) => {
+            e.stopPropagation();
           });
         });
-      }
+
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.gallery') || e.target.closest('.overlay-cta')) return;
+          if (mqMobile.matches) {
+            grid.dataset.state = 'base';
+            onCardClickMobile(card);
+          } else {
+            onCardClickDesktop(card, idx);
+          }
+        });
+      });
 
       // Inicializa
-      setBaseState();
-      bind();
+      grid.dataset.state = 'base';
 
-      // Re-bind cuando cambia breakpoint
-      mqMobile.addEventListener('change', () => {
-        setBaseState();
-        bind();
-      });
-
-      // Si redimensionan mucho, vuelve a base para evitar estados raros
-      window.addEventListener('resize', () => {
-        setBaseState();
-      });
+      // Volver a base cuando cambia breakpoint
+      mqMobile.addEventListener('change', setBaseState);
     })();
   </script>
 </body>
