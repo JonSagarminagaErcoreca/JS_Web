@@ -6,7 +6,7 @@
     "title_en": "MSM Digital Twin",
     "category": "DIGITAL TWIN",
     "category_en": "DIGITAL TWIN",
-    "year": "2024",
+    "year": "2025",
     "image": "assets/Projects/MSM/2e0bbfe7-a60f-482d-b264-dd73f4725928_rw_1920.webp",
     "hero": {
       "type": "video",
@@ -409,6 +409,47 @@
       "case": "project.html?id=vpo-ingenieria",
       "repo": "",
       "live": "https://vpoingenieria.com"
+    }
+  },
+  {
+    "id": "7",
+    "slug": "animation",
+    "title": "Make it Move",
+    "title_en": "Make it Move",
+    "category": "MOTION",
+    "category_en": "MOTION",
+    "year": "2025",
+    "image": "assets/Projects/Animation/video caratula.mp4",
+    "hero": {
+      "type": "youtube",
+      "src": "https://www.youtube.com/embed/nSBLPhBRgHI"
+    },
+    "desc": "Animaciones pensadas para producto digital, marca y storytelling, donde cada movimiento tiene un porqué.",
+    "desc_en": "Animations designed for digital product, brand and storytelling, where every movement has a clear purpose.",
+    "tags": ["Animation", "Motion Graphics", "Digital Art", "Microinteractions"],
+    "description": {
+      "overview": "Make it Move es una colección curada de piezas de animación y motion graphics orientadas a dar vida a productos digitales, identidades de marca y pequeñas historias visuales.",
+      "overview_en": "Make it Move is a curated collection of animation and motion graphics pieces crafted to bring digital products, brand identities and short visual stories to life.",
+      "sections": [
+        {
+          "title": "Qué es",
+          "title_en": "What it is",
+          "content": "Más que un experimento, Make it Move funciona como un portfolio vivo de soluciones de animación listas para aterrizar en producto real. Reúne microinteracciones, transiciones de interfaz, loops gráficos y pequeñas piezas narrativas pensadas para contextos profesionales.",
+          "content_en": "More than an experiment, Make it Move acts as a living portfolio of animation solutions ready to land in real products. It gathers microinteractions, interface transitions, graphic loops and short narrative pieces tailored for professional contexts."
+        },
+        {
+          "title": "Cómo se trabaja",
+          "title_en": "How it’s built",
+          "content": "Cada pieza se diseña partiendo de un objetivo claro: guiar la atención, reforzar el tono de la marca o hacer más fluidas las interacciones. A partir de ahí se define el lenguaje de movimiento —timing, curvas, profundidad, luz— y se crea una librería modular de patrones reutilizables para futuras implementaciones.",
+          "content_en": "Each piece starts from a clear objective: guide attention, reinforce brand tone or make interactions feel smoother. From there the motion language is defined —timing, easing, depth, light— and translated into a modular library of reusable patterns for future implementations."
+        }
+      ]
+    },
+    "gallery": [],
+    "links": {
+      "case": "project.html?id=animation",
+      "repo": "",
+      "live": ""
     }
   }
 ]

@@ -45,8 +45,9 @@
     main.project { max-width: 1100px; margin: 0 auto; padding: 24px 16px 80px; }
 
     .proj-hero { position: relative; border-radius: 20px; overflow: hidden; background: #f4f6f8; }
-    .proj-hero img, .proj-hero video { display:block; width:100%; height:auto; object-fit: cover; }
+    .proj-hero img, .proj-hero video, .proj-hero iframe { display:block; width:100%; height:auto; object-fit: cover; }
     .proj-hero video { cursor: pointer; }
+    .proj-hero iframe { aspect-ratio: 16 / 9; border: 0; }
     .proj-meta { display:flex; gap:16px; align-items:center; justify-content: space-between; margin: 18px 0 8px; color: var(--muted,#6b7280); font-size: 14px; }
     .proj-meta-info { display:flex; gap:16px; align-items:center; }
     
@@ -275,11 +276,22 @@
       const desc = getF(p, 'desc');
       const category = getF(p, 'category');
       
-      const hero = p.hero?.type === 'video'
-        ? `<video class="media" autoplay muted playsinline loop>
-             <source src="${p.hero.src}" type="video/mp4">
-           </video>`
-        : `<img class="media" src="${p.image || ''}" alt="${title}">`;
+      let hero;
+      if (p.hero?.type === 'video') {
+        hero = `<video class="media" autoplay muted playsinline loop>
+                  <source src="${p.hero.src}" type="video/mp4">
+                </video>`;
+      } else if (p.hero?.type === 'youtube') {
+        hero = `<iframe class="media"
+                  src="${p.hero.src}"
+                  title="${title} – YouTube video"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>`;
+      } else {
+        hero = `<img class="media" src="${p.image || ''}" alt="${title}">`;
+      }
 
       const tools = (p.tags || []).map(t => `<span class="chip">${t}</span>`).join('');
       const body  = (p.body  || []).map(par => `<p>${par}</p>`).join('');
